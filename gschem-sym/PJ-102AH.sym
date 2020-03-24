@@ -1,0 +1,49 @@
+v 20130925 2
+P 1000 800 700 800 1 0 0
+{
+T 1100 800 5 10 0 0 0 0 1
+pintype=pwr
+T 645 795 3 10 1 1 0 6 1
+pinlabel=center
+T 795 845 5 10 1 1 0 0 1
+pinnumber=1
+T 1100 1000 5 10 0 0 0 0 1
+pinseq=1
+}
+P 1000 500 700 500 1 0 0
+{
+T 1100 400 5 10 0 0 0 0 1
+pintype=pwr
+T 645 495 3 10 1 1 0 6 1
+pinlabel=barrel
+T 795 545 5 10 1 1 0 0 1
+pinnumber=2
+T 1100 600 5 10 0 0 0 0 1
+pinseq=2
+}
+P 1000 200 700 200 1 0 0
+{
+T 1100 0 5 10 0 0 0 0 1
+pintype=pas
+T 645 195 3 10 1 1 0 6 1
+pinlabel=switch
+T 795 245 5 10 1 1 0 0 1
+pinnumber=3
+T 1100 200 5 10 0 0 0 0 1
+pinseq=3
+}
+B 0 0 700 1000 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 0 1300 8 10 1 1 0 0 1
+device=PJ-102AH
+T 0 1500 8 10 0 1 0 0 1
+description=A Barrel Power Jack
+T 0 1700 8 10 0 0 0 0 1
+author=Kevin Johnson <kevin@kj800x.com>
+T 0 1900 8 10 0 0 0 0 1
+numslots=0
+T 0 2100 8 10 0 0 0 0 1
+footprint=BARREL.fp
+T 0 2300 8 10 0 0 0 0 1
+documentation=https://www.mouser.com/datasheet/2/670/pj-102ah-1778518.pdf
+T 0 1100 8 10 1 1 0 0 1
+refdes=J?
