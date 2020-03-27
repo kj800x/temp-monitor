@@ -1,5 +1,35 @@
 # Pin name action command file
 
+# Start of element J2
+ChangePinName(J2, 1, 1)
+ChangePinName(J2, 2, 2)
+ChangePinName(J2, 3, 3)
+ChangePinName(J2, 4, 4)
+ChangePinName(J2, 5, 5)
+ChangePinName(J2, 8, 8)
+ChangePinName(J2, 7, 7)
+ChangePinName(J2, 6, 6)
+
+# Start of element Q3
+ChangePinName(Q3, 1, B)
+ChangePinName(Q3, 3, E)
+ChangePinName(Q3, 2, C)
+
+# Start of element Q4
+ChangePinName(Q4, 1, B)
+ChangePinName(Q4, 3, E)
+ChangePinName(Q4, 2, C)
+
+# Start of element Q1
+ChangePinName(Q1, 1, B)
+ChangePinName(Q1, 3, E)
+ChangePinName(Q1, 2, C)
+
+# Start of element Q2
+ChangePinName(Q2, 1, B)
+ChangePinName(Q2, 3, E)
+ChangePinName(Q2, 2, C)
+
 # Start of element J1
 ChangePinName(J1, 3, switch)
 ChangePinName(J1, 2, barrel)
@@ -10,72 +40,52 @@ ChangePinName(D4, 2, 2)
 ChangePinName(D4, 1, 1)
 
 # Start of element M2
-ChangePinName(M2, 4, -)
-ChangePinName(M2, 3, +)
-ChangePinName(M2, 2, -)
-ChangePinName(M2, 1, +)
 ChangePinName(M2, 6, -)
 ChangePinName(M2, 5, +)
 ChangePinName(M2, 8, -)
 ChangePinName(M2, 7, +)
+ChangePinName(M2, 4, -)
+ChangePinName(M2, 3, +)
+ChangePinName(M2, 2, -)
+ChangePinName(M2, 1, +)
 
 # Start of element D3
 ChangePinName(D3, 2, 2)
 ChangePinName(D3, 1, 1)
 
-# Start of element D2
-ChangePinName(D2, 2, 2)
-ChangePinName(D2, 1, 1)
+# Start of element D1
+ChangePinName(D1, 2, 2)
+ChangePinName(D1, 1, 1)
 
 # Start of element M1
-ChangePinName(M1, 6, -)
-ChangePinName(M1, 5, +)
-ChangePinName(M1, 8, -)
-ChangePinName(M1, 7, +)
 ChangePinName(M1, 4, -)
 ChangePinName(M1, 3, +)
 ChangePinName(M1, 2, -)
 ChangePinName(M1, 1, +)
-
-# Start of element Q3
-ChangePinName(Q3, B, B)
-ChangePinName(Q3, E, E)
-ChangePinName(Q3, C, C)
+ChangePinName(M1, 6, -)
+ChangePinName(M1, 5, +)
+ChangePinName(M1, 8, -)
+ChangePinName(M1, 7, +)
 
 # Start of element R3
 ChangePinName(R3, 1, 1)
 ChangePinName(R3, 2, 2)
 
-# Start of element Q4
-ChangePinName(Q4, B, B)
-ChangePinName(Q4, E, E)
-ChangePinName(Q4, C, C)
-
 # Start of element R4
 ChangePinName(R4, 1, 1)
 ChangePinName(R4, 2, 2)
-
-# Start of element Q2
-ChangePinName(Q2, B, B)
-ChangePinName(Q2, E, E)
-ChangePinName(Q2, C, C)
-
-# Start of element R2
-ChangePinName(R2, 1, 1)
-ChangePinName(R2, 2, 2)
-
-# Start of element Q1
-ChangePinName(Q1, B, B)
-ChangePinName(Q1, E, E)
-ChangePinName(Q1, C, C)
 
 # Start of element R1
 ChangePinName(R1, 1, 1)
 ChangePinName(R1, 2, 2)
 
-# Start of element D1
-ChangePinName(D1, 2, 2)
-ChangePinName(D1, 1, 1)
+# Start of element R2
+ChangePinName(R2, 1, 1)
+ChangePinName(R2, 2, 2)
+
+# Start of element D2
+ChangePinName(D2, 2, 2)
+ChangePinName(D2, 1, 1)
 
 # Start of element U1
 ChangePinName(U1, 146, GPIO_71)
