@@ -13,7 +13,7 @@ unnamed_net4	U2-5 U1-20
 unnamed_net3	U2-4 U1-19 
 unnamed_net2	R1-2 U1-16 
 unnamed_net1	R2-2 U1-14 
-+5V	CONN1-2 U2-1 U1-7 
++5V	CONN1-2 U1-7 
 Vdd	CONN1-1 J1-1 M1-3 M1-1 D1-2 M1-7 M1-5 D2-2 U1-5 
-+3.3V	CONN1-3 U1-3 
++3.3V	CONN1-3 U2-1 U1-3 
 GND	CONN1-4 U2-3 Q1-3 Q2-3 J1-2 U1-1 
