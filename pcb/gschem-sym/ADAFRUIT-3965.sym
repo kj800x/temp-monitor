@@ -1,0 +1,93 @@
+v 20130925 2
+P 2600 2700 2300 2700 1 0 0
+{
+T 2700 2700 5 10 0 0 0 0 1
+pintype=clk
+T 2245 2695 3 10 1 1 0 6 1
+pinlabel=SCL
+T 2395 2745 5 10 1 1 0 0 1
+pinnumber=4
+T 2700 2900 5 10 0 0 0 0 1
+pinseq=4
+}
+P 2600 2400 2300 2400 1 0 0
+{
+T 2700 2300 5 10 0 0 0 0 1
+pintype=io
+T 2245 2395 3 10 1 1 0 6 1
+pinlabel=SDA
+T 2395 2445 5 10 1 1 0 0 1
+pinnumber=5
+T 2700 2500 5 10 0 0 0 0 1
+pinseq=5
+}
+P 900 2700 1200 2700 1 0 0
+{
+T 800 2900 5 10 0 0 180 0 1
+pintype=in
+T 1255 2695 3 10 1 1 0 0 1
+pinlabel=RST
+T 1105 2745 5 10 1 1 0 6 1
+pinnumber=7
+T 800 2700 5 10 0 0 180 0 1
+pinseq=7
+}
+B 1200 1400 1100 1900 3 0 0 0 -1 -1 0 -1 -1 -1 -1 -1
+T 2300 3500 8 10 1 1 0 0 1
+device=ADAFRUIT-3965
+T 2300 4500 8 10 0 1 0 0 1
+description=A Pressure Sensor
+T 2300 4300 8 10 0 0 0 0 1
+author=Kevin Johnson <kevin@kj800x.com>
+T 2300 4100 8 10 0 0 0 0 1
+numslots=0
+T 2300 3700 8 10 0 0 0 0 1
+footprint=8HEAD_M.fp
+T 2300 3900 8 10 0 0 0 0 1
+documentation=https://www.digikey.com/product-detail/en/3965/1528-2713-ND/9658071
+T 2300 3300 8 10 1 1 0 0 1
+refdes=U?
+P 1500 3600 1500 3300 1 0 0
+{
+T 1700 3700 5 10 0 0 90 0 1
+pintype=pwr
+T 1355 3200 3 10 1 1 180 6 1
+pinlabel=VIN
+T 1405 3550 5 10 1 1 180 0 1
+pinnumber=1
+T 1500 3700 5 10 0 0 90 0 1
+pinseq=1
+}
+P 1900 3600 1900 3300 1 0 0
+{
+T 2100 3700 5 10 0 0 90 0 1
+pintype=pwr
+T 1755 3200 3 10 1 1 180 6 1
+pinlabel=3V
+T 1805 3550 5 10 1 1 180 0 1
+pinnumber=2
+T 1900 3700 5 10 0 0 90 0 1
+pinseq=2
+}
+P 1700 1100 1700 1400 1 0 0
+{
+T 1900 1000 5 10 0 0 270 2 1
+pintype=pwr
+T 1945 1600 3 10 1 1 180 0 1
+pinlabel=GND
+T 1605 1150 5 10 1 1 0 6 1
+pinnumber=3
+T 1700 1000 5 10 0 0 270 2 1
+pinseq=3
+}
+P 2600 1900 2300 1900 1 0 0
+{
+T 2700 1700 5 10 0 0 0 0 1
+pintype=pas
+T 2245 1895 3 10 1 1 0 6 1
+pinlabel=EOC
+T 2395 1945 5 10 1 1 0 0 1
+pinnumber=6
+T 2700 1900 5 10 0 0 0 0 1
+pinseq=6
+}
