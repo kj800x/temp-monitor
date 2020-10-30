@@ -18,7 +18,7 @@ async function main() {
       {
         static: true,
         route: "/motor",
-        staticDir: path.resolve(__dirname, "../motor-controller-ui/build/"),
+        staticDir: path.resolve(__dirname, "../../ui/build/"),
         indexFallback: true,
         priority: 0,
         type: "ui",
