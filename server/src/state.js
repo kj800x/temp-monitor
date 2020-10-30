@@ -1,7 +1,20 @@
-import { broadcast } from "./websocket";
+let target = 0;
+let limit = 0;
 
-function broadcastState() {
-  broadcast(Math.random());
-}
+export const setTarget = (value) => {
+  target = value;
+};
+export const setLimit = (value) => {
+  limit = value;
+};
 
-setInterval(broadcastState, 100);
+export const getState = () => {
+  return {
+    time: new Date().getTime(),
+    pressure: Math.random(),
+    status: Math.random() * 0.6 + 0.1,
+    motor: Math.random() * 0.2 + 0.4,
+    target,
+    limit,
+  };
+};

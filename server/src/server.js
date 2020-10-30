@@ -3,7 +3,6 @@ import http from "http";
 import path from "path";
 import { wss } from "./websocket";
 import * as localproxy from "@kj800x/localproxy-client";
-import "./state";
 
 async function main() {
   const PORT = await localproxy.getAvailablePort();
