@@ -1,0 +1,19 @@
+{
+  "name": "motor-controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r esm src/server.js",
+    "cli": "node -r esm src/cli/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kj800x/localproxy-client": "0.0.8",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "ws": "^7.3.1"
+  }
+}
