@@ -50,7 +50,7 @@ export const ChartPanel = ({
           domain={[domainMin, domainMax]}
           tickFormatter={formatXAxis}
         />
-        <YAxis domain={[0, 1]} />
+        <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         <Line
           dot={false}
@@ -85,7 +85,7 @@ export const ChartPanel = ({
           domain={[domainMin, domainMax]}
           tickFormatter={formatXAxis}
         />
-        <YAxis />
+        <YAxis domain={[12, 21]} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         <Line
           dot={false}
@@ -111,7 +111,7 @@ export const ChartPanel = ({
           domain={[domainMin, domainMax]}
           tickFormatter={formatXAxis}
         />
-        <YAxis domain={[0, 1]} />
+        <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         <Line
           dot={false}

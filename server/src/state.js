@@ -23,12 +23,17 @@ const differences = (arr) =>
 export const getState = () => {
   return state;
 };
-export const deriveStatus = (historicalStates, pressure) => {
+export const deriveStatus = (historicalStates) => {
+  const threshold = new Date().getTime() - 5000;
+
   const lastStatus =
     historicalStates.length > 0
       ? historicalStates[historicalStates.length - 1].status
       : 0;
-  const pressures = historicalStates.map((s) => s.pressure);
+
+  const pressures = historicalStates
+    .filter((state) => state.time > threshold)
+    .map((s) => s.pressure);
   const slopes = differences(pressures);
   const avgSlope = avg(slopes);
   if (avgSlope > 0) {
@@ -64,10 +69,10 @@ function deriveNextState() {
 }
 
 function updateState() {
-  const now = new Date();
   state = deriveNextState();
+  const threshold = new Date().getTime() - 60000;
   historicalStates = [
-    ...historicalStates.filter((state) => state.time > now.getTime() - 60000),
+    ...historicalStates.filter((state) => state.time > threshold),
     state,
   ];
 
