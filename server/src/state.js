@@ -1,5 +1,11 @@
+import { getPressure } from "./pressure";
+import { broadcast } from "./websocket";
+import { log } from "./logger";
+
 let target = 0;
 let limit = 0;
+let historicalStates = [];
+let state = {};
 
 export const setTarget = (value) => {
   target = value;
@@ -7,14 +13,67 @@ export const setTarget = (value) => {
 export const setLimit = (value) => {
   limit = value;
 };
+const avg = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
+const differences = (arr) =>
+  arr.reduce((acc, v) => [v, acc[0] ? [...acc[1], v - acc[0]] : []], [
+    null,
+    [],
+  ])[1];
 
 export const getState = () => {
+  return state;
+};
+export const deriveStatus = (historicalStates, pressure) => {
+  const lastStatus =
+    historicalStates.length > 0
+      ? historicalStates[historicalStates.length - 1].status
+      : 0;
+  const pressures = historicalStates.map((s) => s.pressure);
+  const slopes = differences(pressures);
+  const avgSlope = avg(slopes);
+  if (avgSlope > 0) {
+    return lastStatus + avgSlope * 0.8;
+  }
+  return lastStatus * 0.98;
+};
+export const deriveMotor = (status, target, limit) => {
+  if (limit === 1) {
+    return target;
+  }
+  if (status > limit) {
+    return 0;
+  }
+  if (status + 0.2 > limit) {
+    return target * -5 * (status - limit);
+  }
+  return target;
+};
+
+function deriveNextState() {
+  const pressure = getPressure();
+  const status = deriveStatus(historicalStates, pressure);
+  const motor = deriveMotor(status, target, limit);
   return {
     time: new Date().getTime(),
-    pressure: Math.random(),
-    status: Math.random() * 0.6 + 0.1,
-    motor: Math.random() * 0.2 + 0.4,
+    pressure,
+    status,
+    motor,
     target,
     limit,
   };
-};
+}
+
+function updateState() {
+  const now = new Date();
+  state = deriveNextState();
+  historicalStates = [
+    ...historicalStates.filter((state) => state.time > now.getTime() - 60000),
+    state,
+  ];
+
+  // callbacks
+  broadcast({ state: getState() });
+  log(getState());
+}
+
+setInterval(updateState, 50);

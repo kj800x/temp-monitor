@@ -1,5 +1,5 @@
 import ws from "ws";
-import { getState, setTarget, setLimit } from "./state";
+import { setTarget, setLimit } from "./state";
 
 export const wss = new ws.Server({ noServer: true });
 
@@ -24,9 +24,3 @@ export function broadcast(data) {
     }
   });
 }
-
-function broadcastState() {
-  broadcast({ state: getState() });
-}
-
-setInterval(broadcastState, 50);
