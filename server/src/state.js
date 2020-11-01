@@ -42,7 +42,6 @@ export const deriveStatus = (historicalStates) => {
   return lastStatus * 0.98;
 };
 export const deriveMotor = (status, target, limit) => {
-  console.log(limit);
   if (limit === 1) {
     return target;
   }
