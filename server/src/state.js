@@ -42,6 +42,7 @@ export const deriveStatus = (historicalStates) => {
   return lastStatus * 0.98;
 };
 export const deriveMotor = (status, target, limit) => {
+  console.log(limit);
   if (limit === 1) {
     return target;
   }
@@ -60,11 +61,11 @@ function deriveNextState() {
   const motor = deriveMotor(status, target, limit);
   return {
     time: new Date().getTime(),
-    pressure,
-    status,
-    motor,
-    target,
-    limit,
+    pressure: Math.max(0, Math.min(pressure, 1)),
+    status: Math.max(0, Math.min(status, 1)),
+    motor: Math.max(0, Math.min(motor, 1)),
+    target: Math.max(0, Math.min(target, 1)),
+    limit: Math.max(0, Math.min(limit, 1)),
   };
 }
 
