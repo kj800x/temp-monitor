@@ -1,17 +1,21 @@
 import stringify from "csv-stringify";
 import fs from "fs";
+import mkdirp from "mkdirp";
 
 const now = new Date();
 const nowString = `${now.getFullYear()}-${
   now.getMonth() + 1
 }-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
 
-const output = fs.createWriteStream(`./logs/${nowString}.csv`);
 const csvStringStream = stringify();
 csvStringStream.on("error", function (err) {
   console.error(err.message);
 });
-csvStringStream.pipe(output);
+
+mkdirp("./logs").then(() => {
+  const output = fs.createWriteStream(`./logs/${nowString}.csv`);
+  csvStringStream.pipe(output);
+});
 
 export const log = (state) => {
   csvStringStream.write([
@@ -23,12 +27,3 @@ export const log = (state) => {
     state.limit,
   ]);
 };
-
-/*
-time: new Date().getTime(),
-pressure,
-status,
-motor,
-target,
-limit,
-*/

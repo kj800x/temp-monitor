@@ -35,7 +35,7 @@ export const deriveStatus = (historicalStates) => {
     .filter((state) => state.time > threshold)
     .map((s) => s.pressure);
   const slopes = differences(pressures);
-  const avgSlope = avg(slopes);
+  const avgSlope = avg(slopes.map((n) => (n > 0.1 ? 2 * n : n)));
   if (avgSlope > 0) {
     return lastStatus + avgSlope * 0.8;
   }
