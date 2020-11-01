@@ -61,7 +61,7 @@ function deriveNextState() {
   const motor = deriveMotor(status, target, limit);
   return {
     time: new Date().getTime(),
-    pressure: Math.max(0, Math.min(pressure, 1)),
+    pressure: pressure,
     status: Math.max(0, Math.min(status, 1)),
     motor: Math.max(0, Math.min(motor, 1)),
     target: Math.max(0, Math.min(target, 1)),
