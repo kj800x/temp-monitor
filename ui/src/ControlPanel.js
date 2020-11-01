@@ -31,7 +31,7 @@ export const ControlPanel = ({ currentMotorData, setTarget, setLimit }) => (
         max="1"
         value={currentMotorData.target}
         step="0.01"
-        onChange={({ target: { value } }) => setTarget(value)}
+        onChange={({ target: { value } }) => setTarget(parseFloat(value))}
       />
       <SliderLabel>Target</SliderLabel>
     </SliderContainer>
@@ -43,7 +43,7 @@ export const ControlPanel = ({ currentMotorData, setTarget, setLimit }) => (
         max="1"
         value={currentMotorData.limit}
         step="0.01"
-        onChange={({ target: { value } }) => setLimit(value)}
+        onChange={({ target: { value } }) => setLimit(parseFloat(value))}
       />
       <SliderLabel>Limit</SliderLabel>
     </SliderContainer>
