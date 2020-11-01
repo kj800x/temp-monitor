@@ -35,7 +35,7 @@ export const deriveStatus = (historicalStates) => {
     .filter((state) => state.time > threshold)
     .map((s) => s.pressure);
   const slopes = differences(pressures);
-  const avgSlope = avg(slopes);
+  const avgSlope = avg(slopes.map((n) => (n > 0.1 ? 2 * n : n)));
   if (avgSlope > 0) {
     return lastStatus + avgSlope * 0.8;
   }
@@ -60,11 +60,11 @@ function deriveNextState() {
   const motor = deriveMotor(status, target, limit);
   return {
     time: new Date().getTime(),
-    pressure,
-    status,
-    motor,
-    target,
-    limit,
+    pressure: pressure,
+    status: Math.max(0, Math.min(status, 1)),
+    motor: Math.max(0, Math.min(motor, 1)),
+    target: Math.max(0, Math.min(target, 1)),
+    limit: Math.max(0, Math.min(limit, 1)),
   };
 }
 

@@ -3,3 +3,4 @@ node_modules
 **/*.backup
 pressure_readings.csv
 logs/
+ui/build.tar.gz
