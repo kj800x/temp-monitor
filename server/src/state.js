@@ -1,6 +1,7 @@
 import { getPressure } from "./pressure";
 import { broadcast } from "./websocket";
 import { log } from "./logger";
+import { setMotor } from "./motor";
 
 let target = 0;
 let limit = 0;
@@ -87,6 +88,7 @@ function updateState() {
 
   // callbacks
   broadcast({ state: getState() });
+  setMotor(getState().motor);
   log(getState());
 }
 
