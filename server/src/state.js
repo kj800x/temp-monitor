@@ -6,6 +6,7 @@ let target = 0;
 let limit = 0;
 let historicalStates = [];
 let state = {};
+let lastJump = 0;
 
 export const setTarget = (value) => {
   target = value;
@@ -23,8 +24,16 @@ const differences = (arr) =>
 export const getState = () => {
   return state;
 };
-export const deriveStatus = (historicalStates) => {
-  const threshold = new Date().getTime() - 5000;
+export const deriveStatus = (historicalStates, pressure) => {
+  const jumpStatus = historicalStates
+    .slice()
+    .reverse()
+    .find((state) => state.time < new Date().getTime() - 1500);
+  if (jumpStatus && Math.abs(pressure - jumpStatus.pressure) > 1) {
+    lastJump = new Date().getTime();
+  }
+
+  const threshold = new Date().getTime() - 15000;
 
   const lastStatus =
     historicalStates.length > 0
@@ -32,14 +41,13 @@ export const deriveStatus = (historicalStates) => {
       : 0;
 
   const pressures = historicalStates
-    .filter((state) => state.time > threshold)
+    .filter((state) => state.time > threshold && state.time > lastJump)
     .map((s) => s.pressure);
-  const slopes = differences(pressures);
-  const avgSlope = avg(slopes.map((n) => (n > 0.1 ? 2 * n : n)));
-  if (avgSlope > 0) {
-    return lastStatus + avgSlope * 0.8;
+  const avgPressure = avg(pressures);
+  if (pressure > avgPressure) {
+    return { status: lastStatus + 0.003, avg: avgPressure };
   }
-  return lastStatus * 0.98;
+  return { status: lastStatus - (1.2 - lastStatus) * 0.0011, avg: avgPressure };
 };
 export const deriveMotor = (status, target, limit) => {
   if (limit === 1) {
@@ -56,11 +64,12 @@ export const deriveMotor = (status, target, limit) => {
 
 function deriveNextState() {
   const pressure = getPressure();
-  const status = deriveStatus(historicalStates, pressure);
+  const { status, avg } = deriveStatus(historicalStates, pressure);
   const motor = deriveMotor(status, target, limit);
   return {
     time: new Date().getTime(),
     pressure: pressure,
+    avg,
     status: Math.max(0, Math.min(status, 1)),
     motor: Math.max(0, Math.min(motor, 1)),
     target: Math.max(0, Math.min(target, 1)),

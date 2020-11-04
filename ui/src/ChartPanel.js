@@ -96,6 +96,15 @@ export const ChartPanel = ({
           isAnimationActive={false}
           hide={hidden.includes("pressure")}
         />
+        <Line
+          dot={false}
+          type="monotone"
+          dataKey="avg"
+          stroke="#00ffff"
+          strokeWidth={2}
+          isAnimationActive={false}
+          hide={hidden.includes("avg")}
+        />
         <Legend onClick={toggleVisibility} />
       </LineChart>
       <LineChart
