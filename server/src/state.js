@@ -45,7 +45,7 @@ export const deriveStatus = (historicalStates, pressure) => {
     .filter((state) => state.time > threshold && state.time > lastJump)
     .map((s) => s.pressure);
   const avgPressure = avg(pressures);
-  if (pressure > avgPressure) {
+  if (pressure > avgPressure + 0.05) {
     return { status: lastStatus + 0.003, avg: avgPressure };
   }
   return { status: lastStatus - (1.2 - lastStatus) * 0.0011, avg: avgPressure };
