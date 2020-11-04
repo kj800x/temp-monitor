@@ -112,4 +112,12 @@ export const getPressure = () => {
   return latestPressure;
 };
 
-main().catch(console.error);
+function start() {
+  main().catch((err) => {
+    console.error(err);
+    latestPressure = 0;
+    setTimeout(start, 1000)
+  })
+}
+
+start();
