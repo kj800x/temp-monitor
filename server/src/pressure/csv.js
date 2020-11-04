@@ -4,7 +4,8 @@ import neatCsv from "neat-csv";
 
 console.log("using csv pressure method");
 
-let startTime = new Date().getTime();
+const TIME_OFFSET = process.env.TIME_OFFSET || 0;
+let startTime = new Date().getTime() - TIME_OFFSET * 1000;
 let data = [];
 
 if (!process.env.PRESSURE_FILE) {
