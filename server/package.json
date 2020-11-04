@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@kj800x/localproxy-client": "0.0.8",
+    "bonescript": "^0.7.4-beta1",
     "csv-stringify": "^5.5.1",
     "esm": "^3.2.25",
     "express": "^4.17.1",
