@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useMotorData } from "./useMotorData";
-import { ChartPanel } from "./ChartPanel";
-import { ControlPanel } from "./ControlPanel";
+import { Route, Switch } from "react-router-dom";
+import { RootRoute } from "./RootRoute";
+import { ReplayRoute } from "./ReplayRoute";
+import { Header } from "./Header";
 
-const Header = styled.div`
-  padding: 4px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-  background-color: #4f2c09;
-`;
-const HeaderButton = styled.div`
-  cursor: pointer;
-  user-select: none;
-  border: 1px solid black;
-  padding: 4px;
-  background: #793d00;
-`;
-const HeaderTitle = styled.div`
-  cursor: auto;
-  user-select: none;
-  font-size: x-large;
-  font-weight: 600;
-  font-style: italic;
-  color: #ffed00;
-`;
 const Main = styled.div`
   flex: 1;
   display: flex;
@@ -53,35 +30,18 @@ function App() {
     return () => window.removeEventListener("resize", handler);
   });
 
-  const {
-    historicalMotorData,
-    currentMotorData,
-    setTarget,
-    setLimit,
-  } = useMotorData();
-
   return (
     <AppWrapper>
-      <Header>
-        <HeaderTitle>Motor Control</HeaderTitle>
-        <HeaderButton onClick={() => setEditable(!editable)}>
-          Editable
-          <input type="checkbox" checked={editable} readOnly={true} />
-        </HeaderButton>
-      </Header>
+      <Header editable={editable} setEditable={setEditable} />
       <Main>
-        <ChartPanel
-          historicalMotorData={historicalMotorData}
-          currentMotorData={currentMotorData}
-          width={editable ? windowWidth - 200 : windowWidth}
-        />
-        {editable && (
-          <ControlPanel
-            currentMotorData={currentMotorData}
-            setTarget={setTarget}
-            setLimit={setLimit}
-          />
-        )}
+        <Switch>
+          <Route path="/replay" exact={true}>
+            <ReplayRoute />
+          </Route>
+          <Route path="/">
+            <RootRoute editable={editable} windowWidth={windowWidth} />
+          </Route>
+        </Switch>
       </Main>
     </AppWrapper>
   );

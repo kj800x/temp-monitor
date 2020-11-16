@@ -10,6 +10,7 @@
     "loaders.css": "^0.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "recharts": "^1.8.5",
     "styled-components": "^5.2.0",
@@ -38,6 +39,6 @@
   "##homepage": "/motor/",
   "proxy": "http://localhost",
   "devDependencies": {
-    "@kj800x/localproxy-react-scripts": "0.0.8"
+    "@kj800x/localproxy-react-scripts": "^0.2.1"
   }
 }
