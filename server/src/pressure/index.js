@@ -21,6 +21,6 @@ switch (process.env.PRESSURE_SOURCE) {
   }
   default: {
     console.log("info: pressure not enabled");
-    getPressure = () => 0;
+    getPressure = () => 14;
   }
 }

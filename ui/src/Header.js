@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { FETCH_APP_STATE, SET_LOGGING } from "./queries";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 
 const HeaderWrapper = styled.div`
   padding: 4px;
@@ -41,6 +43,7 @@ const HeaderButton = styled.div`
   border: 1px solid black;
   padding: 4px;
   background: #793d00;
+  margin-left: 12px;
 `;
 const HeaderTitle = styled.div`
   cursor: auto;
@@ -51,26 +54,44 @@ const HeaderTitle = styled.div`
   color: #ffed00;
 `;
 
-export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => (
-  <HeaderWrapper>
-    <LeftWrapper>
-      <HeaderTitle>Motor Control</HeaderTitle>
-      <StyledNavLink exact to="/">
-        Live
-      </StyledNavLink>
-      <StyledNavLink exact to="/replay">
-        Replay
-      </StyledNavLink>
-    </LeftWrapper>
-    <RightWrapper>
-      <HeaderButton onClick={toggleLogging}>
-        Logging
-        <input type="checkbox" checked={isLogging} readOnly={true} />
-      </HeaderButton>
-      <HeaderButton onClick={() => setEditable((editable) => !editable)}>
-        Editable
-        <input type="checkbox" checked={editable} readOnly={true} />
-      </HeaderButton>
-    </RightWrapper>
-  </HeaderWrapper>
-);
+export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
+  const { data: appStateData } = useQuery(FETCH_APP_STATE);
+  const [setLogging] = useMutation(SET_LOGGING);
+
+  return (
+    <HeaderWrapper>
+      <LeftWrapper>
+        <HeaderTitle>Motor Control</HeaderTitle>
+        <StyledNavLink exact to="/">
+          Live
+        </StyledNavLink>
+        <StyledNavLink exact to="/replay">
+          Replay
+        </StyledNavLink>
+      </LeftWrapper>
+      <RightWrapper>
+        {appStateData && (
+          <HeaderButton
+            onClick={() => {
+              setLogging({
+                variables: { logging: !appStateData.appState.logging },
+              });
+            }}
+          >
+            Logging
+            <input
+              type="checkbox"
+              checked={appStateData.appState.logging}
+              readOnly={true}
+            />
+          </HeaderButton>
+        )}
+
+        <HeaderButton onClick={() => setEditable((editable) => !editable)}>
+          Editable
+          <input type="checkbox" checked={editable} readOnly={true} />
+        </HeaderButton>
+      </RightWrapper>
+    </HeaderWrapper>
+  );
+};
