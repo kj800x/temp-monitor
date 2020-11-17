@@ -2,28 +2,47 @@ import stringify from "csv-stringify";
 import fs from "fs";
 import mkdirp from "mkdirp";
 
-const now = new Date();
-const nowString = `${now.getFullYear()}-${
-  now.getMonth() + 1
-}-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
+let logging = false;
+let csvStringStream;
+let output;
 
-const csvStringStream = stringify();
-csvStringStream.on("error", function (err) {
-  console.error(err.message);
-});
+export const setLogging = (shouldBeLogging) => {
+  if (shouldBeLogging && !logging) {
+    logging = true;
+    mkdirp("./logs").then(() => {
+      const now = new Date();
+      const nowString = `${now.getFullYear()}-${
+        now.getMonth() + 1
+      }-${now.getDate()}_${now.getHours()}-${now.getMinutes()}-${now.getSeconds()}`;
 
-mkdirp("./logs").then(() => {
-  const output = fs.createWriteStream(`./logs/${nowString}.csv`);
-  csvStringStream.pipe(output);
-});
+      output = fs.createWriteStream(`./logs/${nowString}.csv`);
+
+      csvStringStream = stringify();
+      csvStringStream.on("error", function (err) {
+        console.error(err.message);
+      });
+      csvStringStream.pipe(output);
+    });
+  } else if (logging && !shouldBeLogging) {
+    output.close();
+    logging = false;
+    csvStringStream = undefined;
+  }
+};
+
+export const getLogging = () => {
+  return logging;
+};
 
 export const log = (state) => {
-  csvStringStream.write([
-    state.time,
-    state.pressure,
-    state.status,
-    state.motor,
-    state.target,
-    state.limit,
-  ]);
+  if (logging && csvStringStream) {
+    csvStringStream.write([
+      state.time,
+      state.pressure,
+      state.status,
+      state.motor,
+      state.target,
+      state.limit,
+    ]);
+  }
 };

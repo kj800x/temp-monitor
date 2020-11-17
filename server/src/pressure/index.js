@@ -15,8 +15,12 @@ switch (process.env.PRESSURE_SOURCE) {
     getPressure = require("./random.js").getPressure;
     break;
   }
-  default: {
+  case "REAL": {
     getPressure = require("./real.js").getPressure;
     break;
+  }
+  default: {
+    console.log("info: pressure not enabled");
+    getPressure = () => 0;
   }
 }

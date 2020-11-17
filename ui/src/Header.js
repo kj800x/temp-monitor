@@ -15,6 +15,8 @@ const LeftWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
+const RightWrapper = LeftWrapper;
+
 const StyledNavLink = styled(NavLink)`
   margin-left: 12px;
   background: #504311;
@@ -49,7 +51,7 @@ const HeaderTitle = styled.div`
   color: #ffed00;
 `;
 
-export const Header = ({ setEditable, editable }) => (
+export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => (
   <HeaderWrapper>
     <LeftWrapper>
       <HeaderTitle>Motor Control</HeaderTitle>
@@ -60,9 +62,15 @@ export const Header = ({ setEditable, editable }) => (
         Replay
       </StyledNavLink>
     </LeftWrapper>
-    <HeaderButton onClick={() => setEditable((editable) => !editable)}>
-      Editable
-      <input type="checkbox" checked={editable} readOnly={true} />
-    </HeaderButton>
+    <RightWrapper>
+      <HeaderButton onClick={toggleLogging}>
+        Logging
+        <input type="checkbox" checked={isLogging} readOnly={true} />
+      </HeaderButton>
+      <HeaderButton onClick={() => setEditable((editable) => !editable)}>
+        Editable
+        <input type="checkbox" checked={editable} readOnly={true} />
+      </HeaderButton>
+    </RightWrapper>
   </HeaderWrapper>
 );
