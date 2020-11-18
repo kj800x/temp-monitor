@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
-import { RootRoute } from "./RootRoute";
-import { ReplayRoute } from "./ReplayRoute";
-import { Header } from "./Header";
+import { RootRoute } from "../root-route/RootRoute";
+import { ReplayRoute } from "../replay-route/ReplayRoute";
+import { ReplayIndexRoute } from "../replay-index-route/ReplayIndexRoute";
+import { Header } from "../common/Header";
 
 const Main = styled.div`
   flex: 1;
@@ -35,8 +36,11 @@ function App() {
       <Header editable={editable} setEditable={setEditable} />
       <Main>
         <Switch>
+          <Route path="/replay/:file" exact={true}>
+            <ReplayRoute windowWidth={windowWidth} />
+          </Route>
           <Route path="/replay" exact={true}>
-            <ReplayRoute />
+            <ReplayIndexRoute />
           </Route>
           <Route path="/">
             <RootRoute editable={editable} windowWidth={windowWidth} />

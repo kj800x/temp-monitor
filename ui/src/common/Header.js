@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { FETCH_APP_STATE, SET_LOGGING } from "./queries";
+import { FETCH_APP_STATE, SET_LOGGING } from "../queries";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 
 const HeaderWrapper = styled.div`
@@ -65,9 +65,7 @@ export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
         <StyledNavLink exact to="/">
           Live
         </StyledNavLink>
-        <StyledNavLink exact to="/replay">
-          Replay
-        </StyledNavLink>
+        <StyledNavLink to="/replay">Replay</StyledNavLink>
       </LeftWrapper>
       <RightWrapper>
         {appStateData && (

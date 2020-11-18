@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useMotorData } from "./useMotorData";
-import { ChartPanel } from "./ChartPanel";
+import { ChartPanel } from "../common/ChartPanel";
 import { ControlPanel } from "./ControlPanel";
 
 export const RootRoute = ({ editable, windowWidth }) => {

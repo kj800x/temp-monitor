@@ -14,10 +14,15 @@ function formatXAxis(x) {
   return Math.round((now - x) / 1000) + " sec ago";
 }
 
+function formatElapsedXAxis(x) {
+  return (x / 1000).toFixed(0) + " sec";
+}
+
 export const ChartPanel = ({
   historicalMotorData,
   currentMotorData,
   width,
+  useElapsedXAxis = false,
 }) => {
   const [hidden, setHidden] = useState([]);
 
@@ -48,7 +53,7 @@ export const ChartPanel = ({
           type="number"
           dataKey="time"
           domain={[domainMin, domainMax]}
-          tickFormatter={formatXAxis}
+          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
         <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
@@ -83,7 +88,7 @@ export const ChartPanel = ({
           type="number"
           dataKey="time"
           domain={[domainMin, domainMax]}
-          tickFormatter={formatXAxis}
+          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
         <YAxis domain={[12, 21]} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
@@ -118,7 +123,7 @@ export const ChartPanel = ({
           type="number"
           dataKey="time"
           domain={[domainMin, domainMax]}
-          tickFormatter={formatXAxis}
+          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
         <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
