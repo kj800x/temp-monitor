@@ -24,8 +24,8 @@ function formatElapsedXAxis(x) {
 }
 
 export const ChartPanel = ({
-  historicalMotorData,
-  currentMotorData,
+  motorData,
+  dataSpec,
   width,
   useElapsedXAxis = false,
 }) => {
@@ -42,15 +42,16 @@ export const ChartPanel = ({
     [setHidden]
   );
 
-  const domainMin = currentMotorData ? currentMotorData.time - 60000 : 0;
-  const domainMax = currentMotorData ? currentMotorData.time : 0;
+  const latestMotorData = motorData[motorData.length - 1];
+  const domainMin = latestMotorData ? latestMotorData.time - 60000 : 0;
+  const domainMax = latestMotorData ? latestMotorData.time : 0;
 
   return (
     <ChartPanelWrapper>
       <LineChart
         width={width - 8}
         height={300}
-        data={historicalMotorData}
+        data={motorData}
         margin={{ top: 30, bottom: 10 }}
       >
         <XAxis
@@ -62,30 +63,26 @@ export const ChartPanel = ({
         />
         <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="target"
-          stroke="#82ca9d"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("target")}
-        />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="motor"
-          stroke="#ffff00"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("motor")}
-        />
+        {dataSpec
+          .filter((d) => d.chart === "motor")
+          .map((d) => (
+            <Line
+              dot={false}
+              type="monotone"
+              key={d.key}
+              dataKey={d.key}
+              stroke={d.color}
+              strokeWidth={2}
+              isAnimationActive={false}
+              hide={hidden.includes(d.key)}
+            />
+          ))}
         <Legend onClick={toggleVisibility} />
       </LineChart>
       <LineChart
         width={width - 8}
         height={300}
-        data={historicalMotorData}
+        data={motorData}
         margin={{ top: 30, bottom: 10 }}
       >
         <XAxis
@@ -97,30 +94,26 @@ export const ChartPanel = ({
         />
         <YAxis domain={[12, 21]} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="pressure"
-          stroke="#8884d8"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("pressure")}
-        />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="avg"
-          stroke="#00ffff"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("avg")}
-        />
+        {dataSpec
+          .filter((d) => d.chart === "pressure")
+          .map((d) => (
+            <Line
+              dot={false}
+              type="monotone"
+              key={d.key}
+              dataKey={d.key}
+              stroke={d.color}
+              strokeWidth={2}
+              isAnimationActive={false}
+              hide={hidden.includes(d.key)}
+            />
+          ))}
         <Legend onClick={toggleVisibility} />
       </LineChart>
       <LineChart
         width={width - 8}
         height={300}
-        data={historicalMotorData}
+        data={motorData}
         margin={{ top: 30, bottom: 10 }}
       >
         <XAxis
@@ -132,24 +125,20 @@ export const ChartPanel = ({
         />
         <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="limit"
-          stroke="#00ffff"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("limit")}
-        />
-        <Line
-          dot={false}
-          type="monotone"
-          dataKey="status"
-          stroke="#ff0000"
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("status")}
-        />
+        {dataSpec
+          .filter((d) => d.chart === "status")
+          .map((d) => (
+            <Line
+              dot={false}
+              type="monotone"
+              key={d.key}
+              dataKey={d.key}
+              stroke={d.color}
+              strokeWidth={2}
+              isAnimationActive={false}
+              hide={hidden.includes(d.key)}
+            />
+          ))}
         <Legend onClick={toggleVisibility} />
       </LineChart>
     </ChartPanelWrapper>

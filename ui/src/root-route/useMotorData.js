@@ -15,8 +15,41 @@ const WEBSOCKET_ADDRESS = `${
   window.location.port ? ":" + window.location.port : ""
 }/motor/api`;
 
+const dataSpec = [
+  {
+    chart: "motor",
+    key: "target",
+    color: "#82ca9d",
+  },
+  {
+    chart: "motor",
+    key: "motor",
+    color: "#ffff00",
+  },
+  {
+    chart: "pressure",
+    key: "pressure",
+    color: "#8884d8",
+  },
+  {
+    chart: "pressure",
+    key: "avg",
+    color: "#00ffff",
+  },
+  {
+    chart: "status",
+    key: "limit",
+    color: "#00ffff",
+  },
+  {
+    chart: "status",
+    key: "status",
+    color: "#ff0000",
+  },
+];
+
 export const useMotorData = () => {
-  const [historicalMotorData, setHistoricalMotorData] = useState([]);
+  const [motorData, setMotorData] = useState([]);
   const [ws, setWs] = useState(null);
 
   useEffect(() => {
@@ -25,7 +58,7 @@ export const useMotorData = () => {
     lws.onmessage = (message) => {
       const now = new Date().getTime();
       const retentionThreshold = now - 60000;
-      setHistoricalMotorData((historicalMotorData) => [
+      setMotorData((historicalMotorData) => [
         ...historicalMotorData.filter((d) => d.time > retentionThreshold),
         JSON.parse(message.data).state,
       ]);
@@ -39,11 +72,8 @@ export const useMotorData = () => {
   }, []);
 
   return {
-    historicalMotorData,
-    currentMotorData:
-      historicalMotorData.length > 0
-        ? historicalMotorData[historicalMotorData.length - 1]
-        : DUMMY_MOTOR_DATA,
+    motorData,
+    dataSpec,
     setTarget: (value) => {
       console.log(value);
       ws && ws.send(JSON.stringify({ type: "set", name: "target", value }));

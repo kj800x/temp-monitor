@@ -5,23 +5,18 @@ import { ChartPanel } from "../common/ChartPanel";
 import { ControlPanel } from "./ControlPanel";
 
 export const RootRoute = ({ editable, windowWidth }) => {
-  const {
-    historicalMotorData,
-    currentMotorData,
-    setTarget,
-    setLimit,
-  } = useMotorData();
+  const { motorData, dataSpec, setTarget, setLimit } = useMotorData();
 
   return (
     <>
       <ChartPanel
-        historicalMotorData={historicalMotorData}
-        currentMotorData={currentMotorData}
+        motorData={motorData}
+        dataSpec={dataSpec}
         width={editable ? windowWidth - 200 : windowWidth}
       />
       {editable && (
         <ControlPanel
-          currentMotorData={currentMotorData}
+          latestMotorData={motorData[motorData.length - 1]}
           setTarget={setTarget}
           setLimit={setLimit}
         />

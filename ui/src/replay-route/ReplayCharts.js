@@ -22,7 +22,9 @@ const Controls = styled.div`
 const REPLAY_STEP = 25;
 
 export const ReplayCharts = ({ windowWidth, file }) => {
-  const { historicalMotorData, loading, error } = useReplayMotorData({ file });
+  const { motorData, dataSpec, loading, error } = useReplayMotorData({
+    file,
+  });
   const [timestamp, setTimestamp] = useState(45000);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -48,10 +50,10 @@ export const ReplayCharts = ({ windowWidth, file }) => {
   return (
     <ReplayChartsWrapper>
       <ChartPanel
-        historicalMotorData={historicalMotorData.filter(
+        motorData={motorData.filter(
           (d) => (d.time > timestamp - 60000) & (d.time <= timestamp)
         )}
-        currentMotorData={{ time: timestamp }}
+        dataSpec={dataSpec}
         width={windowWidth}
         useElapsedXAxis={true}
       />
@@ -59,8 +61,8 @@ export const ReplayCharts = ({ windowWidth, file }) => {
         <input
           style={{ flex: 1 }}
           type="range"
-          min={historicalMotorData[0].time}
-          max={historicalMotorData[historicalMotorData.length - 1].time}
+          min={motorData[0].time}
+          max={motorData[motorData.length - 1].time}
           value={timestamp}
           onChange={(event) => {
             setTimestamp(parseInt(event.target.value, 10));

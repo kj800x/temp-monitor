@@ -25,8 +25,42 @@ function parseData(data) {
   );
 }
 
+const dataSpec = [
+  {
+    chart: "motor",
+    key: "target",
+    color: "#82ca9d",
+  },
+  {
+    chart: "motor",
+    key: "motor",
+    color: "#ffff00",
+  },
+  {
+    chart: "pressure",
+    key: "pressure",
+    color: "#8884d8",
+  },
+  {
+    chart: "pressure",
+    key: "avg",
+    color: "#00ffff",
+  },
+  {
+    chart: "status",
+    key: "limit",
+    color: "#00ffff",
+  },
+  {
+    chart: "status",
+    key: "status",
+    color: "#ff0000",
+  },
+];
+
 export const useReplayMotorData = ({ file }) => {
-  const [data, setData] = useState(null);
+  const [motorData, setMotorData] = useState(null);
+  // const [dataSpec, setDataSpec] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -37,7 +71,7 @@ export const useReplayMotorData = ({ file }) => {
         const request = await fetch(`/motor/logs/${file}`);
 
         const data = csv.parse(await request.text());
-        setData(parseData(data));
+        setMotorData(parseData(data));
         setLoading(false);
       } catch (e) {
         setError(e);
@@ -48,7 +82,8 @@ export const useReplayMotorData = ({ file }) => {
   }, [file]);
 
   return {
-    historicalMotorData: data,
+    motorData,
+    dataSpec,
     loading,
     error,
   };
