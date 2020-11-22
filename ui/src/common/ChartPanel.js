@@ -15,7 +15,12 @@ function formatXAxis(x) {
 }
 
 function formatElapsedXAxis(x) {
-  return (x / 1000).toFixed(0) + " sec";
+  const min = Math.floor(x / 60000);
+  const sec = Math.floor((x % 60000) / 1000);
+  if (min > 0) {
+    return `${min} min ${sec} sec`;
+  }
+  return `${sec} sec`;
 }
 
 export const ChartPanel = ({

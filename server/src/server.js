@@ -22,11 +22,14 @@ async function main() {
   });
   apolloServer.installSubscriptionHandlers(httpServer);
 
-  const runningHttpWsServer = httpWsServer.listen(DIRECT_WS_API_PORT, async () => {
-    console.log(
-      `🚀 Websocket Direct API server ready at http://localhost/motor/api (proxy to http://localhost:${DIRECT_WS_API_PORT})`
-    );
-  })
+  const runningHttpWsServer = httpWsServer.listen(
+    DIRECT_WS_API_PORT,
+    async () => {
+      console.log(
+        `🚀 Websocket Direct API server ready at http://localhost/motor/api (proxy to http://localhost:${DIRECT_WS_API_PORT})`
+      );
+    }
+  );
   runningHttpWsServer.on("upgrade", (request, socket, head) => {
     wss.handleUpgrade(request, socket, head, (socket) => {
       wss.emit("connection", socket, request);
@@ -63,6 +66,14 @@ async function main() {
         trimRoute: false,
         priority: 0,
         type: "api",
+      },
+      {
+        static: true,
+        route: "/motor/logs",
+        staticDir: path.resolve(__dirname, "../logs"),
+        autoIndex: true,
+        priority: 0,
+        type: "data",
       },
     ],
   };

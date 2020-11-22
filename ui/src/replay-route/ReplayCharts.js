@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { ChartPanel } from "../common/ChartPanel";
 import Error from "../common/Error";
 import Loading from "../common/Loading";
+import { useInterval } from "../common/useInterval";
 import { useKeys } from "../common/useKeys";
 
 import { useReplayMotorData } from "./useReplayMotorData";
@@ -18,6 +19,8 @@ const Controls = styled.div`
   flex-direction: row;
 `;
 
+const REPLAY_STEP = 25;
+
 export const ReplayCharts = ({ windowWidth, file }) => {
   const { historicalMotorData, loading, error } = useReplayMotorData({ file });
   const [timestamp, setTimestamp] = useState(45000);
@@ -29,16 +32,10 @@ export const ReplayCharts = ({ windowWidth, file }) => {
     Space: () => setIsPlaying((p) => !p),
   });
 
-  useEffect(() => {
-    if (isPlaying) {
-      const i = setInterval(() => {
-        setTimestamp((t) => t + 50);
-      }, 50);
-      return () => {
-        clearInterval(i);
-      };
-    }
-  }, [isPlaying, timestamp]);
+  useInterval(
+    () => setTimestamp((t) => t + REPLAY_STEP),
+    isPlaying ? REPLAY_STEP : null
+  );
 
   if (loading) {
     return <Loading />;
