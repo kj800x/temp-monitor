@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
 
-const DUMMY_MOTOR_DATA = {
-  time: 0,
-  isDummy: true,
-  pressure: 0,
-  target: 0,
-  limit: 0,
-  motor: 0,
-};
-
 const WEBSOCKET_ADDRESS = `${
   window.location.protocol === "https:" ? "wss" : "ws"
 }://${window.location.hostname}${
@@ -75,11 +66,9 @@ export const useMotorData = () => {
     motorData,
     dataSpec,
     setTarget: (value) => {
-      console.log(value);
       ws && ws.send(JSON.stringify({ type: "set", name: "target", value }));
     },
     setLimit: (value) => {
-      console.log(value);
       ws && ws.send(JSON.stringify({ type: "set", name: "limit", value }));
     },
   };

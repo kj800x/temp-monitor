@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import { ChartPanel } from "../common/ChartPanel";
 import Error from "../common/Error";
@@ -21,12 +21,46 @@ const Controls = styled.div`
 
 const REPLAY_STEP = 25;
 
-export const ReplayCharts = ({ windowWidth, file }) => {
+function augmentData(motorData, program, dataSpec) {
+  if (!program) {
+    return { motorData, dataSpec };
+  }
+  try {
+    // eslint-disable-next-line no-eval
+    const custom = eval("(() => {" + program + "})()");
+
+    return {
+      motorData: custom.program.reduce(
+        (md, fn) =>
+          md.map((datum) => ({
+            ...datum,
+            ...fn(
+              datum,
+              md.filter(
+                (d) => d.time < datum.time && d.time > datum.time - 30000
+              )
+            ),
+          })),
+        motorData
+      ),
+      dataSpec: [...dataSpec, ...custom.dataSpec],
+    };
+  } catch (e) {
+    console.log("error augmenting", e);
+    return { motorData, dataSpec };
+  }
+}
+
+export const ReplayCharts = ({ windowWidth, file, program }) => {
   const { motorData, dataSpec, loading, error } = useReplayMotorData({
     file,
   });
   const [timestamp, setTimestamp] = useState(45000);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const augmentedReplayData = useMemo(() => {
+    return augmentData(motorData, program, dataSpec);
+  }, [motorData, program, dataSpec]);
 
   useKeys({
     ArrowLeft: () => setTimestamp((ts) => ts - 5000),
@@ -50,10 +84,10 @@ export const ReplayCharts = ({ windowWidth, file }) => {
   return (
     <ReplayChartsWrapper>
       <ChartPanel
-        motorData={motorData.filter(
+        motorData={augmentedReplayData.motorData.filter(
           (d) => (d.time > timestamp - 60000) & (d.time <= timestamp)
         )}
-        dataSpec={dataSpec}
+        dataSpec={augmentedReplayData.dataSpec}
         width={windowWidth}
         useElapsedXAxis={true}
       />
@@ -61,8 +95,12 @@ export const ReplayCharts = ({ windowWidth, file }) => {
         <input
           style={{ flex: 1 }}
           type="range"
-          min={motorData[0].time}
-          max={motorData[motorData.length - 1].time}
+          min={augmentedReplayData.motorData[0].time}
+          max={
+            augmentedReplayData.motorData[
+              augmentedReplayData.motorData.length - 1
+            ].time
+          }
           value={timestamp}
           onChange={(event) => {
             setTimestamp(parseInt(event.target.value, 10));

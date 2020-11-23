@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Loading from "../common/Loading";
 
 const ControlPanelWrapper = styled.div`
   padding: 4px;
@@ -21,31 +22,37 @@ const Slider = styled.input`
   flex: 1;
 `;
 
-export const ControlPanel = ({ currentMotorData, setTarget, setLimit }) => (
-  <ControlPanelWrapper>
-    <SliderContainer>
-      <Slider
-        type="range"
-        orient="vertical"
-        min="0"
-        max="1"
-        value={currentMotorData.target}
-        step="0.01"
-        onChange={({ target: { value } }) => setTarget(parseFloat(value))}
-      />
-      <SliderLabel>Target</SliderLabel>
-    </SliderContainer>
-    <SliderContainer>
-      <Slider
-        type="range"
-        orient="vertical"
-        min="0"
-        max="1"
-        value={currentMotorData.limit}
-        step="0.01"
-        onChange={({ target: { value } }) => setLimit(parseFloat(value))}
-      />
-      <SliderLabel>Limit</SliderLabel>
-    </SliderContainer>
-  </ControlPanelWrapper>
-);
+export const ControlPanel = ({ latestMotorData, setTarget, setLimit }) => {
+  if (!latestMotorData) {
+    return <Loading />;
+  }
+
+  return (
+    <ControlPanelWrapper>
+      <SliderContainer>
+        <Slider
+          type="range"
+          orient="vertical"
+          min="0"
+          max="1"
+          value={latestMotorData.target}
+          step="0.01"
+          onChange={({ target: { value } }) => setTarget(parseFloat(value))}
+        />
+        <SliderLabel>Target</SliderLabel>
+      </SliderContainer>
+      <SliderContainer>
+        <Slider
+          type="range"
+          orient="vertical"
+          min="0"
+          max="1"
+          value={latestMotorData.limit}
+          step="0.01"
+          onChange={({ target: { value } }) => setLimit(parseFloat(value))}
+        />
+        <SliderLabel>Limit</SliderLabel>
+      </SliderContainer>
+    </ControlPanelWrapper>
+  );
+};

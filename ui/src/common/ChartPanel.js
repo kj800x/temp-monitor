@@ -43,7 +43,7 @@ export const ChartPanel = ({
   );
 
   const latestMotorData = motorData[motorData.length - 1];
-  const domainMin = latestMotorData ? latestMotorData.time - 60000 : 0;
+  const domainMin = (latestMotorData ? latestMotorData.time : 0) - 60000;
   const domainMax = latestMotorData ? latestMotorData.time : 0;
 
   return (
@@ -92,7 +92,7 @@ export const ChartPanel = ({
           domain={[domainMin, domainMax]}
           tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
-        <YAxis domain={[12, 21]} />
+        <YAxis domain={["auto", "auto"]} /> {/*domain={[12, 21]}*/}
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
         {dataSpec
           .filter((d) => d.chart === "pressure")

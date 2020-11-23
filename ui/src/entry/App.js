@@ -10,6 +10,7 @@ const Main = styled.div`
   flex: 1;
   display: flex;
   flex-direction: row;
+  overflow: ${({ overflow }) => overflow};
 `;
 const AppWrapper = styled.div`
   flex-direction: column;
@@ -34,19 +35,23 @@ function App() {
   return (
     <AppWrapper>
       <Header editable={editable} setEditable={setEditable} />
-      <Main>
-        <Switch>
-          <Route path="/replay/:file" exact={true}>
-            <ReplayRoute windowWidth={windowWidth} />
-          </Route>
-          <Route path="/replay" exact={true}>
+      <Switch>
+        <Route path="/replay/:file" exact={true}>
+          <Main overflow={"hidden"}>
+            <ReplayRoute editable={editable} windowWidth={windowWidth} />
+          </Main>
+        </Route>
+        <Route path="/replay" exact={true}>
+          <Main overflow={"auto"}>
             <ReplayIndexRoute />
-          </Route>
-          <Route path="/">
+          </Main>
+        </Route>
+        <Route path="/">
+          <Main overflow={"hidden"}>
             <RootRoute editable={editable} windowWidth={windowWidth} />
-          </Route>
-        </Switch>
-      </Main>
+          </Main>
+        </Route>
+      </Switch>
     </AppWrapper>
   );
 }
