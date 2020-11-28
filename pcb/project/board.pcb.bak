@@ -5,7 +5,7 @@ FileVersion[20091103]
 
 PCB["Motor Controller" 3300.00mil 3900.00mil]
 
-Grid[10.00mil 0.0000 0.0000 0]
+Grid[10.00mil 0.0000 0.0000 1]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[8.00mil 10.00mil 8.00mil 6.00mil 12.00mil 6.00mil]
@@ -813,7 +813,7 @@ Via[2220.00mil 160.00mil 36.00mil 20.00mil 0.0000 20.00mil "" ""]
 
 Element["" "BT8.fp" "M1" "unknown" 2400.00mil 3670.00mil -36.16mil -197.06mil 0 100 ""]
 (
-	Pin[400.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "5" "warn,edge2"]
+	Pin[400.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "5" "edge2"]
 	Pin[700.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "8" "edge2"]
 	Pin[600.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "7" "edge2"]
 	Pin[500.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "6" "edge2"]
@@ -840,8 +840,8 @@ Element["" "TO220.fp" "Q2" "unknown" 1505.00mil 2220.00mil -168.72mil -534.27mil
 (
 	Pin[-100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "B" "1" "square"]
 	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "C" "2" ""]
-	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "E" "3" "warn"]
-	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "warn,thermal(1X)"]
+	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "E" "3" ""]
+	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "thermal(1X)"]
 	ElementLine [-100.00mil 0.0000 -100.00mil -180.00mil 30.00mil]
 	ElementLine [0.0000 0.0000 0.0000 -180.00mil 30.00mil]
 	ElementLine [100.00mil 0.0000 100.00mil -180.00mil 30.00mil]
@@ -869,7 +869,7 @@ Element["" "TO220.fp" "Q1" "unknown" 945.00mil 2220.00mil -170.41mil -535.36mil 
 	Pin[-100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "B" "1" "square"]
 	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "C" "2" ""]
 	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "E" "3" ""]
-	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "warn,thermal(1X)"]
+	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "thermal(1X)"]
 	ElementLine [-100.00mil 0.0000 -100.00mil -180.00mil 30.00mil]
 	ElementLine [0.0000 0.0000 0.0000 -180.00mil 30.00mil]
 	ElementLine [100.00mil 0.0000 100.00mil -180.00mil 30.00mil]
@@ -892,10 +892,10 @@ Element["" "TO220.fp" "Q1" "unknown" 945.00mil 2220.00mil -170.41mil -535.36mil 
 
 	)
 
-Element["" "ACY400" "R1" "250_?" 845.00mil 1310.00mil 57.69mil -295.90mil 0 100 ""]
+Element["" "ACY400" "R1" "1.2k" 845.00mil 1310.00mil 57.69mil -295.90mil 0 100 ""]
 (
 	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
-	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "warn"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
 	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
 	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
 	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
@@ -905,10 +905,10 @@ Element["" "ACY400" "R1" "250_?" 845.00mil 1310.00mil 57.69mil -295.90mil 0 100 
 
 	)
 
-Element["" "ACY400" "R2" "250_?" 1405.00mil 1310.00mil 57.23mil -298.71mil 0 100 ""]
+Element["" "ACY400" "R2" "1.2k" 1405.00mil 1310.00mil 57.23mil -298.71mil 0 100 ""]
 (
 	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
-	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "warn"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
 	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
 	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
 	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
@@ -946,11 +946,11 @@ Element["" "DIODE_LAY-400.fp" "D1" "unknown" 945.00mil 2390.00mil -77.34mil 56.0
 
 Element["" "8HEAD_M.fp" "U2" "unknown" 2420.00mil 2510.00mil -0.8695mm 832.86mil 0 100 ""]
 (
-	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "VIN" "1" "warn"]
+	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "VIN" "1" ""]
 	Pin[0.0000 100.00mil 60.00mil 20.00mil 66.00mil 35.00mil "3V" "2" ""]
 	Pin[0.0000 200.00mil 60.00mil 20.00mil 66.00mil 35.00mil "GND" "3" ""]
-	Pin[0.0000 300.00mil 60.00mil 20.00mil 66.00mil 35.00mil "SCL" "4" "warn"]
-	Pin[0.0000 400.00mil 60.00mil 20.00mil 66.00mil 35.00mil "SDA" "5" "warn"]
+	Pin[0.0000 300.00mil 60.00mil 20.00mil 66.00mil 35.00mil "SCL" "4" ""]
+	Pin[0.0000 400.00mil 60.00mil 20.00mil 66.00mil 35.00mil "SDA" "5" ""]
 	Pin[0.0000 500.00mil 60.00mil 20.00mil 66.00mil 35.00mil "EOC" "6" ""]
 	Pin[0.0000 600.00mil 60.00mil 20.00mil 66.00mil 35.00mil "RST" "7" ""]
 	Pin[0.0000 700.00mil 60.00mil 20.00mil 66.00mil 35.00mil "" "8" ""]
@@ -992,14 +992,14 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 	Pin[0.0000 -500.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_30" "11" ""]
 	Pin[0.0000 -600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_31" "13" ""]
 	Pin[0.0000 -700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_48" "15" ""]
-	Pin[0.0000 -800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "SPI0_CS0" "17" ""]
+	Pin[0.0000 -800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_4" "17" ""]
 	Pin[0.0000 -900.00mil 69.00mil 20.00mil 75.00mil 41.00mil "I2C2_SCL" "19" ""]
-	Pin[0.0000 -1000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM0B" "21" ""]
+	Pin[0.0000 -1000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_3" "21" ""]
 	Pin[0.0000 -1100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_49" "23" ""]
 	Pin[0.0000 -1200.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_117" "25" ""]
 	Pin[0.0000 -1300.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_125" "27" ""]
-	Pin[0.0000 -1400.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM0B" "29" ""]
-	Pin[0.0000 -1500.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM0A" "31" ""]
+	Pin[0.0000 -1400.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_121" "29" ""]
+	Pin[0.0000 -1500.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_120" "31" ""]
 	Pin[0.0000 -1600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN4" "33" ""]
 	Pin[0.0000 -1700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN6" "35" ""]
 	Pin[0.0000 -1800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN2" "37" ""]
@@ -1009,13 +1009,13 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 	Pin[100.00mil -100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "VDD_3V3" "4" ""]
 	Pin[100.00mil -200.00mil 69.00mil 20.00mil 75.00mil 41.00mil "VDD_5V" "6" ""]
 	Pin[100.00mil -300.00mil 69.00mil 20.00mil 75.00mil 41.00mil "SYS_5V" "8" ""]
-	Pin[100.00mil -400.00mil 69.00mil 20.00mil 75.00mil 41.00mil "SYS_RESET" "10" ""]
+	Pin[100.00mil -400.00mil 69.00mil 20.00mil 75.00mil 41.00mil "SYS_RESETn" "10" ""]
 	Pin[100.00mil -500.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_60" "12" ""]
-	Pin[100.00mil -600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM1A" "14" "warn"]
-	Pin[100.00mil -700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM1B" "16" "warn"]
-	Pin[100.00mil -800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "SPI0_DI" "18" ""]
+	Pin[100.00mil -600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_40" "14" ""]
+	Pin[100.00mil -700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_51" "16" ""]
+	Pin[100.00mil -800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_5" "18" ""]
 	Pin[100.00mil -900.00mil 69.00mil 20.00mil 75.00mil 41.00mil "I2C2_SDA" "20" ""]
-	Pin[100.00mil -1000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "PWM0A" "22" ""]
+	Pin[100.00mil -1000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_2" "22" ""]
 	Pin[100.00mil -1100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_15" "24" ""]
 	Pin[100.00mil -1200.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_14" "26" ""]
 	Pin[100.00mil -1300.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_123" "28" ""]
@@ -1025,7 +1025,7 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 	Pin[100.00mil -1700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN5" "36" ""]
 	Pin[100.00mil -1800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN3" "38" ""]
 	Pin[100.00mil -1900.00mil 69.00mil 20.00mil 75.00mil 41.00mil "AIN1" "40" ""]
-	Pin[100.00mil -2000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_07" "42" ""]
+	Pin[100.00mil -2000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_7" "42" ""]
 	Pin[100.00mil -2100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "DGND" "44" ""]
 	Pin[1900.00mil -100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_38" "103" ""]
 	Pin[1900.00mil -200.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_34" "105" ""]
@@ -1042,8 +1042,8 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 	Pin[1900.00mil -1300.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_86" "127" ""]
 	Pin[1900.00mil -1400.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_87" "129" ""]
 	Pin[1900.00mil -1500.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_10" "131" ""]
-	Pin[1900.00mil -1600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_09" "133" ""]
-	Pin[1900.00mil -1700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_08" "135" ""]
+	Pin[1900.00mil -1600.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_9" "133" ""]
+	Pin[1900.00mil -1700.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_8" "135" ""]
 	Pin[1900.00mil -1800.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_78" "137" ""]
 	Pin[1900.00mil -1900.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_76" "139" ""]
 	Pin[1900.00mil -2000.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_74" "141" ""]
@@ -1070,10 +1070,10 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 	Pin[2000.00mil -300.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_67" "108" ""]
 	Pin[2000.00mil -100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "GPIO_39" "104" ""]
 	Pin[50.00mil 200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1001" ""]
-	Pin[1950.00mil 200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1000" "warn,thermal(1X)"]
-	Pin[1825.00mil -2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1003" "warn,thermal(1X)"]
-	Pin[175.00mil -2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1002" "warn,thermal(1X)"]
-	Pin[1900.00mil 0.0000 69.00mil 20.00mil 75.00mil 41.00mil "DGND" "101" "warn"]
+	Pin[1950.00mil 200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1000" "thermal(1X)"]
+	Pin[1825.00mil -2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1003" "thermal(1X)"]
+	Pin[175.00mil -2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1002" "thermal(1X)"]
+	Pin[1900.00mil 0.0000 69.00mil 20.00mil 75.00mil 41.00mil "DGND" "101" ""]
 	ElementLine [285.00mil 720.00mil 310.00mil 695.00mil 6.00mil]
 	ElementLine [285.00mil 720.00mil 310.00mil 720.00mil 6.00mil]
 	ElementLine [310.00mil 745.00mil 310.00mil 720.00mil 6.00mil]
@@ -1176,161 +1176,28 @@ Element["onsolder" "BBB.fp" "U1" "unknown" 200.00mil 3120.00mil -45.91mil 437.85
 
 	)
 
-Element["" "RCY100" "C1" "100u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
+Element["found" "JTAGIC3-50MIL-SMD.fp" "CONN1" "unknown" 2760.00mil 1700.00mil 80.00mil -160.00mil 1 100 ""]
 (
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square,warn"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
+	Pad[40.00mil 100.00mil 95.00mil 100.00mil 30.00mil 20.00mil 38.00mil "1" "1" "square,edge2"]
+	Pad[-95.00mil 100.00mil -40.00mil 100.00mil 30.00mil 20.00mil 38.00mil "2" "2" "square"]
+	Pad[40.00mil 50.00mil 95.00mil 50.00mil 30.00mil 20.00mil 38.00mil "3" "3" "square,edge2"]
+	Pad[-95.00mil 50.00mil -40.00mil 50.00mil 30.00mil 20.00mil 38.00mil "4" "4" "square"]
+	Pad[40.00mil 0.0000 95.00mil 0.0000 30.00mil 20.00mil 38.00mil "5" "5" "square,edge2"]
+	Pad[-95.00mil 0.0000 -40.00mil 0.0000 30.00mil 20.00mil 38.00mil "6" "6" "square"]
+	Pad[40.00mil -50.00mil 95.00mil -50.00mil 30.00mil 20.00mil 38.00mil "7" "7" "square,edge2"]
+	Pad[-95.00mil -50.00mil -40.00mil -50.00mil 30.00mil 20.00mil 38.00mil "8" "8" "square"]
+	Pad[40.00mil -100.00mil 95.00mil -100.00mil 30.00mil 20.00mil 38.00mil "9" "9" "square,edge2"]
+	Pad[-95.00mil -100.00mil -40.00mil -100.00mil 30.00mil 20.00mil 38.00mil "10" "10" "square"]
+	ElementLine [-68.00mil 127.00mil -68.00mil 216.00mil 10.00mil]
+	ElementLine [-68.00mil -216.00mil -68.00mil -127.00mil 10.00mil]
+	ElementLine [-68.00mil -216.00mil 68.00mil -216.00mil 10.00mil]
+	ElementLine [68.00mil -216.00mil 68.00mil -127.00mil 10.00mil]
+	ElementLine [68.00mil 127.00mil 68.00mil 216.00mil 10.00mil]
+	ElementLine [-68.00mil 216.00mil 68.00mil 216.00mil 10.00mil]
+	ElementArc [50.00mil 199.00mil 11.00mil 11.00mil 90 360 10.00mil]
 
 	)
-
-Element["" "RCY100" "C8" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" "warn"]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "RCY100" "C7" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square,warn"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" "warn"]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "RCY100" "C6" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square,warn"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" "warn"]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "ACY400" "R4" "4.7k" 1570.00mil 513.00mil 0.0000 -33.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square,edge2"]
-	Pin[400.00mil 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "warn,edge2"]
-	ElementLine [0.0000 0.0000 100.00mil 0.0000 10.00mil]
-	ElementLine [300.00mil 0.0000 400.00mil 0.0000 10.00mil]
-	ElementLine [100.00mil -33.00mil 300.00mil -33.00mil 10.00mil]
-	ElementLine [300.00mil -33.00mil 300.00mil 33.00mil 10.00mil]
-	ElementLine [300.00mil 33.00mil 100.00mil 33.00mil 10.00mil]
-	ElementLine [100.00mil 33.00mil 100.00mil -33.00mil 10.00mil]
-
-	)
-
-Element["" "ACY400" "R6" "4.7k" 1570.00mil 513.00mil 0.0000 -33.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square,warn,edge2"]
-	Pin[400.00mil 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "edge2"]
-	ElementLine [0.0000 0.0000 100.00mil 0.0000 10.00mil]
-	ElementLine [300.00mil 0.0000 400.00mil 0.0000 10.00mil]
-	ElementLine [100.00mil -33.00mil 300.00mil -33.00mil 10.00mil]
-	ElementLine [300.00mil -33.00mil 300.00mil 33.00mil 10.00mil]
-	ElementLine [300.00mil 33.00mil 100.00mil 33.00mil 10.00mil]
-	ElementLine [100.00mil 33.00mil 100.00mil -33.00mil 10.00mil]
-
-	)
-
-Element["" "ACY400" "R5" "4.7k" 1570.00mil 513.00mil 0.0000 -33.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square,warn,edge2"]
-	Pin[400.00mil 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "edge2"]
-	ElementLine [0.0000 0.0000 100.00mil 0.0000 10.00mil]
-	ElementLine [300.00mil 0.0000 400.00mil 0.0000 10.00mil]
-	ElementLine [100.00mil -33.00mil 300.00mil -33.00mil 10.00mil]
-	ElementLine [300.00mil -33.00mil 300.00mil 33.00mil 10.00mil]
-	ElementLine [300.00mil 33.00mil 100.00mil 33.00mil 10.00mil]
-	ElementLine [100.00mil 33.00mil 100.00mil -33.00mil 10.00mil]
-
-	)
-
-Element["" "RCY100" "C5" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" "warn"]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "RCY100" "C4" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square,warn"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "RCY100" "C3" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "RCY100" "C2" "0.1_u" 1620.00mil 580.00mil -50.00mil -100.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
-	ElementArc [50.00mil 0.0000 100.00mil 100.00mil 0 360 10.00mil]
-
-	)
-
-Element["" "ACY400" "R3" "4.7k" 1570.00mil 513.00mil 0.0000 -33.00mil 0 100 ""]
-(
-	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square,edge2"]
-	Pin[400.00mil 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" "warn,edge2"]
-	ElementLine [0.0000 0.0000 100.00mil 0.0000 10.00mil]
-	ElementLine [300.00mil 0.0000 400.00mil 0.0000 10.00mil]
-	ElementLine [100.00mil -33.00mil 300.00mil -33.00mil 10.00mil]
-	ElementLine [300.00mil -33.00mil 300.00mil 33.00mil 10.00mil]
-	ElementLine [300.00mil 33.00mil 100.00mil 33.00mil 10.00mil]
-	ElementLine [100.00mil 33.00mil 100.00mil -33.00mil 10.00mil]
-
-	)
-
-Element["" "HEADER10_1.fp" "CONN1" "unknown" 1620.00mil 530.00mil -50.00mil -50.00mil 3 100 ""]
-(
-	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "1" "1" "square"]
-	Pin[0.0000 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "2" "2" ""]
-	Pin[0.0000 200.00mil 60.00mil 30.00mil 66.00mil 38.00mil "3" "3" ""]
-	Pin[0.0000 300.00mil 60.00mil 30.00mil 66.00mil 38.00mil "4" "4" ""]
-	Pin[0.0000 400.00mil 60.00mil 30.00mil 66.00mil 38.00mil "5" "5" ""]
-	Pin[100.00mil 400.00mil 60.00mil 30.00mil 66.00mil 38.00mil "6" "6" ""]
-	Pin[100.00mil 300.00mil 60.00mil 30.00mil 66.00mil 38.00mil "7" "7" ""]
-	Pin[100.00mil 200.00mil 60.00mil 30.00mil 66.00mil 38.00mil "8" "8" ""]
-	Pin[100.00mil 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "9" "9" "warn"]
-	Pin[100.00mil 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "10" "10" "warn"]
-	ElementLine [-50.00mil -50.00mil -50.00mil 450.00mil 10.00mil]
-	ElementLine [-50.00mil 450.00mil 150.00mil 450.00mil 10.00mil]
-	ElementLine [150.00mil 450.00mil 150.00mil -50.00mil 10.00mil]
-	ElementLine [150.00mil -50.00mil -50.00mil -50.00mil 10.00mil]
-	ElementLine [-50.00mil 50.00mil 50.00mil 50.00mil 10.00mil]
-	ElementLine [50.00mil 50.00mil 50.00mil -50.00mil 10.00mil]
-
-	)
-Rat[1720.00mil 580.00mil 1 1620.00mil 630.00mil 1  ""]
-Rat[1720.00mil 580.00mil 1 2827.50mil 1750.00mil 0  ""]
-Rat[2530.00mil 3480.00mil 0 2420.00mil 3110.00mil 1  ""]
-Rat[2827.50mil 1750.00mil 0 2827.50mil 1800.00mil 0  ""]
-Rat[1720.00mil 580.00mil 1 1970.00mil 513.00mil 1  ""]
-Rat[3060.00mil 1750.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[1620.00mil 730.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[300.00mil 3020.00mil 0 200.00mil 3120.00mil 1  ""]
-Rat[2380.00mil 310.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[2300.00mil 360.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[1620.00mil 830.00mil 1 2827.50mil 1700.00mil 0  ""]
-Rat[1720.00mil 930.00mil 1 2530.00mil 1700.00mil 1  ""]
-Rat[1720.00mil 730.00mil 1 2040.00mil 1670.00mil 0  ""]
-Rat[1620.00mil 930.00mil 1 2100.00mil 2320.00mil 1  ""]
-Rat[1720.00mil 830.00mil 1 2150.00mil 2070.00mil 0  ""]
-Rat[300.00mil 2520.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[300.00mil 2420.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[200.00mil 1620.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[200.00mil 1720.00mil 1 100.00mil 100.00mil 1  "via"]
+Rat[2380.00mil 310.00mil 1 2380.00mil 310.00mil 1  ""]
 Layer(1 "top" "copper")
 (
 	Line[2692.50mil 1750.00mil 2440.00mil 1750.00mil 25.00mil 20.00mil "clearline"]
@@ -1560,19 +1427,105 @@ NetList()
 (
 	Net("+3.3V" "(unknown)")
 	(
-		Connect("C1-2")
-		Connect("C2-2")
-		Connect("CONN1-2")
+		Connect("CONN1-3")
 		Connect("U1-4")
 		Connect("U2-1")
-		Connect("U2-7")
 	)
 	Net("+5V" "(unknown)")
 	(
-		Connect("C3-1")
-		Connect("C4-2")
-		Connect("C6-1")
-		Connect("C7-2")
+		Connect("CONN1-2")
+		Connect("U1-7")
+	)
+	Net("GND" "(unknown)")
+	(
+		Connect("CONN1-4")
+		Connect("J1-2")
+		Connect("Q1-3")
+		Connect("Q2-3")
+		Connect("U1-101")
+		Connect("U2-3")
+	)
+	Net("unnamed_net1" "(unknown)")
+	(
+		Connect("R2-2")
+		Connect("U1-14")
+	)
+	Net("unnamed_net2" "(unknown)")
+	(
+		Connect("R1-2")
+		Connect("U1-16")
+	)
+	Net("unnamed_net3" "(unknown)")
+	(
+		Connect("U1-19")
+		Connect("U2-4")
+	)
+	Net("unnamed_net4" "(unknown)")
+	(
+		Connect("U1-20")
+		Connect("U2-5")
+	)
+	Net("unnamed_net5" "(unknown)")
+	(
+		Connect("CONN1-9")
+		Connect("U1-24")
+	)
+	Net("unnamed_net6" "(unknown)")
+	(
+		Connect("CONN1-10")
+		Connect("U1-26")
+	)
+	Net("unnamed_net7" "(unknown)")
+	(
+		Connect("U1-41")
+		Connect("U2-6")
+	)
+	Net("unnamed_net8" "(unknown)")
+	(
+		Connect("CONN1-5")
+		Connect("U1-113")
+	)
+	Net("unnamed_net9" "(unknown)")
+	(
+		Connect("CONN1-6")
+		Connect("U1-119")
+	)
+	Net("unnamed_net10" "(unknown)")
+	(
+		Connect("CONN1-7")
+		Connect("U1-121")
+	)
+	Net("unnamed_net11" "(unknown)")
+	(
+		Connect("CONN1-8")
+		Connect("U1-123")
+	)
+	Net("unnamed_net12" "(unknown)")
+	(
+		Connect("D2-1")
+		Connect("M1-6")
+		Connect("M1-8")
+		Connect("Q2-2")
+	)
+	Net("unnamed_net13" "(unknown)")
+	(
+		Connect("Q2-1")
+		Connect("R2-1")
+	)
+	Net("unnamed_net14" "(unknown)")
+	(
+		Connect("Q1-1")
+		Connect("R1-1")
+	)
+	Net("unnamed_net15" "(unknown)")
+	(
+		Connect("D1-1")
+		Connect("M1-2")
+		Connect("M1-4")
+		Connect("Q1-2")
+	)
+	Net("Vdd" "(unknown)")
+	(
 		Connect("CONN1-1")
 		Connect("D1-2")
 		Connect("D2-2")
@@ -1581,118 +1534,6 @@ NetList()
 		Connect("M1-3")
 		Connect("M1-5")
 		Connect("M1-7")
-		Connect("R5-2")
-		Connect("R6-2")
 		Connect("U1-6")
-	)
-	Net("GND" "(unknown)")
-	(
-		Connect("C1-1")
-		Connect("C2-1")
-		Connect("C3-2")
-		Connect("C5-1")
-		Connect("C6-2")
-		Connect("C8-1")
-		Connect("CONN1-3")
-		Connect("J1-2")
-		Connect("Q1-3")
-		Connect("Q2-3")
-		Connect("R3-1")
-		Connect("R4-1")
-		Connect("U1-1")
-		Connect("U2-3")
-	)
-	Net("unnamed_net1" "(unknown)")
-	(
-		Connect("D1-1")
-		Connect("M1-2")
-		Connect("M1-4")
-		Connect("Q1-2")
-	)
-	Net("unnamed_net2" "(unknown)")
-	(
-		Connect("R6-1")
-		Connect("U1-19")
-		Connect("U2-4")
-	)
-	Net("unnamed_net3" "(unknown)")
-	(
-		Connect("R5-1")
-		Connect("U1-20")
-		Connect("U2-5")
-	)
-	Net("unnamed_net4" "(unknown)")
-	(
-		Connect("CONN1-4")
-		Connect("U1-113")
-	)
-	Net("unnamed_net5" "(unknown)")
-	(
-		Connect("CONN1-6")
-		Connect("U1-119")
-	)
-	Net("unnamed_net6" "(unknown)")
-	(
-		Connect("CONN1-8")
-		Connect("U1-123")
-	)
-	Net("unnamed_net7" "(unknown)")
-	(
-		Connect("CONN1-5")
-		Connect("U1-117")
-	)
-	Net("unnamed_net8" "(unknown)")
-	(
-		Connect("CONN1-7")
-		Connect("U1-121")
-	)
-	Net("unnamed_net9" "(unknown)")
-	(
-		Connect("CONN1-10")
-		Connect("U1-14")
-	)
-	Net("unnamed_net10" "(unknown)")
-	(
-		Connect("CONN1-9")
-		Connect("U1-16")
-	)
-	Net("unnamed_net11" "(unknown)")
-	(
-		Connect("R1-2")
-		Connect("R3-2")
-		Connect("U1-31")
-	)
-	Net("unnamed_net12" "(unknown)")
-	(
-		Connect("Q1-1")
-		Connect("R1-1")
-	)
-	Net("unnamed_net13" "(unknown)")
-	(
-		Connect("R2-2")
-		Connect("R4-2")
-		Connect("U1-29")
-	)
-	Net("unnamed_net14" "(unknown)")
-	(
-		Connect("C4-1")
-		Connect("C5-2")
-	)
-	Net("unnamed_net15" "(unknown)")
-	(
-		Connect("D2-1")
-		Connect("M1-6")
-		Connect("M1-8")
-		Connect("Q2-2")
-	)
-	Net("unnamed_net16" "(unknown)")
-	(
-		Connect("Q2-1")
-		Connect("R2-1")
-	)
-	Net("unnamed_net17" "(unknown)")
-	(
-		Connect("C7-1")
-		Connect("C8-2")
 	)
 )
