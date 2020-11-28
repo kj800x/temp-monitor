@@ -1,17 +1,5 @@
-# release: pcb 1.99x
-# To read pcb files, the pcb version (or the cvs source date) must be >= the file version
-FileVersion[20070407]
-PCB["" 600000 500000]
-Grid[10000.000000 0 0 0]
-Cursor[0 0 0.000000]
-PolyArea[200000000.000000]
-Thermal[0.500000]
-DRC[1000 1000 1000 1000 1500 1000]
-Flags("nameonpcb,uniquename,clearnew,snappin")
-Groups("1,c:2:3:4:5:6,s:7:8")
-Styles["Signal,1000,3600,2000,1000:Power,2500,6000,3500,1000:Fat,4000,6000,3500,1000:Skinny,600,2402,1181,600"]
 
-Element["" "BBGW.fp" "U1" "unknown" 0 0 0.0000 0.0000 0 100 ""]
+Element["" "" "" "" 180.10mil 780.00mil 0.0000 0.0000 0 100 ""]
 (
 	Pin[-50.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1001" ""]
 	Pin[1850.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1000" ""]
@@ -171,33 +159,3 @@ Element["" "BBGW.fp" "U1" "unknown" 0 0 0.0000 0.0000 0 100 ""]
 	ElementArc [1475.00mil 2125.00mil 500.00mil 500.00mil 90 90 10.00mil]
 
 	)
-Layer(1 "top")
-(
-)
-Layer(2 "ground")
-(
-)
-Layer(3 "signal2")
-(
-)
-Layer(4 "signal3")
-(
-)
-Layer(5 "power")
-(
-)
-Layer(6 "bottom")
-(
-)
-Layer(7 "outline")
-(
-)
-Layer(8 "spare")
-(
-)
-Layer(9 "silk")
-(
-)
-Layer(10 "silk")
-(
-)

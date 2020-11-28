@@ -103,9 +103,9 @@ Power
 C 49300 44000 1 0 0 BeagleBoardGreen-1.sym
 {
 T 35650 44350 5 8 0 1 0 0 1
-device=BEAGLEBOARDBLACK
+device=Beaglebone Green Wireless
 T 34550 44550 5 8 0 1 0 0 1
-footprint=BBB.fp
+footprint=BBGW.fp
 T 52200 49500 5 8 1 1 0 0 1
 refdes=U1
 }
