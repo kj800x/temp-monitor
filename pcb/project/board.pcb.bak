@@ -3,9 +3,9 @@
 # To read pcb files, the pcb version (or the git source date) must be >= the file version
 FileVersion[20091103]
 
-PCB["Motor Controller" 4750.00mil 5800.00mil]
+PCB["Motor Controller" 3300.00mil 3900.00mil]
 
-Grid[10.00mil 0.0000 0.0000 0]
+Grid[10.00mil 0.0000 0.0000 1]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[8.00mil 10.00mil 8.00mil 6.00mil 12.00mil 6.00mil]
@@ -803,12 +803,120 @@ Via[2210.00mil 3300.00mil 60.00mil 20.00mil 0.0000 35.00mil "" "thermal(1X)"]
 Via[510.00mil 3400.00mil 60.00mil 20.00mil 0.0000 35.00mil "" "thermal(1X)"]
 Via[2540.00mil 1270.00mil 60.00mil 20.00mil 0.0000 35.00mil "" ""]
 
+Element["" "TO220.fp" "Q1" "unknown" 950.00mil 2220.00mil -170.41mil -535.36mil 0 100 ""]
+(
+	Pin[-100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "B" "1" "square"]
+	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "C" "2" ""]
+	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "E" "3" ""]
+	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "warn,thermal(1X)"]
+	ElementLine [-100.00mil 0.0000 -100.00mil -180.00mil 30.00mil]
+	ElementLine [0.0000 0.0000 0.0000 -180.00mil 30.00mil]
+	ElementLine [100.00mil 0.0000 100.00mil -180.00mil 30.00mil]
+	ElementLine [-200.00mil -180.00mil 200.00mil -180.00mil 20.00mil]
+	ElementLine [200.00mil -180.00mil 200.00mil -555.00mil 20.00mil]
+	ElementLine [200.00mil -555.00mil -200.00mil -555.00mil 20.00mil]
+	ElementLine [-200.00mil -555.00mil -200.00mil -180.00mil 20.00mil]
+	ElementLine [-200.00mil -555.00mil 200.00mil -555.00mil 20.00mil]
+	ElementLine [200.00mil -555.00mil 200.00mil -680.00mil 20.00mil]
+	ElementLine [200.00mil -680.00mil 185.00mil -680.00mil 20.00mil]
+	ElementLine [185.00mil -680.00mil 185.00mil -750.00mil 20.00mil]
+	ElementLine [185.00mil -750.00mil 200.00mil -750.00mil 20.00mil]
+	ElementLine [200.00mil -750.00mil 200.00mil -790.00mil 20.00mil]
+	ElementLine [200.00mil -790.00mil -200.00mil -790.00mil 20.00mil]
+	ElementLine [-200.00mil -790.00mil -200.00mil -750.00mil 20.00mil]
+	ElementLine [-200.00mil -750.00mil -185.00mil -750.00mil 20.00mil]
+	ElementLine [-185.00mil -750.00mil -185.00mil -680.00mil 20.00mil]
+	ElementLine [-185.00mil -680.00mil -200.00mil -680.00mil 20.00mil]
+	ElementLine [-200.00mil -680.00mil -200.00mil -555.00mil 20.00mil]
+
+	)
+
+Element["" "ACY400" "R1" "250_?" 850.00mil 1300.00mil -102.31mil -295.90mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
+	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil 33.00mil -300.00mil 10.00mil]
+	ElementLine [33.00mil -300.00mil 33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -100.00mil 33.00mil -100.00mil 10.00mil]
+
+	)
+
+Element["" "TO220.fp" "Q2" "unknown" 1500.00mil 2220.00mil -168.72mil -534.27mil 0 100 ""]
+(
+	Pin[-100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "B" "1" "square"]
+	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "C" "2" ""]
+	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "E" "3" ""]
+	Pin[0.0000 -670.00mil 150.00mil 30.00mil 156.00mil 130.00mil "4" "4" "warn,thermal(1X)"]
+	ElementLine [-100.00mil 0.0000 -100.00mil -180.00mil 30.00mil]
+	ElementLine [0.0000 0.0000 0.0000 -180.00mil 30.00mil]
+	ElementLine [100.00mil 0.0000 100.00mil -180.00mil 30.00mil]
+	ElementLine [-200.00mil -180.00mil 200.00mil -180.00mil 20.00mil]
+	ElementLine [200.00mil -180.00mil 200.00mil -555.00mil 20.00mil]
+	ElementLine [200.00mil -555.00mil -200.00mil -555.00mil 20.00mil]
+	ElementLine [-200.00mil -555.00mil -200.00mil -180.00mil 20.00mil]
+	ElementLine [-200.00mil -555.00mil 200.00mil -555.00mil 20.00mil]
+	ElementLine [200.00mil -555.00mil 200.00mil -680.00mil 20.00mil]
+	ElementLine [200.00mil -680.00mil 185.00mil -680.00mil 20.00mil]
+	ElementLine [185.00mil -680.00mil 185.00mil -750.00mil 20.00mil]
+	ElementLine [185.00mil -750.00mil 200.00mil -750.00mil 20.00mil]
+	ElementLine [200.00mil -750.00mil 200.00mil -790.00mil 20.00mil]
+	ElementLine [200.00mil -790.00mil -200.00mil -790.00mil 20.00mil]
+	ElementLine [-200.00mil -790.00mil -200.00mil -750.00mil 20.00mil]
+	ElementLine [-200.00mil -750.00mil -185.00mil -750.00mil 20.00mil]
+	ElementLine [-185.00mil -750.00mil -185.00mil -680.00mil 20.00mil]
+	ElementLine [-185.00mil -680.00mil -200.00mil -680.00mil 20.00mil]
+	ElementLine [-200.00mil -680.00mil -200.00mil -555.00mil 20.00mil]
+
+	)
+
+Element["" "ACY400" "R2" "250_?" 1400.00mil 1300.00mil -112.77mil -298.71mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
+	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil 33.00mil -300.00mil 10.00mil]
+	ElementLine [33.00mil -300.00mil 33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -100.00mil 33.00mil -100.00mil 10.00mil]
+
+	)
+
+Element["" "DIODE_LAY-400.fp" "D2" "unknown" 1500.00mil 2400.00mil -86.92mil 54.48mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 0.0000 0.0000 133.00mil 10.00mil]
+	ElementLine [0.0000 267.00mil 0.0000 400.00mil 10.00mil]
+	ElementLine [0.0000 133.00mil 66.00mil 267.00mil 10.00mil]
+	ElementLine [-66.00mil 267.00mil 66.00mil 267.00mil 10.00mil]
+	ElementLine [-66.00mil 267.00mil 0.0000 133.00mil 10.00mil]
+	ElementLine [-66.00mil 133.00mil 66.00mil 133.00mil 10.00mil]
+
+	)
+
+Element["" "DIODE_LAY-400.fp" "D1" "unknown" 950.00mil 2400.00mil -77.34mil 56.01mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 0.0000 0.0000 133.00mil 10.00mil]
+	ElementLine [0.0000 267.00mil 0.0000 400.00mil 10.00mil]
+	ElementLine [0.0000 133.00mil 66.00mil 267.00mil 10.00mil]
+	ElementLine [-66.00mil 267.00mil 66.00mil 267.00mil 10.00mil]
+	ElementLine [-66.00mil 267.00mil 0.0000 133.00mil 10.00mil]
+	ElementLine [-66.00mil 133.00mil 66.00mil 133.00mil 10.00mil]
+
+	)
+
 Element["" "BBGW.fp" "U1" "unknown" 350.00mil 800.00mil -150.00mil -760.00mil 0 100 ""]
 (
-	Pin[-50.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1001" "thermal(1X)"]
-	Pin[1850.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1000" "thermal(1X)"]
-	Pin[1725.00mil 2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1003" "thermal(1X)"]
-	Pin[75.00mil 2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1002" "thermal(1X)"]
+	Pin[-50.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1001" "warn,thermal(1X)"]
+	Pin[1850.00mil -200.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1000" "warn,thermal(1X)"]
+	Pin[1725.00mil 2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1003" "warn,thermal(1X)"]
+	Pin[75.00mil 2400.00mil 153.00mil 20.00mil 159.00mil 125.00mil "" "1002" "warn,thermal(1X)"]
 	Pin[1800.00mil 0.0000 69.00mil 20.00mil 75.00mil 41.00mil "" "2" ""]
 	Pin[1800.00mil 2200.00mil 69.00mil 20.00mil 75.00mil 41.00mil "" "46" ""]
 	Pin[1800.00mil 100.00mil 69.00mil 20.00mil 75.00mil 41.00mil "" "4" ""]
@@ -964,6 +1072,79 @@ Element["" "BBGW.fp" "U1" "unknown" 350.00mil 800.00mil -150.00mil -760.00mil 0 
 
 	)
 
+Element["" "BT8.fp" "M1" "unknown" 2390.00mil 3660.00mil -16.16mil 52.94mil 0 100 ""]
+(
+	Pin[400.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "5" "edge2"]
+	Pin[700.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "8" "edge2"]
+	Pin[600.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "7" "edge2"]
+	Pin[500.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "6" "edge2"]
+	Pin[300.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "4" "edge2"]
+	Pin[200.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "3" "edge2"]
+	Pin[100.00mil 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "-" "2" "edge2"]
+	Pin[0.0000 0.0000 60.00mil 20.00mil 66.00mil 35.00mil "+" "1" "edge2"]
+	ElementLine [-1.0100mm -3.1400mm -1.0200mm -3.1500mm 10.00mil]
+	ElementLine [-1.0100mm 3.1500mm -1.0100mm -3.1400mm 10.00mil]
+	ElementLine [-1.2300mm 3.1300mm -1.2100mm 3.1500mm 10.00mil]
+	ElementLine [-1.2300mm -3.1500mm -1.2300mm 3.1300mm 10.00mil]
+	ElementLine [-0.1200mm -2.5600mm -0.4200mm -2.2600mm 6.00mil]
+	ElementLine [0.0800mm -2.5600mm -0.1200mm -2.5600mm 6.00mil]
+	ElementLine [0.0800mm -1.2600mm 0.0800mm -2.5600mm 6.00mil]
+	ElementLine [-0.5200mm -1.2600mm 0.5800mm -1.2600mm 6.00mil]
+	ElementLine [19.2400mm -3.1500mm -1.4600mm -3.1500mm 10.00mil]
+	ElementLine [19.2400mm 3.1500mm 19.2400mm -3.1500mm 10.00mil]
+	ElementLine [-1.4600mm 3.1500mm 19.2400mm 3.1500mm 10.00mil]
+	ElementLine [-1.4600mm 3.1500mm -1.4600mm -3.1500mm 10.00mil]
+
+	)
+
+Element["" "RCY100" "C7" "0.1_u" 3090.00mil 3400.00mil 40.00mil 50.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[-100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [-50.00mil 0.0000 100.00mil 100.00mil 180.000000 360.000000 10.00mil]
+
+	)
+
+Element["" "RCY100" "C6" "0.1_u" 2930.00mil 3270.00mil -110.00mil -190.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -100.00mil 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [0.0000 -50.00mil 100.00mil 100.00mil 90.000000 360.000000 10.00mil]
+
+	)
+
+Element["" "RCY100" "C8" "0.1_u" 3140.00mil 3170.00mil 70.00mil -90.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 100.00mil 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [0.0000 50.00mil 100.00mil 100.00mil 270.000000 360.000000 10.00mil]
+
+	)
+
+Element["" "RCY100" "C4" "0.1_u" 2490.00mil 3400.00mil 40.00mil 50.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[-100.00mil 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [-50.00mil 0.0000 100.00mil 100.00mil 180.000000 360.000000 10.00mil]
+
+	)
+
+Element["" "RCY100" "C3" "0.1_u" 2330.00mil 3270.00mil -90.00mil 50.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -100.00mil 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [0.0000 -50.00mil 100.00mil 100.00mil 90.000000 360.000000 10.00mil]
+
+	)
+
+Element["" "RCY100" "C5" "0.1_u" 2540.00mil 3170.00mil 60.00mil -90.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 100.00mil 60.00mil 30.00mil 66.00mil 30.00mil "2" "2" ""]
+	ElementArc [0.0000 50.00mil 100.00mil 100.00mil 270.000000 360.000000 10.00mil]
+
+	)
+
 Element["" "RCY100" "C1" "100u" 2910.00mil 1500.00mil 70.00mil 20.00mil 0 100 ""]
 (
 	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 30.00mil "1" "1" "square"]
@@ -1038,203 +1219,52 @@ Element["" "BARREL.fp" "J1" "unknown" 1500.00mil 3780.00mil -4.0960mm -339.62mil
 
 	)
 
-Element["" "L298N.fp" "U3" "unknown" 1090.00mil 2150.00mil 0.0000 0.0000 0 100 ""]
+Element["" "ACY400" "R4" "4.7k" 1570.00mil 1300.00mil 47.00mil -300.00mil 0 100 ""]
 (
-	Pin[-420.00mil -1775.00mil 146.00mil 20.00mil 152.00mil 120.00mil "" "2" ""]
-	Pin[1030.00mil -1775.00mil 146.00mil 20.00mil 152.00mil 120.00mil "" "2" ""]
-	Pin[1030.00mil -325.00mil 146.00mil 20.00mil 152.00mil 120.00mil "" "2" ""]
-	Pin[-420.00mil -325.00mil 146.00mil 20.00mil 152.00mil 120.00mil "" "2" ""]
-	Pin[380.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "4" ""]
-	Pin[480.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "5" ""]
-	Pin[580.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "6" ""]
-	Pin[680.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "7" ""]
-	Pin[780.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "8" ""]
-	Pin[880.00mil 0.0000 75.00mil 20.00mil 81.00mil 41.00mil "" "9" ""]
-	Pin[-200.00mil 0.0000 100.00mil 20.00mil 106.00mil 41.00mil "" "1" ""]
-	Pin[0.0000 0.0000 100.00mil 20.00mil 106.00mil 41.00mil "" "2" ""]
-	Pin[200.00mil 0.0000 100.00mil 20.00mil 106.00mil 41.00mil "" "3" ""]
-	ElementLine [-545.00mil -200.00mil 1155.00mil -200.00mil 10.00mil]
-	ElementLine [1155.00mil -1900.00mil -545.00mil -1900.00mil 10.00mil]
-	ElementLine [-300.00mil -200.00mil -300.00mil -425.00mil 10.00mil]
-	ElementLine [-300.00mil -425.00mil 285.00mil -425.00mil 10.00mil]
-	ElementLine [285.00mil -425.00mil 285.00mil -200.00mil 10.00mil]
-	ElementLine [345.00mil -200.00mil 345.00mil -425.00mil 10.00mil]
-	ElementLine [345.00mil -425.00mil 910.00mil -425.00mil 10.00mil]
-	ElementLine [910.00mil -425.00mil 910.00mil -200.00mil 10.00mil]
-	ElementLine [-545.00mil -1900.00mil -545.00mil 75.00mil 10.00mil]
-	ElementLine [-545.00mil 75.00mil 1155.00mil 75.00mil 10.00mil]
-	ElementLine [1155.00mil -1900.00mil 1155.00mil 75.00mil 10.00mil]
-	ElementLine [210.00mil -175.00mil 210.00mil -135.00mil 6.00mil]
-	ElementLine [210.00mil -135.00mil 220.00mil -125.00mil 6.00mil]
-	ElementLine [220.00mil -125.00mil 230.00mil -135.00mil 6.00mil]
-	ElementLine [230.00mil -135.00mil 230.00mil -175.00mil 6.00mil]
-	ElementLine [190.00mil -175.00mil 170.00mil -175.00mil 6.00mil]
-	ElementLine [170.00mil -175.00mil 170.00mil -155.00mil 6.00mil]
-	ElementLine [170.00mil -155.00mil 190.00mil -155.00mil 6.00mil]
-	ElementLine [190.00mil -155.00mil 190.00mil -125.00mil 6.00mil]
-	ElementLine [190.00mil -125.00mil 170.00mil -125.00mil 6.00mil]
-	ElementLine [-20.00mil -175.00mil -40.00mil -175.00mil 6.00mil]
-	ElementLine [-40.00mil -150.00mil -20.00mil -150.00mil 6.00mil]
-	ElementLine [-20.00mil -150.00mil -20.00mil -125.00mil 6.00mil]
-	ElementLine [-20.00mil -125.00mil -40.00mil -125.00mil 6.00mil]
-	ElementLine [-40.00mil -175.00mil -40.00mil -125.00mil 6.00mil]
-	ElementLine [-10.00mil -125.00mil -10.00mil -175.00mil 6.00mil]
-	ElementLine [-10.00mil -175.00mil 10.00mil -155.00mil 6.00mil]
-	ElementLine [10.00mil -125.00mil 10.00mil -175.00mil 6.00mil]
-	ElementLine [25.00mil -175.00mil 25.00mil -125.00mil 6.00mil]
-	ElementLine [25.00mil -125.00mil 35.00mil -125.00mil 6.00mil]
-	ElementLine [35.00mil -125.00mil 45.00mil -135.00mil 6.00mil]
-	ElementLine [45.00mil -135.00mil 45.00mil -165.00mil 6.00mil]
-	ElementLine [45.00mil -165.00mil 35.00mil -175.00mil 6.00mil]
-	ElementLine [35.00mil -175.00mil 25.00mil -175.00mil 6.00mil]
-	ElementLine [-235.00mil -175.00mil -235.00mil -125.00mil 6.00mil]
-	ElementLine [-235.00mil -125.00mil -245.00mil -125.00mil 6.00mil]
-	ElementLine [-245.00mil -125.00mil -225.00mil -125.00mil 6.00mil]
-	ElementLine [-235.00mil -175.00mil -245.00mil -165.00mil 6.00mil]
-	ElementLine [-180.00mil -175.00mil -180.00mil -135.00mil 6.00mil]
-	ElementLine [-180.00mil -135.00mil -170.00mil -125.00mil 6.00mil]
-	ElementLine [-170.00mil -125.00mil -160.00mil -135.00mil 6.00mil]
-	ElementLine [-160.00mil -135.00mil -160.00mil -175.00mil 6.00mil]
-	ElementLine [-215.00mil -175.00mil -200.00mil -175.00mil 6.00mil]
-	ElementLine [-200.00mil -175.00mil -200.00mil -150.00mil 6.00mil]
-	ElementLine [-200.00mil -150.00mil -215.00mil -150.00mil 6.00mil]
-	ElementLine [-215.00mil -150.00mil -215.00mil -125.00mil 6.00mil]
-	ElementLine [-215.00mil -125.00mil -200.00mil -125.00mil 6.00mil]
-	ElementLine [455.00mil -125.00mil 475.00mil -125.00mil 6.00mil]
-	ElementLine [465.00mil -125.00mil 465.00mil -175.00mil 6.00mil]
-	ElementLine [455.00mil -175.00mil 475.00mil -175.00mil 6.00mil]
-	ElementLine [485.00mil -125.00mil 485.00mil -175.00mil 6.00mil]
-	ElementLine [485.00mil -175.00mil 505.00mil -155.00mil 6.00mil]
-	ElementLine [505.00mil -125.00mil 505.00mil -175.00mil 6.00mil]
-	ElementLine [555.00mil -125.00mil 575.00mil -125.00mil 6.00mil]
-	ElementLine [565.00mil -125.00mil 565.00mil -175.00mil 6.00mil]
-	ElementLine [555.00mil -175.00mil 575.00mil -175.00mil 6.00mil]
-	ElementLine [585.00mil -125.00mil 585.00mil -175.00mil 6.00mil]
-	ElementLine [585.00mil -175.00mil 605.00mil -155.00mil 6.00mil]
-	ElementLine [605.00mil -125.00mil 605.00mil -175.00mil 6.00mil]
-	ElementLine [655.00mil -125.00mil 675.00mil -125.00mil 6.00mil]
-	ElementLine [665.00mil -125.00mil 665.00mil -175.00mil 6.00mil]
-	ElementLine [655.00mil -175.00mil 675.00mil -175.00mil 6.00mil]
-	ElementLine [685.00mil -125.00mil 685.00mil -175.00mil 6.00mil]
-	ElementLine [685.00mil -175.00mil 705.00mil -155.00mil 6.00mil]
-	ElementLine [705.00mil -125.00mil 705.00mil -175.00mil 6.00mil]
-	ElementLine [755.00mil -125.00mil 775.00mil -125.00mil 6.00mil]
-	ElementLine [765.00mil -125.00mil 765.00mil -175.00mil 6.00mil]
-	ElementLine [755.00mil -175.00mil 775.00mil -175.00mil 6.00mil]
-	ElementLine [785.00mil -125.00mil 785.00mil -175.00mil 6.00mil]
-	ElementLine [785.00mil -175.00mil 805.00mil -155.00mil 6.00mil]
-	ElementLine [805.00mil -125.00mil 805.00mil -175.00mil 6.00mil]
-	ElementLine [355.00mil -125.00mil 355.00mil -175.00mil 6.00mil]
-	ElementLine [355.00mil -175.00mil 375.00mil -175.00mil 6.00mil]
-	ElementLine [355.00mil -150.00mil 375.00mil -150.00mil 6.00mil]
-	ElementLine [355.00mil -125.00mil 375.00mil -125.00mil 6.00mil]
-	ElementLine [385.00mil -125.00mil 385.00mil -175.00mil 6.00mil]
-	ElementLine [385.00mil -175.00mil 405.00mil -155.00mil 6.00mil]
-	ElementLine [405.00mil -125.00mil 405.00mil -175.00mil 6.00mil]
-	ElementLine [855.00mil -125.00mil 855.00mil -175.00mil 6.00mil]
-	ElementLine [855.00mil -175.00mil 875.00mil -175.00mil 6.00mil]
-	ElementLine [855.00mil -150.00mil 875.00mil -150.00mil 6.00mil]
-	ElementLine [855.00mil -125.00mil 875.00mil -125.00mil 6.00mil]
-	ElementLine [885.00mil -125.00mil 885.00mil -175.00mil 6.00mil]
-	ElementLine [885.00mil -175.00mil 905.00mil -155.00mil 6.00mil]
-	ElementLine [905.00mil -125.00mil 905.00mil -175.00mil 6.00mil]
-	ElementLine [370.00mil -60.00mil 370.00mil -100.00mil 6.00mil]
-	ElementLine [370.00mil -100.00mil 380.00mil -110.00mil 6.00mil]
-	ElementLine [380.00mil -110.00mil 390.00mil -100.00mil 6.00mil]
-	ElementLine [390.00mil -100.00mil 390.00mil -60.00mil 6.00mil]
-	ElementLine [370.00mil -90.00mil 390.00mil -90.00mil 6.00mil]
-	ElementLine [870.00mil -110.00mil 870.00mil -60.00mil 6.00mil]
-	ElementLine [870.00mil -60.00mil 880.00mil -60.00mil 6.00mil]
-	ElementLine [880.00mil -60.00mil 890.00mil -70.00mil 6.00mil]
-	ElementLine [890.00mil -100.00mil 880.00mil -110.00mil 6.00mil]
-	ElementLine [880.00mil -110.00mil 870.00mil -110.00mil 6.00mil]
-	ElementLine [870.00mil -85.00mil 885.00mil -85.00mil 6.00mil]
-	ElementLine [885.00mil -85.00mil 890.00mil -90.00mil 6.00mil]
-	ElementLine [890.00mil -90.00mil 890.00mil -100.00mil 6.00mil]
-	ElementLine [885.00mil -85.00mil 890.00mil -80.00mil 6.00mil]
-	ElementLine [890.00mil -80.00mil 890.00mil -70.00mil 6.00mil]
-	ElementLine [570.00mil -110.00mil 590.00mil -110.00mil 6.00mil]
-	ElementLine [590.00mil -110.00mil 590.00mil -85.00mil 6.00mil]
-	ElementLine [590.00mil -85.00mil 570.00mil -85.00mil 6.00mil]
-	ElementLine [570.00mil -85.00mil 570.00mil -60.00mil 6.00mil]
-	ElementLine [570.00mil -60.00mil 590.00mil -60.00mil 6.00mil]
-	ElementLine [480.00mil -110.00mil 480.00mil -60.00mil 6.00mil]
-	ElementLine [480.00mil -60.00mil 470.00mil -60.00mil 6.00mil]
-	ElementLine [470.00mil -60.00mil 490.00mil -60.00mil 6.00mil]
-	ElementLine [480.00mil -110.00mil 470.00mil -100.00mil 6.00mil]
-	ElementLine [670.00mil -110.00mil 690.00mil -110.00mil 6.00mil]
-	ElementLine [690.00mil -85.00mil 670.00mil -85.00mil 6.00mil]
-	ElementLine [690.00mil -110.00mil 690.00mil -60.00mil 6.00mil]
-	ElementLine [690.00mil -60.00mil 670.00mil -60.00mil 6.00mil]
-	ElementLine [770.00mil -85.00mil 790.00mil -85.00mil 6.00mil]
-	ElementLine [770.00mil -85.00mil 770.00mil -110.00mil 6.00mil]
-	ElementLine [785.00mil -110.00mil 785.00mil -60.00mil 6.00mil]
-	ElementLine [-545.00mil -545.00mil -300.00mil -545.00mil 6.00mil]
-	ElementLine [-300.00mil -545.00mil -300.00mil -975.00mil 6.00mil]
-	ElementLine [-300.00mil -975.00mil -545.00mil -975.00mil 6.00mil]
-	ElementLine [1155.00mil -975.00mil 1150.00mil -980.00mil 6.00mil]
-	ElementLine [1150.00mil -980.00mil 905.00mil -980.00mil 6.00mil]
-	ElementLine [905.00mil -980.00mil 900.00mil -975.00mil 6.00mil]
-	ElementLine [900.00mil -975.00mil 900.00mil -545.00mil 6.00mil]
-	ElementLine [900.00mil -545.00mil 1155.00mil -545.00mil 6.00mil]
-	ElementLine [975.00mil -780.00mil 975.00mil -840.00mil 6.00mil]
-	ElementLine [975.00mil -840.00mil 1000.00mil -865.00mil 6.00mil]
-	ElementLine [1000.00mil -865.00mil 1030.00mil -835.00mil 6.00mil]
-	ElementLine [1030.00mil -835.00mil 1030.00mil -780.00mil 6.00mil]
-	ElementLine [1030.00mil -835.00mil 1060.00mil -865.00mil 6.00mil]
-	ElementLine [1060.00mil -865.00mil 1085.00mil -840.00mil 6.00mil]
-	ElementLine [1085.00mil -840.00mil 1085.00mil -780.00mil 6.00mil]
-	ElementLine [1005.00mil -760.00mil 1055.00mil -760.00mil 6.00mil]
-	ElementLine [1055.00mil -760.00mil 1055.00mil -715.00mil 6.00mil]
-	ElementLine [1055.00mil -715.00mil 1005.00mil -715.00mil 6.00mil]
-	ElementLine [1005.00mil -715.00mil 1005.00mil -665.00mil 6.00mil]
-	ElementLine [1005.00mil -665.00mil 1055.00mil -665.00mil 6.00mil]
-	ElementLine [-485.00mil -780.00mil -485.00mil -840.00mil 6.00mil]
-	ElementLine [-485.00mil -840.00mil -460.00mil -865.00mil 6.00mil]
-	ElementLine [-460.00mil -865.00mil -430.00mil -835.00mil 6.00mil]
-	ElementLine [-430.00mil -835.00mil -430.00mil -780.00mil 6.00mil]
-	ElementLine [-430.00mil -835.00mil -400.00mil -865.00mil 6.00mil]
-	ElementLine [-400.00mil -865.00mil -375.00mil -840.00mil 6.00mil]
-	ElementLine [-375.00mil -840.00mil -375.00mil -780.00mil 6.00mil]
-	ElementLine [-430.00mil -760.00mil -455.00mil -735.00mil 6.00mil]
-	ElementLine [-430.00mil -760.00mil -435.00mil -755.00mil 6.00mil]
-	ElementLine [-455.00mil -665.00mil -405.00mil -665.00mil 6.00mil]
-	ElementLine [-430.00mil -760.00mil -430.00mil -665.00mil 6.00mil]
-	ElementLine [-530.00mil -1985.00mil -530.00mil -1915.00mil 6.00mil]
-	ElementLine [-530.00mil -1915.00mil -505.00mil -1915.00mil 6.00mil]
-	ElementLine [-490.00mil -1985.00mil -465.00mil -1985.00mil 6.00mil]
-	ElementLine [-465.00mil -1985.00mil -465.00mil -1955.00mil 6.00mil]
-	ElementLine [-465.00mil -1955.00mil -490.00mil -1955.00mil 6.00mil]
-	ElementLine [-490.00mil -1955.00mil -490.00mil -1915.00mil 6.00mil]
-	ElementLine [-490.00mil -1915.00mil -465.00mil -1915.00mil 6.00mil]
-	ElementLine [-450.00mil -1985.00mil -450.00mil -1955.00mil 6.00mil]
-	ElementLine [-450.00mil -1955.00mil -425.00mil -1955.00mil 6.00mil]
-	ElementLine [-425.00mil -1985.00mil -450.00mil -1985.00mil 6.00mil]
-	ElementLine [-425.00mil -1985.00mil -425.00mil -1915.00mil 6.00mil]
-	ElementLine [-410.00mil -1985.00mil -410.00mil -1915.00mil 6.00mil]
-	ElementLine [-410.00mil -1915.00mil -385.00mil -1915.00mil 6.00mil]
-	ElementLine [-385.00mil -1915.00mil -385.00mil -1985.00mil 6.00mil]
-	ElementLine [-385.00mil -1985.00mil -410.00mil -1985.00mil 6.00mil]
-	ElementLine [-410.00mil -1950.00mil -385.00mil -1950.00mil 6.00mil]
-	ElementLine [-370.00mil -1915.00mil -370.00mil -1985.00mil 6.00mil]
-	ElementLine [-370.00mil -1985.00mil -340.00mil -1955.00mil 6.00mil]
-	ElementLine [-340.00mil -1955.00mil -340.00mil -1985.00mil 6.00mil]
-	ElementLine [-340.00mil -1985.00mil -340.00mil -1915.00mil 6.00mil]
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
+	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil 33.00mil -300.00mil 10.00mil]
+	ElementLine [33.00mil -300.00mil 33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -100.00mil 33.00mil -100.00mil 10.00mil]
 
 	)
-Rat[2540.00mil 1580.00mil 1 1290.00mil 2150.00mil 1  ""]
-Rat[950.00mil 2800.00mil 0 850.00mil 2220.00mil 0  ""]
-Rat[2460.00mil 950.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[1090.00mil 2150.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[2120.00mil 1825.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[2040.00mil 790.00mil 0 2070.00mil 670.00mil 2  ""]
-Rat[760.00mil 670.00mil 2 670.00mil 375.00mil 1  ""]
-Rat[2250.00mil 2800.00mil 1 2430.00mil 1900.00mil 1  ""]
-Rat[1470.00mil 2150.00mil 1 100.00mil 100.00mil 1  "via"]
-Rat[250.00mil 1100.00mil 1 1570.00mil 2150.00mil 1  ""]
-Rat[250.00mil 1200.00mil 1 1670.00mil 2150.00mil 1  ""]
-Rat[250.00mil 1300.00mil 1 1770.00mil 2150.00mil 1  ""]
-Rat[250.00mil 1400.00mil 1 1870.00mil 2150.00mil 1  ""]
+
+Element["" "ACY400" "R3" "4.7k" 1020.00mil 1300.00mil 57.00mil -300.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 55.00mil 30.00mil 61.00mil 30.00mil "1" "1" "square"]
+	Pin[0.0000 -400.00mil 55.00mil 30.00mil 61.00mil 30.00mil "2" "2" ""]
+	ElementLine [0.0000 -100.00mil 0.0000 0.0000 10.00mil]
+	ElementLine [0.0000 -400.00mil 0.0000 -300.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil -33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -300.00mil 33.00mil -300.00mil 10.00mil]
+	ElementLine [33.00mil -300.00mil 33.00mil -100.00mil 10.00mil]
+	ElementLine [-33.00mil -100.00mil 33.00mil -100.00mil 10.00mil]
+
+	)
+
+Element["" "HEADER10_1.fp" "CONN1" "unknown" 710.00mil 3510.00mil -440.00mil -120.00mil 0 100 ""]
+(
+	Pin[0.0000 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "1" "1" "square,edge2"]
+	Pin[-100.00mil 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "2" "2" "edge2"]
+	Pin[-200.00mil 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "3" "3" "edge2"]
+	Pin[-300.00mil 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "4" "4" "edge2"]
+	Pin[-400.00mil 0.0000 60.00mil 30.00mil 66.00mil 38.00mil "5" "5" "edge2"]
+	Pin[-400.00mil 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "6" "6" "edge2"]
+	Pin[-300.00mil 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "7" "7" "edge2"]
+	Pin[-200.00mil 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "8" "8" "edge2"]
+	Pin[-100.00mil 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "9" "9" "edge2"]
+	Pin[0.0000 100.00mil 60.00mil 30.00mil 66.00mil 38.00mil "10" "10" "edge2"]
+	ElementLine [-450.00mil -50.00mil 50.00mil -50.00mil 10.00mil]
+	ElementLine [-450.00mil -50.00mil -450.00mil 150.00mil 10.00mil]
+	ElementLine [-450.00mil 150.00mil 50.00mil 150.00mil 10.00mil]
+	ElementLine [50.00mil -50.00mil 50.00mil 150.00mil 10.00mil]
+	ElementLine [-50.00mil -50.00mil -50.00mil 50.00mil 10.00mil]
+	ElementLine [-50.00mil 50.00mil 50.00mil 50.00mil 10.00mil]
+
+	)
 Layer(1 "top" "copper")
 (
 	Line[1500.00mil 3780.00mil 1430.00mil 3780.00mil 25.00mil 20.00mil "clearline"]
@@ -1442,13 +1472,13 @@ Layer(4 "bottom" "copper")
 Layer(5 "outline" "outline")
 (
 	Line[0.0000 0.0000 0.0000 3900.00mil 10.00mil 20.00mil "clearline"]
+	Line[3300.00mil 3900.00mil 3300.00mil 0.0000 10.00mil 20.00mil "clearline"]
 	Line[2070.00mil 670.00mil 2070.00mil 0.0000 10.00mil 20.00mil "clearline"]
 	Line[0.0000 0.0000 760.00mil 0.0000 10.00mil 20.00mil "clearline"]
 	Line[2070.00mil 0.0000 3300.00mil 0.0000 10.00mil 20.00mil "clearline"]
+	Line[3300.00mil 3900.00mil 10.00mil 3900.00mil 10.00mil 20.00mil "clearline"]
 	Line[760.00mil 0.0000 760.00mil 670.00mil 10.00mil 20.00mil "clearline"]
 	Line[760.00mil 670.00mil 2070.00mil 670.00mil 10.00mil 20.00mil "clearline"]
-	Line[4750.00mil 3910.00mil 4750.00mil 10.00mil 10.00mil 20.00mil "clearline"]
-	Line[3300.00mil 5790.00mil 10.00mil 5790.00mil 10.00mil 20.00mil "clearline"]
 )
 Layer(6 "bottom silk" "silk")
 (
@@ -1475,76 +1505,131 @@ NetList()
 	(
 		Connect("C1-2")
 		Connect("C2-2")
+		Connect("CONN1-2")
 		Connect("U1-4")
 		Connect("U2-1")
 		Connect("U2-7")
 	)
 	Net("+5V" "(unknown)")
 	(
+		Connect("C3-1")
+		Connect("C4-2")
+		Connect("C6-1")
+		Connect("C7-2")
+		Connect("CONN1-1")
+		Connect("D1-2")
+		Connect("D2-2")
+		Connect("J1-1")
+		Connect("M1-1")
+		Connect("M1-3")
+		Connect("M1-5")
+		Connect("M1-7")
 		Connect("R5-2")
 		Connect("R6-2")
 		Connect("U1-6")
-		Connect("U3-3")
-	)
-	Net("7.5V" "(unknown)")
-	(
-		Connect("J1-1")
-		Connect("U3-1")
 	)
 	Net("GND" "(unknown)")
 	(
 		Connect("C1-1")
 		Connect("C2-1")
+		Connect("C3-2")
+		Connect("C5-1")
+		Connect("C6-2")
+		Connect("C8-1")
+		Connect("CONN1-3")
 		Connect("J1-2")
+		Connect("Q1-3")
+		Connect("Q2-3")
+		Connect("R3-1")
+		Connect("R4-1")
 		Connect("U1-1")
 		Connect("U2-3")
-		Connect("U3-2")
 	)
 	Net("unnamed_net1" "(unknown)")
+	(
+		Connect("C4-1")
+		Connect("C5-2")
+		Connect("D1-1")
+		Connect("M1-2")
+		Connect("M1-4")
+		Connect("Q1-2")
+	)
+	Net("unnamed_net2" "(unknown)")
 	(
 		Connect("R6-1")
 		Connect("U1-19")
 		Connect("U2-4")
 	)
-	Net("unnamed_net2" "(unknown)")
+	Net("unnamed_net3" "(unknown)")
 	(
 		Connect("R5-1")
 		Connect("U1-20")
 		Connect("U2-5")
 	)
-	Net("unnamed_net3" "(unknown)")
-	(
-		Connect("U1-41")
-		Connect("U2-6")
-	)
 	Net("unnamed_net4" "(unknown)")
 	(
-		Connect("U1-14")
-		Connect("U3-4")
+		Connect("CONN1-4")
+		Connect("U1-113")
 	)
 	Net("unnamed_net5" "(unknown)")
 	(
-		Connect("U1-31")
-		Connect("U3-9")
+		Connect("CONN1-6")
+		Connect("U1-119")
 	)
 	Net("unnamed_net6" "(unknown)")
 	(
-		Connect("U1-108")
-		Connect("U3-5")
+		Connect("CONN1-8")
+		Connect("U1-123")
 	)
 	Net("unnamed_net7" "(unknown)")
 	(
-		Connect("U1-110")
-		Connect("U3-6")
+		Connect("CONN1-5")
+		Connect("U1-117")
 	)
 	Net("unnamed_net8" "(unknown)")
 	(
-		Connect("U1-112")
-		Connect("U3-7")
+		Connect("CONN1-7")
+		Connect("U1-121")
 	)
 	Net("unnamed_net9" "(unknown)")
 	(
-		Connect("U1-114")
-		Connect("U3-8")
+		Connect("CONN1-10")
+		Connect("U1-14")
+	)
+	Net("unnamed_net10" "(unknown)")
+	(
+		Connect("CONN1-9")
+		Connect("U1-16")
+	)
+	Net("unnamed_net11" "(unknown)")
+	(
+		Connect("R1-2")
+		Connect("R3-2")
+		Connect("U1-31")
+	)
+	Net("unnamed_net12" "(unknown)")
+	(
+		Connect("Q1-1")
+		Connect("R1-1")
+	)
+	Net("unnamed_net13" "(unknown)")
+	(
+		Connect("R2-2")
+		Connect("R4-2")
+		Connect("U1-29")
+	)
+	Net("unnamed_net14" "(unknown)")
+	(
+		Connect("C7-1")
+		Connect("C8-2")
+		Connect("D2-1")
+		Connect("M1-6")
+		Connect("M1-8")
+		Connect("Q2-2")
+	)
+	Net("unnamed_net15" "(unknown)")
+	(
+		Connect("Q2-1")
+		Connect("R2-1")
 	)
 )
