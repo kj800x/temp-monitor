@@ -1,8 +1,8 @@
-unnamed_net10	U3-8 U1-115 
-unnamed_net9	U3-7 U1-111 
-unnamed_net8	U3-6 U1-109 
-unnamed_net7	U3-5 U1-107 
-unnamed_net6	U3-4 U1-16 
+unnamed_net10	U3-5 U1-42 
+unnamed_net9	U3-6 U1-27 
+unnamed_net8	U3-7 U1-23 
+unnamed_net7	U3-4 U1-16 
+unnamed_net6	U3-8 U1-15 
 unnamed_net5	U3-9 U1-14 
 +5V	U3-3 R5-2 R6-2 U1-5 
 unnamed_net4	U1-41 U2-6 
