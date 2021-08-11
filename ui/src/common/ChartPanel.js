@@ -87,7 +87,7 @@ export const ChartPanel = ({
       <LatestTemperature latestMotorData={latestMotorData} />
       <LineChart
         width={width - 8}
-        height={500}
+        height={300}
         data={motorData}
         margin={{ top: 30, bottom: 10 }}
       >
@@ -121,7 +121,7 @@ export const ChartPanel = ({
       </LineChart>
       <LineChart
         width={width - 8}
-        height={500}
+        height={300}
         data={longMotorData}
         margin={{ top: 30, bottom: 10 }}
       >
