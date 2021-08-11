@@ -24,7 +24,7 @@ export const LIVE_UPDATE_SUBSCRIPTION = gql`
       data
     }
   }
-`
+`;
 
 export const FETCH_REPLAY_OPTIONS = gql`
   query replayOptions {
@@ -35,6 +35,14 @@ export const FETCH_REPLAY_OPTIONS = gql`
 export const FETCH_REPLAY_DATA = gql`
   query replayData($file: String!) {
     replayData(file: $file) {
+      data
+    }
+  }
+`;
+
+export const FETCH_CURRENT_HISTORICAL_DATA = gql`
+  query fetchCurrentHistoricalData {
+    currentHistoricalData {
       data
     }
   }

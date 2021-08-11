@@ -24,10 +24,10 @@ export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   uploads: false,
-  subscriptions: "/motor/graphql",
+  subscriptions: "/temp/graphql",
   playground: {
-    endpoint: "/motor/graphql",
-    subscriptionEndpoint: "ws://localhost/motor/graphql",
+    endpoint: "/temp/graphql",
+    subscriptionEndpoint: "ws://localhost/temp/graphql",
     settings: {
       "editor.theme": "dark",
     },

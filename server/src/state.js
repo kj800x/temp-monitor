@@ -1,56 +1,28 @@
-import { getPressure } from "./pressure";
 import { broadcast } from "./websocket";
 import { log } from "./logger";
-import { setMotor } from "./motor";
-import { pipeline } from "./pipeline";
 
-let target = 0;
-let limit = 0;
+const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
+
+let temperature = 0;
 let historicalStates = [];
-let state = {};
 
-export const setTarget = (value) => {
-  target = value;
-};
-export const setLimit = (value) => {
-  limit = value;
+export const getHistoricalStates = () => {
+  return historicalStates;
 };
 
-export const getState = () => {
-  return state;
+export const recordTemperature = (value) => {
+  temperature = value;
+  updateState();
 };
-
-function deriveNextState() {
-  const pressure = getPressure();
-
-  const datum = {
-    time: new Date().getTime(),
-    pressure: pressure,
-    target,
-    limit,
-  };
-
-  return pipeline.reduce(
-    (datum, fn) => ({
-      ...datum,
-      ...fn(datum, historicalStates),
-    }),
-    datum
-  );
-}
 
 function updateState() {
-  state = deriveNextState();
-  const threshold = new Date().getTime() - 60000;
+  const threshold = new Date().getTime() - ONE_DAY_IN_MS;
+  const state = { time: new Date().getTime(), temperature };
   historicalStates = [
     ...historicalStates.filter((state) => state.time > threshold),
     state,
   ];
 
-  // callbacks
-  broadcast({ state: getState() });
-  setMotor(getState().motor);
-  log(getState());
+  broadcast({ state });
+  log(state);
 }
-
-setInterval(updateState, 50);

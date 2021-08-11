@@ -14,14 +14,14 @@ const url = new URL(window.location);
 const httpLink = new HttpLink({
   uri: `${url.protocol}//${url.host}${
     url.port ? `:${url.port}` : ""
-  }/motor/graphql`,
+  }/temp/graphql`,
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
   uri: `${url.protocol === "https:" ? "wss:" : "ws:"}//${url.host}${
     url.port ? `:${url.port}` : ""
-  }/motor/graphql`,
+  }/temp/graphql`,
   options: {
     reconnect: true,
   },

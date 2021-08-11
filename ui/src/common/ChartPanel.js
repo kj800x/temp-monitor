@@ -1,17 +1,50 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
+import { format as timeAgo } from "timeago.js";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+} from "recharts";
+
+const DATE_OPTIONS = {
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+};
+
+const LatestTemperatureWrapper = styled.div`
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+`;
+
+const LatestTemperature = ({ latestMotorData }) => {
+  return (
+    <LatestTemperatureWrapper>
+      Currently: {latestMotorData ? latestMotorData.temperature.toFixed(1) : ""}{" "}
+      &deg;F
+    </LatestTemperatureWrapper>
+  );
+};
 
 const ChartPanelWrapper = styled.div`
   padding: 4px;
   flex: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 function formatXAxis(x) {
-  const now = new Date().getTime();
-
-  return Math.round((now - x) / 1000) + " sec ago";
+  return timeAgo(x, "en_US");
 }
 
 function formatElapsedXAxis(x) {
@@ -25,7 +58,7 @@ function formatElapsedXAxis(x) {
 
 export const ChartPanel = ({
   motorData,
-  dataSpec,
+  longMotorData,
   width,
   useElapsedXAxis = false,
 }) => {
@@ -43,14 +76,18 @@ export const ChartPanel = ({
   );
 
   const latestMotorData = motorData[motorData.length - 1];
-  const domainMin = (latestMotorData ? latestMotorData.time : 0) - 60000;
+  const longDomainMin =
+    (latestMotorData ? latestMotorData.time : 0) - 1000 * 60 * 60 * 24;
+  const domainMin =
+    (latestMotorData ? latestMotorData.time : 0) - 1000 * 60 * 60;
   const domainMax = latestMotorData ? latestMotorData.time : 0;
 
   return (
     <ChartPanelWrapper>
+      <LatestTemperature latestMotorData={latestMotorData} />
       <LineChart
         width={width - 8}
-        height={300}
+        height={500}
         data={motorData}
         margin={{ top: 30, bottom: 10 }}
       >
@@ -61,85 +98,60 @@ export const ChartPanel = ({
           domain={[domainMin, domainMax]}
           tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
-        <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
+        <YAxis domain={[50, 100]} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        {dataSpec
-          .filter((d) => d.chart === "motor")
-          .map((d) => (
-            <Line
-              dot={false}
-              type="monotone"
-              key={d.key}
-              dataKey={d.key}
-              stroke={d.color}
-              strokeWidth={2}
-              isAnimationActive={false}
-              hide={hidden.includes(d.key)}
-            />
-          ))}
-        <Legend onClick={toggleVisibility} />
+        <Line
+          dot={false}
+          type="monotone"
+          key={"temperature"}
+          dataKey={"temperature"}
+          stroke={"rgb(33 232 108)"}
+          strokeWidth={2}
+          isAnimationActive={false}
+          hide={hidden.includes("temperature")}
+        />
+        <Tooltip
+          labelFormatter={(v) =>
+            new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
+          }
+          contentStyle={{ background: "rgb(28 38 49)" }}
+          formatter={(v) => v.toFixed(2)}
+        />
+        <Legend onClick={toggleVisibility} height={10} />
       </LineChart>
       <LineChart
         width={width - 8}
-        height={300}
-        data={motorData}
+        height={500}
+        data={longMotorData}
         margin={{ top: 30, bottom: 10 }}
       >
         <XAxis
           allowDataOverflow={true}
           type="number"
           dataKey="time"
-          domain={[domainMin, domainMax]}
+          domain={[longDomainMin, domainMax]}
           tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
         />
-        <YAxis domain={["auto", "auto"]} /> {/*domain={[12, 21]}*/}
+        <YAxis domain={[50, 100]} />
         <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        {dataSpec
-          .filter((d) => d.chart === "pressure")
-          .map((d) => (
-            <Line
-              dot={false}
-              type="monotone"
-              key={d.key}
-              dataKey={d.key}
-              stroke={d.color}
-              strokeWidth={2}
-              isAnimationActive={false}
-              hide={hidden.includes(d.key)}
-            />
-          ))}
-        <Legend onClick={toggleVisibility} />
-      </LineChart>
-      <LineChart
-        width={width - 8}
-        height={300}
-        data={motorData}
-        margin={{ top: 30, bottom: 10 }}
-      >
-        <XAxis
-          allowDataOverflow={true}
-          type="number"
-          dataKey="time"
-          domain={[domainMin, domainMax]}
-          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
+        <Line
+          dot={false}
+          type="monotone"
+          key={"temperature"}
+          dataKey={"temperature"}
+          stroke={"rgb(33 232 108)"}
+          strokeWidth={2}
+          isAnimationActive={false}
+          hide={hidden.includes("temperature")}
         />
-        <YAxis domain={[0, 1]} tickFormatter={(t) => t * 100 + "%"} />
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        {dataSpec
-          .filter((d) => d.chart === "status")
-          .map((d) => (
-            <Line
-              dot={false}
-              type="monotone"
-              key={d.key}
-              dataKey={d.key}
-              stroke={d.color}
-              strokeWidth={2}
-              isAnimationActive={false}
-              hide={hidden.includes(d.key)}
-            />
-          ))}
-        <Legend onClick={toggleVisibility} />
+        <Tooltip
+          labelFormatter={(v) =>
+            new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
+          }
+          contentStyle={{ background: "rgb(28 38 49)" }}
+          formatter={(v) => v.toFixed(2)}
+        />
+        <Legend onClick={toggleVisibility} height={10} />
       </LineChart>
     </ChartPanelWrapper>
   );

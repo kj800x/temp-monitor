@@ -11,7 +11,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid black;
-  background-color: #4f2c09;
+  background-color: #69a7bb;
 `;
 const LeftWrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const RightWrapper = LeftWrapper;
 
 const StyledNavLink = styled(NavLink)`
   margin-left: 12px;
-  background: #504311;
+  background: rgb(75 106 138);
   position: relative;
   bottom: -4px;
   padding: 4px 10px;
@@ -32,7 +32,7 @@ const StyledNavLink = styled(NavLink)`
   border-bottom-left-radius: 0;
 
   &.active {
-    color: yellow;
+    color: rgb(4 26 49);
     font-weight: 600;
   }
 `;
@@ -42,7 +42,7 @@ const HeaderButton = styled.div`
   user-select: none;
   border: 1px solid black;
   padding: 4px;
-  background: #793d00;
+  background: rgb(45, 62, 80);
   margin-left: 12px;
 `;
 const HeaderTitle = styled.div`
@@ -51,7 +51,7 @@ const HeaderTitle = styled.div`
   font-size: x-large;
   font-weight: 600;
   font-style: italic;
-  color: #ffed00;
+  color: rgb(45, 62, 80);
 `;
 
 export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
@@ -61,14 +61,13 @@ export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
   return (
     <HeaderWrapper>
       <LeftWrapper>
-        <HeaderTitle>Motor Control</HeaderTitle>
+        <HeaderTitle>Temperature</HeaderTitle>
         <StyledNavLink exact to="/">
           Live
         </StyledNavLink>
-        <StyledNavLink to="/replay">Replay</StyledNavLink>
       </LeftWrapper>
       <RightWrapper>
-        {appStateData && (
+        {appStateData && window.location.href.includes("admin") && (
           <HeaderButton
             onClick={() => {
               setLogging({
@@ -84,11 +83,6 @@ export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
             />
           </HeaderButton>
         )}
-
-        <HeaderButton onClick={() => setEditable((editable) => !editable)}>
-          Editable
-          <input type="checkbox" checked={editable} readOnly={true} />
-        </HeaderButton>
       </RightWrapper>
     </HeaderWrapper>
   );

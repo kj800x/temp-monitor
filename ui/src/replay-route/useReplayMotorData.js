@@ -4,25 +4,15 @@ import csv from "csv/lib/es5/sync";
 function parseData(data) {
   const parsedRawData = data
     .map((row) => row.map(parseFloat))
-    .map(([timestamp, pressure, status, motor, target, limit]) => ({
+    .map(([timestamp, temperature]) => ({
       timestamp,
-      pressure,
-      status,
-      motor,
-      target,
-      limit,
+      temperature,
     }));
   const firstTimestamp = parsedRawData[0].timestamp;
-  return parsedRawData.map(
-    ({ timestamp, pressure, status, motor, target, limit }) => ({
-      time: timestamp - firstTimestamp,
-      pressure,
-      status,
-      motor,
-      target,
-      limit,
-    })
-  );
+  return parsedRawData.map(({ timestamp, temperature }) => ({
+    time: timestamp - firstTimestamp,
+    temperature,
+  }));
 }
 
 const dataSpec = [
@@ -68,7 +58,7 @@ export const useReplayMotorData = ({ file }) => {
     async function fetchData() {
       setLoading(true);
       try {
-        const request = await fetch(`/motor/logs/${file}`);
+        const request = await fetch(`/temp/logs/${file}`);
 
         const data = csv.parse(await request.text());
         setMotorData(parseData(data));

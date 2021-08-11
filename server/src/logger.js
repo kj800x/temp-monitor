@@ -36,13 +36,6 @@ export const getLogging = () => {
 
 export const log = (state) => {
   if (logging && csvStringStream) {
-    csvStringStream.write([
-      state.time,
-      state.pressure,
-      state.status,
-      state.motor,
-      state.target,
-      state.limit,
-    ]);
+    csvStringStream.write([state.time, state.temperature]);
   }
 };

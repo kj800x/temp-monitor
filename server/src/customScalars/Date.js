@@ -2,7 +2,7 @@ import { GraphQLScalarType } from "graphql";
 
 export default new GraphQLScalarType({
   name: "Date",
-  description: "Date as represented by getTime",
+  description: "Date",
   parseValue(value) {
     return value;
     // if (value !== null) {

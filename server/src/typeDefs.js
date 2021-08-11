@@ -16,6 +16,7 @@ export const typeDefs = gql`
     allReplayDataOptions: [String!]!
     replayData(file: String!): [Datum!]!
     appState: AppState!
+    currentHistoricalData: [Datum!]!
   }
 
   type Mutation {

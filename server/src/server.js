@@ -18,7 +18,7 @@ async function main() {
 
   apolloServer.applyMiddleware({
     app: expressApp,
-    path: "/motor/graphql",
+    path: "/temp/graphql",
   });
   apolloServer.installSubscriptionHandlers(httpServer);
 
@@ -26,7 +26,7 @@ async function main() {
     DIRECT_WS_API_PORT,
     async () => {
       console.log(
-        `🚀 Websocket Direct API server ready at http://localhost/motor/api (proxy to http://localhost:${DIRECT_WS_API_PORT})`
+        `🚀 Websocket Direct API server ready at ws://localhost/temp/api (proxy to ws://localhost:${DIRECT_WS_API_PORT})`
       );
     }
   );
@@ -37,13 +37,13 @@ async function main() {
   });
 
   const localproxyConfig = {
-    id: "motor-controller",
-    name: "Motor Controller",
+    id: "temperature logger",
+    name: "Temperature Logger",
     pid: process.pid,
     routes: [
       {
         static: true,
-        route: "/motor",
+        route: "/temp",
         staticDir: path.resolve(__dirname, "../../ui/build/"),
         rootIndexFallback: true,
         priority: 0,
@@ -51,7 +51,7 @@ async function main() {
       },
       {
         static: false,
-        route: "/motor/graphql",
+        route: "/temp/graphql",
         hostname: "localhost",
         port: PORT,
         trimRoute: false,
@@ -60,7 +60,7 @@ async function main() {
       },
       {
         static: false,
-        route: "/motor/api",
+        route: "/temp/api",
         hostname: "localhost",
         port: DIRECT_WS_API_PORT,
         trimRoute: false,
@@ -69,7 +69,7 @@ async function main() {
       },
       {
         static: true,
-        route: "/motor/logs",
+        route: "/temp/logs",
         staticDir: path.resolve(__dirname, "../logs"),
         dirListings: true,
         priority: 0,
@@ -80,7 +80,7 @@ async function main() {
 
   const runningHttpServer = httpServer.listen(PORT, async () => {
     console.log(
-      `🚀 Default server ready at http://localhost/motor and http://localhost/motor/graphql (proxy to http://localhost:${PORT})`
+      `🚀 HTTP server ready at http://localhost/temp and http://localhost/temp/graphql (proxy to http://localhost:${PORT})`
     );
     localproxy.register(localproxyConfig);
   });

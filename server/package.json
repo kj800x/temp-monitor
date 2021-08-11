@@ -1,5 +1,5 @@
 {
-  "name": "motor-controller",
+  "name": "temp-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,14 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@kj800x/localproxy-client": "0.3.0",
+    "@kj800x/localproxy-client": "0.3.2",
     "apollo-server-express": "^2.19.0",
-    "bonescript": "^0.7.4-beta1",
     "csv-stringify": "^5.5.1",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "graphql-type-json": "^0.3.2",
-    "i2c-bus": "^5.2.1",
     "mkdirp": "^1.0.4",
     "neat-csv": "^5.2.0",
     "ws": "^7.3.1"

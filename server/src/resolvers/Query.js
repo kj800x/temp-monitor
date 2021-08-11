@@ -1,10 +1,11 @@
 import fs from "fs";
 import neatCsv from "neat-csv";
+import { getHistoricalStates } from "../state";
 
 const prepareReplayData = async (file) => {
   const csv = fs.readFileSync(`./logs/${file}`);
   const parsedRawData = await neatCsv(csv, {
-    headers: ["timestamp", "pressure", "status", "motor", "target", "limit"],
+    headers: ["timestamp", "temperature"],
     mapValues: ({ value }) => parseFloat(value),
   });
   const firstTimestamp = parsedRawData[0].timestamp;
@@ -28,6 +29,10 @@ export const Query = {
       } else {
         return [];
       }
+    },
+
+    currentHistoricalData: async () => {
+      return getHistoricalStates();
     },
 
     replayData: async (_, { file }) => {
