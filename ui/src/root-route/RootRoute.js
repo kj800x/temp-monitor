@@ -3,7 +3,7 @@ import React from "react";
 import { useMotorData } from "./useMotorData";
 import { ChartPanel } from "../common/ChartPanel";
 
-export const RootRoute = ({ editable, windowWidth }) => {
+export const RootRoute = () => {
   const { motorData, longMotorData, dataSpec } = useMotorData();
 
   return (
@@ -12,7 +12,6 @@ export const RootRoute = ({ editable, windowWidth }) => {
         motorData={motorData}
         longMotorData={longMotorData}
         dataSpec={dataSpec}
-        width={editable ? windowWidth - 200 : windowWidth}
       />
     </>
   );

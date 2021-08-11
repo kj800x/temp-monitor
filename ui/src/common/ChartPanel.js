@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useLayoutEffect, useRef } from "react";
 import styled from "styled-components";
 import { format as timeAgo } from "timeago.js";
 import {
@@ -35,12 +35,8 @@ const LatestTemperature = ({ latestMotorData }) => {
 };
 
 const ChartPanelWrapper = styled.div`
-  padding: 4px;
+  padding: 16px;
   flex: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
 `;
 
 function formatXAxis(x) {
@@ -56,10 +52,37 @@ function formatElapsedXAxis(x) {
   return `${sec} sec`;
 }
 
+const ChartWrapper = ({ children }) => {
+  const [safeWidth, setSafeWidth] = useState(window.innerWidth - 24);
+  const [safeHeight, setSafeHeight] = useState((window.innerHeight - 200) / 2);
+
+  const divRef = useRef();
+
+  useLayoutEffect(() => {
+    window.addEventListener("resize", () => {
+      setSafeWidth(window.innerWidth - 24);
+      setSafeHeight((window.innerHeight - 200) / 2);
+    });
+  });
+
+  const childrenWithProps = React.Children.map(children, (child) => {
+    // Checking isValidElement is the safe way and avoids a typescript
+    // error too.
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        width: safeWidth,
+        height: safeHeight,
+      });
+    }
+    return child;
+  });
+
+  return <div ref={divRef}>{childrenWithProps}</div>;
+};
+
 export const ChartPanel = ({
   motorData,
   longMotorData,
-  width,
   useElapsedXAxis = false,
 }) => {
   const [hidden, setHidden] = useState([]);
@@ -85,74 +108,68 @@ export const ChartPanel = ({
   return (
     <ChartPanelWrapper>
       <LatestTemperature latestMotorData={latestMotorData} />
-      <LineChart
-        width={width - 8}
-        height={300}
-        data={motorData}
-        margin={{ top: 30, bottom: 10 }}
-      >
-        <XAxis
-          allowDataOverflow={true}
-          type="number"
-          dataKey="time"
-          domain={[domainMin, domainMax]}
-          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
-        />
-        <YAxis domain={[50, 100]} />
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line
-          dot={false}
-          type="monotone"
-          key={"temperature"}
-          dataKey={"temperature"}
-          stroke={"rgb(33 232 108)"}
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("temperature")}
-        />
-        <Tooltip
-          labelFormatter={(v) =>
-            new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
-          }
-          contentStyle={{ background: "rgb(28 38 49)" }}
-          formatter={(v) => v.toFixed(2)}
-        />
-        <Legend onClick={toggleVisibility} height={10} />
-      </LineChart>
-      <LineChart
-        width={width - 8}
-        height={300}
-        data={longMotorData}
-        margin={{ top: 30, bottom: 10 }}
-      >
-        <XAxis
-          allowDataOverflow={true}
-          type="number"
-          dataKey="time"
-          domain={[longDomainMin, domainMax]}
-          tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
-        />
-        <YAxis domain={[50, 100]} />
-        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-        <Line
-          dot={false}
-          type="monotone"
-          key={"temperature"}
-          dataKey={"temperature"}
-          stroke={"rgb(33 232 108)"}
-          strokeWidth={2}
-          isAnimationActive={false}
-          hide={hidden.includes("temperature")}
-        />
-        <Tooltip
-          labelFormatter={(v) =>
-            new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
-          }
-          contentStyle={{ background: "rgb(28 38 49)" }}
-          formatter={(v) => v.toFixed(2)}
-        />
-        <Legend onClick={toggleVisibility} height={10} />
-      </LineChart>
+      <ChartWrapper>
+        <LineChart data={motorData} margin={{ top: 30, bottom: 10 }}>
+          <XAxis
+            allowDataOverflow={true}
+            type="number"
+            dataKey="time"
+            domain={[domainMin, domainMax]}
+            tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
+          />
+          <YAxis domain={[50, 100]} />
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <Line
+            dot={false}
+            type="monotone"
+            key={"temperature"}
+            dataKey={"temperature"}
+            stroke={"rgb(33 232 108)"}
+            strokeWidth={2}
+            isAnimationActive={false}
+            hide={hidden.includes("temperature")}
+          />
+          <Tooltip
+            labelFormatter={(v) =>
+              new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
+            }
+            contentStyle={{ background: "rgb(28 38 49)" }}
+            formatter={(v) => `${v.toFixed(2)} °F`}
+          />
+          <Legend onClick={toggleVisibility} height={10} />
+        </LineChart>
+      </ChartWrapper>
+      <ChartWrapper>
+        <LineChart data={longMotorData} margin={{ top: 30, bottom: 10 }}>
+          <XAxis
+            allowDataOverflow={true}
+            type="number"
+            dataKey="time"
+            domain={[longDomainMin, domainMax]}
+            tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
+          />
+          <YAxis domain={[50, 100]} />
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <Line
+            dot={false}
+            type="monotone"
+            key={"temperature"}
+            dataKey={"temperature"}
+            stroke={"rgb(33 232 108)"}
+            strokeWidth={2}
+            isAnimationActive={false}
+            hide={hidden.includes("temperature")}
+          />
+          <Tooltip
+            labelFormatter={(v) =>
+              new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
+            }
+            contentStyle={{ background: "rgb(28 38 49)" }}
+            formatter={(v) => `${v.toFixed(2)} °F`}
+          />
+          <Legend onClick={toggleVisibility} height={10} />
+        </LineChart>
+      </ChartWrapper>
     </ChartPanelWrapper>
   );
 };

@@ -15,10 +15,8 @@ code {
 html,
 body,
 #root {
-  height: 100%;
   background: rgb(45, 62, 80);
   color: white;
-  overflow: hidden;
 }
 
 input[type="range"][orient="vertical"] {
