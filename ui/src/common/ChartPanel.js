@@ -117,7 +117,7 @@ export const ChartPanel = ({
             domain={[domainMin, domainMax]}
             tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
           />
-          <YAxis domain={[50, 100]} />
+          <YAxis domain={[65, 90]} tickCount={7} />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Line
             dot={false}
@@ -146,9 +146,10 @@ export const ChartPanel = ({
             type="number"
             dataKey="time"
             domain={[longDomainMin, domainMax]}
+            tickCount={6}
             tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
           />
-          <YAxis domain={[50, 100]} />
+          <YAxis domain={[65, 90]} tickCount={7} />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Line
             dot={false}
