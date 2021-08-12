@@ -16,6 +16,10 @@ const dataSpec = [
   },
 ];
 
+const uniqueBy = (keyFn) => (e, i, a) => {
+  return i === a.findIndex((x) => keyFn(e) === keyFn(x));
+};
+
 export const useMotorData = () => {
   const [motorData, setMotorData] = useState([]);
   const [longMotorData, setLongMotorData] = useState([]);
@@ -42,11 +46,15 @@ export const useMotorData = () => {
       const shortRetentionThreshold = now - 1000 * 60 * 60;
       const longRetentionThreshold = now - 1000 * 60 * 60 * 24;
       setMotorData((historicalMotorData) => [
-        ...historicalMotorData.filter((d) => d.time > shortRetentionThreshold),
+        ...historicalMotorData
+          .filter((d) => d.time > shortRetentionThreshold)
+          .filter(uniqueBy((d) => Math.floor(d.time / (1000 * 15)))),
         JSON.parse(message.data).state,
       ]);
       setLongMotorData((historicalMotorData) => [
-        ...historicalMotorData.filter((d) => d.time > longRetentionThreshold),
+        ...historicalMotorData
+          .filter((d) => d.time > longRetentionThreshold)
+          .filter(uniqueBy((d) => Math.floor(d.time / (1000 * 60 * 1)))),
         JSON.parse(message.data).state,
       ]);
     };
@@ -57,8 +65,6 @@ export const useMotorData = () => {
       setWs(null);
     };
   }, []);
-
-  console.log({ motorData, longMotorData });
 
   return {
     motorData,
