@@ -43,7 +43,12 @@ export const FETCH_REPLAY_DATA = gql`
 export const FETCH_CURRENT_HISTORICAL_DATA = gql`
   query fetchCurrentHistoricalData {
     currentHistoricalData {
-      data
+      shortHistoricalStates {
+        data
+      }
+      longHistoricalStates {
+        data
+      }
     }
   }
 `;

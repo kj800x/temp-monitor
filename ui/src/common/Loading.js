@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React /*, { useState, useCallback } */ from "react";
 import Loader from "react-loaders";
 import styled from "styled-components";
-import { useDelayedEffect } from "./useDelayedEffect";
+// import { useDelayedEffect } from "./useDelayedEffect";
 
 import "loaders.css/loaders.min.css";
 
@@ -20,22 +20,22 @@ const LoaderInnerContainer = styled.div`
 
   .ball-grid-pulse > div,
   .ball-spin-fade-loader > div {
-    background-color: #96520e;
+    background-color: white;
   }
 `;
 
-export default function Loading() {
-  const [show, setShow] = useState(false);
+export function Loading() {
+  // const [show, setShow] = useState(false);
 
-  const activate = useCallback(() => {
-    setShow(true);
-  }, [setShow]);
+  // const activate = useCallback(() => {
+  //   setShow(true);
+  // }, [setShow]);
 
-  useDelayedEffect(activate, 100);
+  // useDelayedEffect(activate, 100);
 
-  if (!show) {
-    return null;
-  }
+  // if (!show) {
+  //   return null;
+  // }
 
   return (
     <LoaderContainer>

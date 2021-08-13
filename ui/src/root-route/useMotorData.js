@@ -24,20 +24,18 @@ export const useMotorData = () => {
   const [motorData, setMotorData] = useState([]);
   const [longMotorData, setLongMotorData] = useState([]);
   const [ws, setWs] = useState(null);
-
-  useQuery(FETCH_CURRENT_HISTORICAL_DATA, {
+  const { loading } = useQuery(FETCH_CURRENT_HISTORICAL_DATA, {
     onCompleted: (data) => {
       setMotorData((historicalMotorData) => [
-        ...data.currentHistoricalData.map((d) => d.data),
+        ...data.currentHistoricalData.shortHistoricalStates.map((d) => d.data),
         ...historicalMotorData,
       ]);
       setLongMotorData((historicalMotorData) => [
-        ...data.currentHistoricalData.map((d) => d.data),
+        ...data.currentHistoricalData.longHistoricalStates.map((d) => d.data),
         ...historicalMotorData,
       ]);
     },
   });
-
   useEffect(() => {
     const lws = new WebSocket(WEBSOCKET_ADDRESS);
 
@@ -67,6 +65,7 @@ export const useMotorData = () => {
   }, []);
 
   return {
+    loading,
     motorData,
     dataSpec,
     longMotorData,

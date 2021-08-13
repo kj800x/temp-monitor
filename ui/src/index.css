@@ -17,6 +17,7 @@ body,
 #root {
   background: rgb(45, 62, 80);
   color: white;
+  overflow-x: hidden;
 }
 
 input[type="range"][orient="vertical"] {

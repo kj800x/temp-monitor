@@ -5,7 +5,7 @@ import TimeAgo from "react-timeago";
 
 import { FETCH_REPLAY_OPTIONS } from "../queries";
 import { Link } from "react-router-dom";
-import Loading from "../common/Loading";
+import { Loading } from "../common/Loading";
 import Error from "../common/Error";
 
 const FileLink = styled(Link)`

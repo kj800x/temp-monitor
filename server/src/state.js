@@ -1,28 +1,21 @@
 import { broadcast } from "./websocket";
 import { log } from "./logger";
+import { hydrate } from "./hydrate";
+import { groomLongStates, groomShortStates } from "./groom";
 
-const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
-
-let temperature = 0;
-let historicalStates = [];
+console.log("hydrate start");
+let { shortHistoricalStates, longHistoricalStates } = hydrate();
+console.log("hydrate complete");
 
 export const getHistoricalStates = () => {
-  return historicalStates;
+  return { shortHistoricalStates, longHistoricalStates };
 };
 
-export const recordTemperature = (value) => {
-  temperature = value;
-  updateState();
-};
-
-function updateState() {
-  const threshold = new Date().getTime() - ONE_DAY_IN_MS;
+export const recordTemperature = (temperature) => {
   const state = { time: new Date().getTime(), temperature };
-  historicalStates = [
-    ...historicalStates.filter((state) => state.time > threshold),
-    state,
-  ];
+  shortHistoricalStates = [...groomShortStates(shortHistoricalStates), state];
+  longHistoricalStates = [...groomLongStates(longHistoricalStates), state];
 
   broadcast({ state });
   log(state);
-}
+};

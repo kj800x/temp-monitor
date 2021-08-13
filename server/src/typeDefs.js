@@ -12,11 +12,16 @@ export const typeDefs = gql`
     logging: Boolean!
   }
 
+  type HistoricalData {
+    shortHistoricalStates: [Datum!]!
+    longHistoricalStates: [Datum!]!
+  }
+
   type Query {
     allReplayDataOptions: [String!]!
     replayData(file: String!): [Datum!]!
     appState: AppState!
-    currentHistoricalData: [Datum!]!
+    currentHistoricalData: HistoricalData!
   }
 
   type Mutation {

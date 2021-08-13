@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import { ChartPanel } from "../common/ChartPanel";
 import Error from "../common/Error";
-import Loading from "../common/Loading";
+import { Loading } from "../common/Loading";
 import { useInterval } from "../common/useInterval";
 import { useKeys } from "../common/useKeys";
 
