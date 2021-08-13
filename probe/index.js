@@ -7,8 +7,15 @@ let API_HOST = process.env["API_HOST"] || "10.60.1.2";
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 let file;
-// let writeStream = fs.createWriteStream("./log.csv");
+let writeStream = fs.createWriteStream("./log.csv");
 let connection = new WebSocket(`ws://${API_HOST}/temp/api`);
+
+connection.onerror = () => {
+  process.exit(1);
+};
+connection.onclose = () => {
+  process.exit(1);
+};
 
 function niceExec(command) {
   return new Promise((resolve, reject) => {
@@ -25,7 +32,6 @@ function niceExec(command) {
 async function setup() {
   await niceExec("modprobe w1-gpio");
   await niceExec("modprobe w1-therm");
-
   const files = fs.readdirSync("/sys/bus/w1/devices/");
   const device = files.find((file) => file.startsWith("28"));
   file = `/sys/bus/w1/devices/${device}/w1_slave`;
