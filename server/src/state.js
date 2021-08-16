@@ -16,8 +16,8 @@ export const getHistoricalStates = () => {
 
 export const recordTemperature = (temperature) => {
   const state = { time: new Date().getTime(), temperature };
-  shortHistoricalStates = groomShortStates(shortHistoricalStates, [state]);
-  longHistoricalStates = groomLongStates(longHistoricalStates, [state]);
+  groomShortStates(shortHistoricalStates, [state]);
+  groomLongStates(longHistoricalStates, [state]);
   broadcast({ state });
   log(state);
 };
