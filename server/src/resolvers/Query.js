@@ -12,7 +12,6 @@ export const Query = {
     },
 
     replayData: async (_, { date }) => {
-      console.log(date);
       return await prepareReplayData(date);
     },
 

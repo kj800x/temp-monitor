@@ -24,7 +24,6 @@ export const groomStates =
         continue;
       }
       oldStates.enqueue(datum);
-      console.log(datum);
     }
     return oldStates;
   };
