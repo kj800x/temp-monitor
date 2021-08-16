@@ -1,5 +1,6 @@
 import fs from "fs";
 import { groomLongStates, groomShortStates } from "./groom";
+import { Queue } from "./queue";
 
 export const hydrate = () => {
   if (fs.existsSync("./logs/current.csv")) {
@@ -13,10 +14,13 @@ export const hydrate = () => {
       }));
 
     return {
-      shortHistoricalStates: groomShortStates(states),
-      longHistoricalStates: groomLongStates(states),
+      shortHistoricalStates: groomShortStates(new Queue(), states),
+      longHistoricalStates: groomLongStates(new Queue(), states),
     };
   } else {
-    return { shortHistoricalStates: [], longHistoricalStates: [] };
+    return {
+      shortHistoricalStates: new Queue(),
+      longHistoricalStates: new Queue(),
+    };
   }
 };
