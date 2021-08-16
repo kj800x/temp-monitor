@@ -2,6 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
   scalar JSON
+  scalar Date
 
   type Datum {
     data: JSON!
@@ -18,8 +19,8 @@ export const typeDefs = gql`
   }
 
   type Query {
-    allReplayDataOptions: [String!]!
-    replayData(file: String!): [Datum!]!
+    firstDateAvailable: Date!
+    replayData(date: Date!): [Datum!]!
     appState: AppState!
     currentHistoricalData: HistoricalData!
   }

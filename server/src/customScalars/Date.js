@@ -1,27 +1,18 @@
-import { GraphQLScalarType } from "graphql";
+import { GraphQLScalarType, Kind } from "graphql";
 
 export default new GraphQLScalarType({
   name: "Date",
   description: "Date",
   parseValue(value) {
-    return value;
-    // if (value !== null) {
-    //   return new Date(value); // value from the client
-    // }
-    // return null;
+    return new Date(value); // value from the client
   },
   serialize(value) {
-    return value;
-    // if (value !== null) {
-    //   value.getTime();
-    // }
-    // return null; // value sent to the client
+    return value.getTime(); // value sent to the client
   },
   parseLiteral(ast) {
-    return value;
-    // if (ast.kind === Kind.INT) {
-    //   return new Date(+ast.value); // ast value is always in string format
-    // }
-    // return null;
+    if (ast.kind === Kind.INT) {
+      return parseInt(ast.value, 10); // ast value is always in string format
+    }
+    return null;
   },
 });

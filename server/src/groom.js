@@ -1,28 +1,33 @@
-const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
-const ONE_MINUTE_IN_MS = 1000 * 60;
-const ONE_HOUR_IN_MS = 1000 * 60 * 60;
-const FIFTEEN_SECONDS_IN_MS = 1000 * 15;
+export const ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
+export const ONE_MINUTE_IN_MS = 1000 * 60;
+export const ONE_HOUR_IN_MS = 1000 * 60 * 60;
+export const FIFTEEN_SECONDS_IN_MS = 1000 * 15;
 
-export const groomStates = (retention, bucket) => (oldStates, newData) => {
-  while (!oldStates.isEmpty() && oldStates.peek().time < retention) {
-    oldStates.dequeue();
-  }
-  for (const datum of newData) {
-    // Check if datum is newer than retention
-    if (datum.time < retention) {
-      continue;
+export const groomStates =
+  (retention, bucket, windowEndsAt = new Date().getTime()) =>
+  (oldStates, newData) => {
+    const threshold = windowEndsAt - retention;
+
+    while (!oldStates.isEmpty() && oldStates.peek().time < threshold) {
+      oldStates.dequeue();
     }
-    // Check if the most recent datum is not within BUCKET time
-    if (
-      !oldStates.isEmpty() &&
-      oldStates.peekBottom().time > datum.time - bucket
-    ) {
-      continue;
+    for (const datum of newData) {
+      if (
+        // Check if datum is newer than retention
+        // or if it's past the end of the window
+        datum.time < threshold ||
+        datum.time > windowEndsAt ||
+        // Check if the most recent datum is not within BUCKET time
+        (!oldStates.isEmpty() &&
+          oldStates.peekBottom().time > datum.time - bucket)
+      ) {
+        continue;
+      }
+      oldStates.enqueue(datum);
+      console.log(datum);
     }
-    oldStates.enqueue(datum);
-  }
-  return oldStates;
-};
+    return oldStates;
+  };
 
 export const groomLongStates = groomStates(ONE_DAY_IN_MS, ONE_MINUTE_IN_MS);
 export const groomShortStates = groomStates(

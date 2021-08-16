@@ -2,6 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
 
 import GraphQLJSON from "graphql-type-json";
+import GraphQLDate from "./customScalars/Date";
 import { typeDefs } from "./typeDefs";
 import { Query } from "./resolvers/Query";
 import { Datum } from "./resolvers/Datum";
@@ -11,6 +12,7 @@ import { Subscription } from "./resolvers/Subscription";
 
 const resolvers = {
   JSON: GraphQLJSON,
+  Date: GraphQLDate,
 
   Datum: Datum.resolver,
   AppState: AppState.resolver,
