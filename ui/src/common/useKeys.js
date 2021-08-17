@@ -1,13 +1,14 @@
 import { useEffect, useCallback } from "react";
 
-export const useKeys = (handlers) => {
+export const useKeys = (handlers, dependencies) => {
   const handleKeyPress = useCallback(
     (event) => {
       if (handlers[event.code]) {
         handlers[event.code]();
       }
     },
-    [handlers]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [handlers, ...dependencies]
   );
 
   useEffect(() => {

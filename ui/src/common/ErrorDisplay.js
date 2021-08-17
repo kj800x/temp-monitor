@@ -31,9 +31,13 @@ const ErrorBoxHeader = styled.div`
 const ErrorBoxContent = styled.div`
   background: rgb(3 28 53);
   padding: 24px;
+
+  & > pre {
+    white-space: pre-wrap;
+  }
 `;
 
-export default function Error({ error }) {
+export function ErrorDisplay({ error }) {
   return (
     <ErrorContainer>
       <ErrorInnerContainer>

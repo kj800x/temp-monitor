@@ -26,15 +26,15 @@ export const LIVE_UPDATE_SUBSCRIPTION = gql`
   }
 `;
 
-export const FETCH_REPLAY_OPTIONS = gql`
-  query replayOptions {
-    allReplayDataOptions
+export const FETCH_FIRST_DATE_AVAILABLE = gql`
+  query firstDateAvailable {
+    firstDateAvailable
   }
 `;
 
 export const FETCH_REPLAY_DATA = gql`
-  query replayData($file: String!) {
-    replayData(file: $file) {
+  query replayData($date: Date!) {
+    replayData(date: $date) {
       data
     }
   }

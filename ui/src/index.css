@@ -20,14 +20,6 @@ body,
   overflow-x: hidden;
 }
 
-input[type="range"][orient="vertical"] {
-  writing-mode: bt-lr;
-  -webkit-appearance: slider-vertical;
-  appearance: slider-vertical;
-  width: 8px;
-  padding: 0 5px;
-}
-
 .recharts-cartesian-axis-tick-value {
   fill: lightgoldenrodyellow;
 }

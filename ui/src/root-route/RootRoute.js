@@ -1,11 +1,11 @@
 import React from "react";
 
-import { useMotorData } from "./useMotorData";
+import { useData } from "./useData";
 import { ChartPanel } from "../common/ChartPanel";
 import { Loading } from "../common/Loading";
 
 export const RootRoute = () => {
-  const { motorData, longMotorData, dataSpec, loading } = useMotorData();
+  const { shortData, longData, latestState, loading } = useData();
 
   if (loading) {
     return <Loading />;
@@ -14,9 +14,9 @@ export const RootRoute = () => {
   return (
     <>
       <ChartPanel
-        motorData={motorData}
-        longMotorData={longMotorData}
-        dataSpec={dataSpec}
+        shortData={shortData}
+        longData={longData}
+        latestState={latestState}
       />
     </>
   );

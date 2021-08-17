@@ -1,176 +1,180 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
-import TimeAgo from "react-timeago";
 
-import { FETCH_REPLAY_OPTIONS } from "../queries";
-import { Link } from "react-router-dom";
+import { FETCH_FIRST_DATE_AVAILABLE } from "../queries";
 import { Loading } from "../common/Loading";
-import Error from "../common/Error";
+import { ErrorDisplay } from "../common/ErrorDisplay";
+import { Link } from "react-router-dom";
 
-const FileLink = styled(Link)`
+const CalendarWrapper = styled.div`
+  width: 350px;
+  margin: auto;
   display: flex;
   flex-direction: column;
-  border: 1px solid orange;
-  background: #522900;
-  padding: 10px;
-  height: 50px;
-  width: 175px;
-  font-size: small;
-  margin: 4px;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  justify-content: space-around;
 `;
-
-const OptionTitle = styled.h2`
-  margin: 12px 4px 8px;
-`;
-
-const OptionFiles = styled.div`
+const MonthWrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 12px 0px;
+  background: #132875;
+  padding: 12px;
 `;
+const WeekWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: center;
 
-const DATE_OPTIONS = {
-  weekday: "short",
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-};
+  & > div {
+    width: 57px;
+  }
+`;
+const Spacer = styled.div``;
+const DayWrapper = styled.div`
+  & > a {
+    color: lightblue !important;
+    text-decoration: none;
+  }
+`;
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
 const DAY = HOUR * 24;
-const WEEK = DAY * 7;
-const MONTH = WEEK * 4;
-const YEAR = MONTH * 12;
 
-const lp = (x) => (("" + x).length === 1 ? "0" + x : x);
+function getCalendar(firstDateAvailable) {
+  const now = new Date().getTime();
+  const dates = [];
+  let date = firstDateAvailable;
 
-function makeDate({ year, month, day, hour, minute, second }) {
-  return new Date(
-    `${lp(year)}-${lp(month)}-${lp(day)}T${lp(hour)}:${lp(minute)}:${lp(
-      second
-    )}`
-  );
-}
-
-function useOptions(data) {
-  if (!data) {
-    return null;
+  while (date < now) {
+    if (new Date(date).getDate() === 1) {
+      dates.push("NEW_MONTH");
+    }
+    if (new Date(date).getDay() === 0) {
+      dates.push("NEW_WEEK");
+    }
+    dates.push(date);
+    date += DAY;
   }
 
-  const processedData = data.allReplayDataOptions.flatMap((raw) => {
-    try {
-      const name = raw.split(".")[0];
-      const [[year, month, day], [hour, minute, second]] = name
-        .split("_")
-        .map((part) => part.split("-"));
-
-      return [
-        {
-          date: makeDate({ year, month, day, hour, minute, second }),
-          raw,
-        },
-      ];
-    } catch (e) {
-      console.warn("Unparsable date", raw, e);
-      return [
-        {
-          date: new Date(0),
-          raw,
-          unparseable: true,
-        },
-      ];
-    }
-  });
-
-  const unparseableData = processedData.filter((d) => d.unparseable);
-  const datedData = processedData.filter((d) => !d.unparseable);
-
-  datedData.sort((b, a) => a.date - b.date);
-
-  const now = new Date();
-
-  const groups = [
-    {
-      title: "Last Hour",
-      files: datedData.filter((d) => d.date > now - HOUR),
-    },
-    {
-      title: "Last Day",
-      files: datedData.filter((d) => d.date > now - DAY && d.date < now - HOUR),
-    },
-    {
-      title: "Last Week",
-      files: datedData.filter((d) => d.date > now - WEEK && d.date < now - DAY),
-    },
-    {
-      title: "Last Month",
-      files: datedData.filter(
-        (d) => d.date > now - MONTH && d.date < now - WEEK
-      ),
-    },
-    {
-      title: "Last Year",
-      files: datedData.filter(
-        (d) => d.date > now - YEAR && d.date < now - MONTH
-      ),
-    },
-    {
-      title: "Older Than A Year",
-      files: datedData.filter((d) => d.date < now - YEAR),
-    },
-    {
-      title: "Unknown Date",
-      files: unparseableData,
-    },
-  ];
-
-  return groups.filter((group) => group.files.length > 0);
+  return dates;
 }
 
-export const ReplayIndexRoute = () => {
-  const { data, loading, error } = useQuery(FETCH_REPLAY_OPTIONS);
+const split = (array, matchElem) => {
+  const out = [];
+  let current = [];
+  for (const e of array) {
+    if (e === matchElem) {
+      out.push(current);
+      current = [];
+    } else {
+      current.push(e);
+    }
+  }
+  out.push(current);
+  return out;
+};
 
-  const options = useOptions(data);
+export const Day = ({ day }) => {
+  const date = new Date(day).getDate();
+
+  return (
+    <DayWrapper>
+      <Link to={`/replay/${day}`}>{date}</Link>
+    </DayWrapper>
+  );
+};
+
+const oneTo = (i) => {
+  if (i <= 0) {
+    return [];
+  }
+  return [...oneTo(i - 1), i];
+};
+
+const PreSpacer = ({ day }) => {
+  return (
+    <>
+      {oneTo(day).map((e) => (
+        <Spacer key={e} />
+      ))}
+    </>
+  );
+};
+const PostSpacer = ({ day }) => {
+  return (
+    <>
+      {oneTo(6 - day).map((e) => (
+        <Spacer key={e} />
+      ))}
+    </>
+  );
+};
+
+export const startOfDay = (d) => {
+  const date = new Date(d);
+  date.setMilliseconds(0);
+  date.setSeconds(0);
+  date.setMinutes(0);
+  date.setHours(0);
+  date.setDate(date.getDate() + 1);
+  return date.getTime();
+};
+
+export const Week = ({ week }) => {
+  return (
+    <WeekWrapper>
+      <PreSpacer day={new Date(week[0]).getDay()} />
+      {week.map((day, i) => (
+        <Day day={startOfDay(day)} key={i} />
+      ))}
+      <PostSpacer day={new Date(week[week.length - 1]).getDay()} />
+    </WeekWrapper>
+  );
+};
+
+export const Month = ({ month }) => {
+  return (
+    <MonthWrapper>
+      <WeekWrapper>
+        {new Date(month[0][0]).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+        })}
+      </WeekWrapper>
+      {month.map((week, i) => (
+        <Week week={week} key={i} />
+      ))}
+    </MonthWrapper>
+  );
+};
+
+export const Calendar = ({ calendar }) => {
+  return (
+    <CalendarWrapper>
+      {calendar.map((month, i) => (
+        <Month month={month} key={i} />
+      ))}
+    </CalendarWrapper>
+  );
+};
+
+export const ReplayIndexRoute = () => {
+  const { data, loading, error } = useQuery(FETCH_FIRST_DATE_AVAILABLE);
 
   if (loading) {
     return <Loading />;
   }
 
   if (error) {
-    return <Error error={error} />;
+    return <ErrorDisplay error={error} />;
   }
 
-  return (
-    <div>
-      {options.map((option) => (
-        <div key={option.title}>
-          <OptionTitle>{option.title}</OptionTitle>
-          <OptionFiles>
-            {option.files.map((file) => (
-              <FileLink to={`/replay/${file.raw}`} key={file.raw}>
-                {file.unparseable ? (
-                  <span>{file.raw}</span>
-                ) : (
-                  <>
-                    <span>
-                      {file.date.toLocaleString("en-US", DATE_OPTIONS)}
-                    </span>
-                    <TimeAgo date={file.date} />
-                  </>
-                )}
-              </FileLink>
-            ))}
-          </OptionFiles>
-        </div>
-      ))}
-    </div>
-  );
+  const days = getCalendar(data.firstDateAvailable);
+
+  const calendar = split(days, "NEW_MONTH").map((m) => split(m, "NEW_WEEK"));
+
+  return <Calendar calendar={calendar} />;
 };

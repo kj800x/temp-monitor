@@ -10,6 +10,8 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import { startOfDay } from "../replay-index-route/ReplayIndexRoute";
+import { ONE_DAY_IN_MS } from "./groom";
 
 const DATE_OPTIONS = {
   month: "long",
@@ -25,11 +27,14 @@ const LatestTemperatureWrapper = styled.div`
   font-size: 48px;
 `;
 
-const LatestTemperature = ({ latestMotorData }) => {
+const LatestTemperature = ({ latestData }) => {
+  if (!latestData) {
+    return null;
+  }
+
   return (
     <LatestTemperatureWrapper>
-      Currently: {latestMotorData ? latestMotorData.temperature.toFixed(1) : ""}{" "}
-      &deg;F
+      Now: {latestData ? latestData.temperature.toFixed(1) : ""} &deg;F
     </LatestTemperatureWrapper>
   );
 };
@@ -43,13 +48,8 @@ function formatXAxis(x) {
   return timeAgo(x, "en_US");
 }
 
-function formatElapsedXAxis(x) {
-  const min = Math.floor(x / 60000);
-  const sec = Math.floor((x % 60000) / 1000);
-  if (min > 0) {
-    return `${min} min ${sec} sec`;
-  }
-  return `${sec} sec`;
+function formatXAxisHours(x) {
+  return new Date(x).toLocaleTimeString("en-US");
 }
 
 const ChartWrapper = ({ children }) => {
@@ -80,11 +80,7 @@ const ChartWrapper = ({ children }) => {
   return <div ref={divRef}>{childrenWithProps}</div>;
 };
 
-export const ChartPanel = ({
-  motorData,
-  longMotorData,
-  useElapsedXAxis = false,
-}) => {
+export const ChartPanel = ({ shortData, longData, latestState, isReplay }) => {
   const [hidden, setHidden] = useState([]);
 
   const toggleVisibility = useCallback(
@@ -98,56 +94,71 @@ export const ChartPanel = ({
     [setHidden]
   );
 
-  const latestMotorData = motorData[motorData.length - 1];
-  const longDomainMin =
-    (latestMotorData ? latestMotorData.time : 0) - 1000 * 60 * 60 * 24;
+  const computedLatestState = latestState;
+
+  const longDomainMin = isReplay
+    ? startOfDay(computedLatestState.time) - ONE_DAY_IN_MS
+    : (computedLatestState ? computedLatestState.time : 0) -
+      1000 * 60 * 60 * 24;
   const domainMin =
-    (latestMotorData ? latestMotorData.time : 0) - 1000 * 60 * 60;
-  const domainMax = latestMotorData ? latestMotorData.time : 0;
+    (computedLatestState ? computedLatestState.time : 0) - 1000 * 60 * 60;
+  const domainMax = isReplay
+    ? startOfDay(computedLatestState.time)
+    : computedLatestState
+    ? computedLatestState.time
+    : 0;
 
   return (
     <ChartPanelWrapper>
-      <LatestTemperature latestMotorData={latestMotorData} />
+      {isReplay ? null : <LatestTemperature latestData={computedLatestState} />}
+      {isReplay ? null : (
+        <ChartWrapper>
+          <LineChart
+            data={[...shortData, latestState]}
+            margin={{ top: 30, bottom: 10 }}
+          >
+            <XAxis
+              allowDataOverflow={true}
+              type="number"
+              dataKey="time"
+              domain={[domainMin, domainMax]}
+              tickFormatter={isReplay ? formatXAxisHours : formatXAxis}
+            />
+            <YAxis domain={[65, 90]} tickCount={7} />
+            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+            <Line
+              dot={false}
+              type="monotone"
+              key={"temperature"}
+              dataKey={"temperature"}
+              stroke={"rgb(33 232 108)"}
+              strokeWidth={2}
+              isAnimationActive={false}
+              hide={hidden.includes("temperature")}
+            />
+            <Tooltip
+              labelFormatter={(v) =>
+                new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
+              }
+              contentStyle={{ background: "rgb(28 38 49)" }}
+              formatter={(v) => `${v.toFixed(2)} °F`}
+            />
+            <Legend onClick={toggleVisibility} height={10} />
+          </LineChart>
+        </ChartWrapper>
+      )}
       <ChartWrapper>
-        <LineChart data={motorData} margin={{ top: 30, bottom: 10 }}>
-          <XAxis
-            allowDataOverflow={true}
-            type="number"
-            dataKey="time"
-            domain={[domainMin, domainMax]}
-            tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
-          />
-          <YAxis domain={[65, 90]} tickCount={7} />
-          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-          <Line
-            dot={false}
-            type="monotone"
-            key={"temperature"}
-            dataKey={"temperature"}
-            stroke={"rgb(33 232 108)"}
-            strokeWidth={2}
-            isAnimationActive={false}
-            hide={hidden.includes("temperature")}
-          />
-          <Tooltip
-            labelFormatter={(v) =>
-              new Date(v).toLocaleDateString("en-US", DATE_OPTIONS)
-            }
-            contentStyle={{ background: "rgb(28 38 49)" }}
-            formatter={(v) => `${v.toFixed(2)} °F`}
-          />
-          <Legend onClick={toggleVisibility} height={10} />
-        </LineChart>
-      </ChartWrapper>
-      <ChartWrapper>
-        <LineChart data={longMotorData} margin={{ top: 30, bottom: 10 }}>
+        <LineChart
+          data={[...longData, latestState]}
+          margin={{ top: 30, bottom: 10 }}
+        >
           <XAxis
             allowDataOverflow={true}
             type="number"
             dataKey="time"
             domain={[longDomainMin, domainMax]}
             tickCount={6}
-            tickFormatter={useElapsedXAxis ? formatElapsedXAxis : formatXAxis}
+            tickFormatter={isReplay ? formatXAxisHours : formatXAxis}
           />
           <YAxis domain={[65, 90]} tickCount={7} />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />

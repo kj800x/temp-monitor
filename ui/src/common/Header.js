@@ -1,5 +1,5 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { FETCH_APP_STATE, SET_LOGGING } from "../queries";
 import { useMutation, useQuery } from "@apollo/react-hooks";
@@ -19,23 +19,23 @@ const LeftWrapper = styled.div`
 `;
 const RightWrapper = LeftWrapper;
 
-// const StyledNavLink = styled(NavLink)`
-//   margin-left: 12px;
-//   background: rgb(75 106 138);
-//   position: relative;
-//   bottom: -4px;
-//   padding: 4px 10px;
-//   color: white;
-//   text-decoration: none;
-//   border-radius: 8px;
-//   border-bottom-right-radius: 0;
-//   border-bottom-left-radius: 0;
+const StyledNavLink = styled(NavLink)`
+  margin-left: 12px;
+  background: rgb(75 106 138);
+  position: relative;
+  bottom: -4px;
+  padding: 4px 10px;
+  color: rgb(4 26 49);
+  text-decoration: none;
+  border-radius: 8px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  font-weight: 600;
 
-//   &.active {
-//     color: rgb(4 26 49);
-//     font-weight: 600;
-//   }
-// `;
+  &.active {
+    color: #b8d4ff;
+  }
+`;
 
 const HeaderButton = styled.div`
   cursor: pointer;
@@ -54,7 +54,7 @@ const HeaderTitle = styled.div`
   color: rgb(45, 62, 80);
 `;
 
-export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
+export const Header = () => {
   const { data: appStateData } = useQuery(FETCH_APP_STATE);
   const [setLogging] = useMutation(SET_LOGGING);
 
@@ -62,9 +62,10 @@ export const Header = ({ setEditable, editable, isLogging, toggleLogging }) => {
     <HeaderWrapper>
       <LeftWrapper>
         <HeaderTitle>Office Temperature</HeaderTitle>
-        {/* <StyledNavLink exact to="/">
+        <StyledNavLink exact to="/">
           Live
-        </StyledNavLink> */}
+        </StyledNavLink>
+        <StyledNavLink to="/replay">History</StyledNavLink>
       </LeftWrapper>
       <RightWrapper>
         {appStateData && window.location.href.includes("admin") && (

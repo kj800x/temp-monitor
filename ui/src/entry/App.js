@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Route, Switch } from "react-router-dom";
 import { RootRoute } from "../root-route/RootRoute";
@@ -10,25 +10,23 @@ const Main = styled.div``;
 const AppWrapper = styled.div``;
 
 function App() {
-  const [editable, setEditable] = useState(false);
-
   return (
     <AppWrapper>
-      <Header editable={editable} setEditable={setEditable} />
+      <Header />
       <Switch>
-        <Route path="/replay/:file" exact={true}>
-          <Main overflow={"hidden"}>
-            <ReplayRoute editable={editable} />
+        <Route path="/replay/:date" exact={true}>
+          <Main>
+            <ReplayRoute />
           </Main>
         </Route>
         <Route path="/replay" exact={true}>
-          <Main overflow={"auto"}>
+          <Main>
             <ReplayIndexRoute />
           </Main>
         </Route>
         <Route path="/">
           <Main>
-            <RootRoute editable={editable} />
+            <RootRoute />
           </Main>
         </Route>
       </Switch>
