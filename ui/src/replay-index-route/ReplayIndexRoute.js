@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
 
+import { ONE_HOUR_IN_MS } from "../common/groom";
 import { FETCH_FIRST_DATE_AVAILABLE } from "../queries";
 import { Loading } from "../common/Loading";
 import { ErrorDisplay } from "../common/ErrorDisplay";
@@ -78,7 +79,7 @@ const split = (array, matchElem) => {
 };
 
 export const Day = ({ day }) => {
-  const date = new Date(day).getDate();
+  const date = new Date(day - ONE_HOUR_IN_MS).getDate();
 
   return (
     <DayWrapper>
