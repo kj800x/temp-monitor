@@ -56,7 +56,7 @@
   "##homepage": "/temp/",
   "proxy": "http://localhost",
   "devDependencies": {
-    "@kj800x/localproxy-react-scripts": "0.3.0",
+    "@kj800x/localproxy-react-scripts": "0.3.3",
     "node-fetch": "^2.6.1"
   }
 }
