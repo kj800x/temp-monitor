@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@kj800x/localproxy-client": "0.3.2",
+    "@kj800x/localproxy-client": "0.3.3",
     "apollo-server-express": "^2.19.0",
     "csv-stringify": "^5.5.1",
     "esm": "^3.2.25",
