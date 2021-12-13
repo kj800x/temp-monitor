@@ -1,24 +1,36 @@
 {
-  "name": "temp-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node -r esm src/server.js",
-    "cli": "node -r esm src/cli/cli.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "name": "temp-monitor",
+  "private": true,
   "dependencies": {
-    "@kj800x/localproxy-client": "0.3.2",
-    "apollo-server-express": "^2.19.0",
-    "csv-stringify": "^5.5.1",
-    "esm": "^3.2.25",
+    "@graphql-tools/schema": "8.2.0",
+    "@kj800x/localproxy-client": "0.3.3",
+    "apollo-server-express": "^2.15.0",
+    "better-sqlite3": "^7.4.3",
+    "chalk": "2.4.2",
+    "dataloader": "^2.0.0",
     "express": "^4.17.1",
-    "graphql-type-json": "^0.3.2",
-    "mkdirp": "^1.0.4",
-    "neat-csv": "^5.2.0",
-    "ws": "^7.3.1"
+    "fs-extra": "^9.1.0",
+    "graphql": "^14.5.8",
+    "graphql-subscriptions": "^1.1.0",
+    "graphql-type-json": "^0.3.1",
+    "loglevel": "^1.7.1",
+    "loglevel-plugin-prefix": "^0.8.4",
+    "mkdirp": "^0.5.1",
+    "tar": "^6.1.11"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^5.4.3",
+    "@types/fs-extra": "^9.0.12",
+    "@types/graphql-type-json": "^0.3.2",
+    "@types/mkdirp": "^1.0.2",
+    "@types/tar": "^4.0.5",
+    "copyfiles": "2.4.1",
+    "typescript": "4.3.5"
+  },
+  "scripts": {
+    "start": "npm run build && node lib/migrations/runMigrations.js && node lib/server.js",
+    "cli": "npm run build && node lib/migrations/runMigrations.js && node lib/cli/cli.js",
+    "migrate": "npm run build && node lib/migrations/runMigrations.js",
+    "build": "tsc --build && copyfiles -u 1 src/**/*.sql lib/"
   }
 }

@@ -1,6 +1,12 @@
-node_modules
-**/*~
-**/*.backup
-pressure_readings.csv
-logs/
-ui/build.tar.gz
+# Ignore anything in the root other than these directories. Other directories are expected to be data directories
+/*/
+!/server
+!/ui
+!/probe
+
+**/*.tsbuildinfo
+**/node_modules/
+**/logs/
+**/lib/
+**/build/
+**/build.tar.gz

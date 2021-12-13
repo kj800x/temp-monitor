@@ -7,7 +7,10 @@ export default new GraphQLScalarType({
     return new Date(value); // value from the client
   },
   serialize(value) {
-    return value.getTime(); // value sent to the client
+    if (value instanceof Date) {
+      return value.getTime(); // value sent to the client
+    }
+    return value;
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.INT) {

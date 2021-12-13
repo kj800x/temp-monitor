@@ -10,6 +10,8 @@ let file;
 let writeStream = fs.createWriteStream("./log.csv");
 let connection = new WebSocket(`ws://${API_HOST}/temp/api`);
 
+const log = console["log"];
+
 connection.onerror = () => {
   process.exit(1);
 };
@@ -49,8 +51,6 @@ async function main() {
   await setup();
   while (true) {
     const temperature = readTemperature();
-    // writeStream.write(`${new Date().getTime()},${temperature.f}\n`);
-    // console.log(temperature);
     if (connection.readyState === 1) {
       connection.send(
         JSON.stringify({
@@ -60,7 +60,7 @@ async function main() {
         })
       );
     } else {
-      console.log("Could not send to server");
+      log("Could not send to server");
     }
     await sleep(10);
   }
