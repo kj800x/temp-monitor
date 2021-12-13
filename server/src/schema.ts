@@ -49,7 +49,7 @@ export const apolloServer = new ApolloServer({
   subscriptions: "/temp/graphql",
   playground: {
     endpoint: "/temp/graphql",
-    subscriptionEndpoint: "ws://localhost/temp/graphql",
+    subscriptionEndpoint: "/temp/graphql",
     settings: {
       "editor.theme": "dark",
     },
