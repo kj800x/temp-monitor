@@ -15,7 +15,7 @@ const cache: InMemoryCache = new InMemoryCache({});
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
   link: new HttpLink({
-    uri: `http://${process.env["API_HOST"] || "10.60.1.2"}/graphql`,
+    uri: `https://apps.coolkev.com/temp/graphql`,
     fetch,
   }),
 });
@@ -45,6 +45,7 @@ function readTemperature(file: string) {
 }
 
 async function main() {
+  console.log("Started");
   const file = await setup();
 
   while (true) {
