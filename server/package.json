@@ -1,6 +1,7 @@
 {
-  "name": "temp-monitor",
+  "name": "temp-monitor-server",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "@graphql-tools/schema": "8.2.0",
     "@kj800x/localproxy-client": "0.3.3",
