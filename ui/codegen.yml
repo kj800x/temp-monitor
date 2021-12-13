@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://apps.coolkev.com/temp/graphql"
+documents: "src/**/queries.js"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  src/generated/schema.json:
+    plugins:
+      - "introspection"
