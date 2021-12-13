@@ -8,10 +8,10 @@ const insert = db.prepare(
 );
 
 export const record: MutationFunction<
-  { temperature: number; date: number },
+  { temperature: number; date: Date },
   DatapointLoaderType
 > = async (_, { temperature, date }, context) => {
-  const id = insert.run(temperature, date).lastInsertRowid as number;
+  const id = insert.run(temperature, date.getTime()).lastInsertRowid as number;
 
   pubsub.publish("liveTemperature", {
     liveTemperature: id,
