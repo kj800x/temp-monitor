@@ -46,12 +46,20 @@ export const HomeChart = () => {
 
   const startOfToday = startOfDate().getTime();
 
+  const rawValues = chartData
+    ? [
+        ...chartData.flatMap((d) => (d.today ? [d.today] : [])),
+        ...chartData.flatMap((d) => (d.yesterday ? [d.yesterday] : [])),
+      ]
+    : [];
+
+  const dataMin = Math.min(...rawValues);
+  const dataMax = Math.max(...rawValues);
+
   return (
     <Wrapper>
       <ResponsiveContainer height="100%" width="100%">
         <LineChart
-          width={500}
-          height={300}
           data={chartData}
           margin={{
             top: 5,
@@ -71,8 +79,9 @@ export const HomeChart = () => {
             }
           />
           <YAxis
-            domain={["dataMin - 10", "dataMax + 10"]}
-            tickCount={12}
+            domain={[Math.floor(dataMin) - 5, Math.ceil(dataMax) + 5]}
+            tickCount={15}
+            allowDecimals={false}
             tickFormatter={(f: number) =>
               `${inMetric ? fToC(f).toFixed(1) : f.toFixed(1)} °${
                 inMetric ? "C" : "F"
@@ -97,18 +106,18 @@ export const HomeChart = () => {
             type="natural"
             dot={false}
             connectNulls={true}
-            strokeWidth={3}
-            dataKey="today"
-            stroke="#a2d28f"
+            strokeWidth={2}
+            dataKey="yesterday"
+            strokeDasharray="6 4"
+            stroke="#ea90b1"
           />
           <Line
             type="natural"
             dot={false}
             connectNulls={true}
-            strokeWidth={3}
-            dataKey="yesterday"
-            strokeDasharray="4 4"
-            stroke="#ea90b1"
+            strokeWidth={5}
+            dataKey="today"
+            stroke="#a2d28f"
           />
         </LineChart>
       </ResponsiveContainer>
