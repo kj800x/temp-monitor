@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { useRecentDataQuery } from "../generated/graphql";
 import { binarySearch } from "../library/binarySearch";
+import { fToC } from "./CurrentTemperature";
 
 const FIVE_MINUTES = 5 * 60 * 1000;
 
@@ -39,7 +40,7 @@ const compareTo =
     return 0;
   };
 
-export const useChartData = () => {
+export const useChartData = (inMetric: boolean) => {
   const { loading, error, data } = useRecentDataQuery({
     pollInterval: FIVE_MINUTES,
   });
@@ -49,7 +50,9 @@ export const useChartData = () => {
       return data;
     }
 
-    const rawPoints = data?.data;
+    const rawPoints = inMetric
+      ? data?.data.map((d) => ({ ...d, temperature: fToC(d.temperature) }))
+      : data?.data;
 
     const points = [];
 
@@ -71,7 +74,7 @@ export const useChartData = () => {
     }
 
     return points;
-  }, [data]);
+  }, [data, inMetric]);
 
   return { loading, error, data, chartData };
 };

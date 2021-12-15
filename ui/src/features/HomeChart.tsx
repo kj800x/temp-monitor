@@ -12,13 +12,12 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { useAppState } from "../library/hooks/useAppState";
-import { fToC } from "./CurrentTemperature";
 
 const Wrapper = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 16px;
+  padding-top: 16px;
   height: calc(100% - 32px);
 
   & *.recharts-text {
@@ -32,9 +31,11 @@ const Wrapper = styled.div`
   }
 `;
 
+const domainPadding = (isMetric: boolean) => (isMetric ? 3 : 5);
+
 export const HomeChart = () => {
   const [inMetric] = useAppState<boolean>("useMetric", false);
-  const { chartData, loading, error } = useChartData();
+  const { chartData, loading, error } = useChartData(inMetric);
 
   if (loading) {
     return <Loading />;
@@ -70,7 +71,9 @@ export const HomeChart = () => {
         >
           <XAxis
             dataKey="time"
-            interval={23}
+            interval={
+              window.innerWidth > 1230 ? 11 : window.innerWidth < 700 ? 47 : 23
+            }
             tickFormatter={(time: number) =>
               new Date(startOfToday + time).toLocaleTimeString("en-us", {
                 hour: "numeric",
@@ -79,13 +82,14 @@ export const HomeChart = () => {
             }
           />
           <YAxis
-            domain={[Math.floor(dataMin) - 5, Math.ceil(dataMax) + 5]}
+            domain={[
+              Math.floor(dataMin) - domainPadding(inMetric),
+              Math.ceil(dataMax) + domainPadding(inMetric),
+            ]}
             tickCount={15}
             allowDecimals={false}
-            tickFormatter={(f: number) =>
-              `${inMetric ? fToC(f).toFixed(1) : f.toFixed(1)} °${
-                inMetric ? "C" : "F"
-              }`
+            tickFormatter={(temp: number) =>
+              `${temp.toFixed(1)} °${inMetric ? "C" : "F"}`
             }
           />
           <Tooltip
@@ -95,26 +99,22 @@ export const HomeChart = () => {
                 minute: "numeric", // Uncomment this if you mess with interval
               })
             }
-            formatter={(f: number) =>
-              `${inMetric ? fToC(f).toFixed(1) : f.toFixed(1)} °${
-                inMetric ? "C" : "F"
-              }`
+            formatter={(temp: number) =>
+              `${temp.toFixed(1)} °${inMetric ? "C" : "F"}`
             }
           />
           <CartesianGrid stroke="#eee" strokeDasharray="1 8" />
           <Line
-            type="natural"
+            type="basis"
             dot={false}
-            connectNulls={true}
             strokeWidth={2}
             dataKey="yesterday"
             strokeDasharray="6 4"
             stroke="#ea90b1"
           />
           <Line
-            type="natural"
+            type="basis"
             dot={false}
-            connectNulls={true}
             strokeWidth={5}
             dataKey="today"
             stroke="#a2d28f"
