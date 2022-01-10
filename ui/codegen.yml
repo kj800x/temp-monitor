@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://apps.coolkev.com/temp/graphql"
+schema: "http://localhost/temp/graphql"
 documents: "src/**/queries.js"
 generates:
   src/generated/graphql.tsx:

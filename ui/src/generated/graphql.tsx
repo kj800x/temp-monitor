@@ -46,6 +46,12 @@ export type MutationRecordArgs = {
 export type Query = {
   __typename?: 'Query';
   data: Array<Datapoint>;
+  historicalData: Array<Datapoint>;
+};
+
+
+export type QueryHistoricalDataArgs = {
+  date: Scalars['Date'];
 };
 
 export type Subscription = {
@@ -62,6 +68,13 @@ export type LiveTemperatureSubscriptionVariables = Exact<{ [key: string]: never;
 
 
 export type LiveTemperatureSubscription = { __typename?: 'Subscription', liveTemperature?: Maybe<{ __typename?: 'Datapoint', id: number, date: any, temperature: number }> };
+
+export type ReferenceDataQueryVariables = Exact<{
+  date: Scalars['Date'];
+}>;
+
+
+export type ReferenceDataQuery = { __typename?: 'Query', historicalData: Array<{ __typename?: 'Datapoint', id: number, temperature: number, date: any }> };
 
 
 export const RecentDataDocument = gql`
@@ -131,3 +144,40 @@ export function useLiveTemperatureSubscription(baseOptions?: Apollo.Subscription
       }
 export type LiveTemperatureSubscriptionHookResult = ReturnType<typeof useLiveTemperatureSubscription>;
 export type LiveTemperatureSubscriptionResult = Apollo.SubscriptionResult<LiveTemperatureSubscription>;
+export const ReferenceDataDocument = gql`
+    query referenceData($date: Date!) {
+  historicalData(date: $date) {
+    id
+    temperature
+    date
+  }
+}
+    `;
+
+/**
+ * __useReferenceDataQuery__
+ *
+ * To run a query within a React component, call `useReferenceDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useReferenceDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useReferenceDataQuery({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useReferenceDataQuery(baseOptions: Apollo.QueryHookOptions<ReferenceDataQuery, ReferenceDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ReferenceDataQuery, ReferenceDataQueryVariables>(ReferenceDataDocument, options);
+      }
+export function useReferenceDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ReferenceDataQuery, ReferenceDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ReferenceDataQuery, ReferenceDataQueryVariables>(ReferenceDataDocument, options);
+        }
+export type ReferenceDataQueryHookResult = ReturnType<typeof useReferenceDataQuery>;
+export type ReferenceDataLazyQueryHookResult = ReturnType<typeof useReferenceDataLazyQuery>;
+export type ReferenceDataQueryResult = Apollo.QueryResult<ReferenceDataQuery, ReferenceDataQueryVariables>;

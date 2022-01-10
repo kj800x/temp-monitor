@@ -6,7 +6,7 @@ export const Button = styled.div<{ use?: "delete"; disabled?: boolean }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 15px;
+  min-height: 24px;
   background: ${({ use }) => (use === "delete" ? "#d94c71" : "#425b76")};
   line-height: 15px;
   cursor: pointer;

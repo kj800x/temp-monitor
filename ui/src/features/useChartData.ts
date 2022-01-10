@@ -1,5 +1,8 @@
 import { useMemo } from "react";
-import { useRecentDataQuery } from "../generated/graphql";
+import {
+  useRecentDataQuery,
+  useReferenceDataQuery,
+} from "../generated/graphql";
 import { binarySearch } from "../library/binarySearch";
 import { fToC } from "./CurrentTemperature";
 
@@ -40,24 +43,49 @@ const compareTo =
     return 0;
   };
 
-export const useChartData = (inMetric: boolean) => {
+export const useChartData = (
+  inMetric: boolean,
+  referenceDate: number | null
+) => {
   const { loading, error, data } = useRecentDataQuery({
     pollInterval: FIVE_MINUTES,
   });
 
+  const {
+    loading: referenceLoading,
+    error: referenceError,
+    data: referenceData,
+  } = useReferenceDataQuery({
+    variables: {
+      date: referenceDate || 0,
+    },
+    skip: !referenceDate,
+  });
+
   const chartData = useMemo(() => {
     if (!data) {
-      return data;
+      return undefined;
     }
 
     const rawPoints = inMetric
       ? data?.data.map((d) => ({ ...d, temperature: fToC(d.temperature) }))
       : data?.data;
 
+    const rawReferencePoints = inMetric
+      ? referenceData?.historicalData.map((d) => ({
+          ...d,
+          temperature: fToC(d.temperature),
+        }))
+      : referenceData?.historicalData;
+
     const points = [];
 
     const startOfToday = startOfDate().getTime();
     const startOfYesterday = startOfDate(-1).getTime();
+    const startOfReference = startOfDate(
+      0,
+      new Date(referenceDate || 0)
+    ).getTime();
 
     for (let i = 0; i < DAY; i += OFFSET) {
       points.push({
@@ -70,11 +98,19 @@ export const useChartData = (inMetric: boolean) => {
           rawPoints!,
           compareTo(startOfYesterday, i, i + OFFSET)
         )?.temperature,
+        ...(rawReferencePoints && rawReferencePoints.length > 0
+          ? {
+              reference: binarySearch<RawPoint>(
+                rawReferencePoints!,
+                compareTo(startOfReference, i, i + OFFSET)
+              )?.temperature,
+            }
+          : {}),
       });
     }
 
     return points;
-  }, [data, inMetric]);
+  }, [data, referenceData, referenceDate, inMetric]);
 
-  return { loading, error, data, chartData };
+  return { loading, error, data, chartData, referenceLoading, referenceError };
 };

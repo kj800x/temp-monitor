@@ -19,3 +19,13 @@ export const LIVE_TEMPERATURE = gql`
     }
   }
 `;
+
+export const REFERENCE_DATA = gql`
+  query referenceData($date: Date!) {
+    historicalData(date: $date) {
+      id
+      temperature
+      date
+    }
+  }
+`;

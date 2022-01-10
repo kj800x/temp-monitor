@@ -13,6 +13,7 @@ export const typeDefs = gql`
 
   type Query {
     data: [Datapoint!]!
+    historicalData(date: Date!): [Datapoint!]!
   }
 
   type Mutation {

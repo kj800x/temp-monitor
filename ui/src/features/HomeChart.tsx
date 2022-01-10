@@ -17,6 +17,7 @@ import { useCallback, useState } from "react";
 
 const TODAY = "today";
 const YESTERDAY = "yesterday";
+const REFERENCE = "reference";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,8 +40,13 @@ const Wrapper = styled.div`
 const domainPadding = (isMetric: boolean) => (isMetric ? 3 : 5);
 
 export const HomeChart = () => {
+  const [referenceDate] = useAppState<null | number>("referenceDate", null);
+
   const [inMetric] = useAppState<boolean>("useMetric", false);
-  const { chartData, loading, error } = useChartData(inMetric);
+  const { chartData, loading, error, referenceLoading } = useChartData(
+    inMetric,
+    referenceDate
+  );
 
   const [hidden, setHidden] = useState<string[]>([]);
 
@@ -71,6 +77,7 @@ export const HomeChart = () => {
     ? [
         ...chartData.flatMap((d) => (d.today ? [d.today] : [])),
         ...chartData.flatMap((d) => (d.yesterday ? [d.yesterday] : [])),
+        ...chartData.flatMap((d) => (d.reference ? [d.reference] : [])),
       ]
     : [];
 
@@ -125,20 +132,34 @@ export const HomeChart = () => {
           />
           <CartesianGrid stroke="#eee" strokeDasharray="1 8" />
           <Legend onClick={toggleVisibility as any} />
+          {referenceDate && !referenceLoading ? (
+            <Line
+              type="basis"
+              dot={false}
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeDasharray="1 5"
+              dataKey={REFERENCE}
+              stroke="#51d3d9"
+              hide={hidden.includes(REFERENCE)}
+            />
+          ) : null}
           <Line
-            type="natural"
+            type="basis"
             dot={false}
-            strokeWidth={2}
-            dataKey="yesterday"
-            strokeDasharray="6 4"
+            strokeWidth={2.5}
+            dataKey={YESTERDAY}
+            strokeLinecap="round"
+            strokeDasharray="1 5"
             stroke="#ea90b1"
             hide={hidden.includes(YESTERDAY)}
           />
           <Line
-            type="natural"
+            type="basis"
             dot={false}
             strokeWidth={5}
-            dataKey="today"
+            dataKey={TODAY}
+            strokeLinecap="round"
             stroke="#a2d28f"
             hide={hidden.includes(TODAY)}
           />
