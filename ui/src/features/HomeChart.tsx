@@ -10,8 +10,13 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import { useAppState } from "../library/hooks/useAppState";
+import { useCallback, useState } from "react";
+
+const TODAY = "today";
+const YESTERDAY = "yesterday";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +41,21 @@ const domainPadding = (isMetric: boolean) => (isMetric ? 3 : 5);
 export const HomeChart = () => {
   const [inMetric] = useAppState<boolean>("useMetric", false);
   const { chartData, loading, error } = useChartData(inMetric);
+
+  const [hidden, setHidden] = useState<string[]>([]);
+
+  const toggleVisibility = useCallback<
+    ({ dataKey }: { dataKey: string }) => void
+  >(
+    ({ dataKey }) => {
+      setHidden((oldHidden) =>
+        oldHidden.includes(dataKey)
+          ? oldHidden.filter((value) => value !== dataKey)
+          : [...oldHidden, dataKey]
+      );
+    },
+    [setHidden]
+  );
 
   if (loading) {
     return <Loading />;
@@ -104,20 +124,23 @@ export const HomeChart = () => {
             }
           />
           <CartesianGrid stroke="#eee" strokeDasharray="1 8" />
+          <Legend onClick={toggleVisibility as any} />
           <Line
-            type="basis"
+            type="natural"
             dot={false}
             strokeWidth={2}
             dataKey="yesterday"
             strokeDasharray="6 4"
             stroke="#ea90b1"
+            hide={hidden.includes(YESTERDAY)}
           />
           <Line
-            type="basis"
+            type="natural"
             dot={false}
             strokeWidth={5}
             dataKey="today"
             stroke="#a2d28f"
+            hide={hidden.includes(TODAY)}
           />
         </LineChart>
       </ResponsiveContainer>
