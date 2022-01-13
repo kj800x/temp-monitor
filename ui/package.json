@@ -8,6 +8,8 @@
     "build": "localproxy-react-scripts build",
     "test": "localproxy-react-scripts test",
     "eject": "localproxy-react-scripts eject",
+    "enable": "localproxy-react-scripts enable",
+    "disable": "localproxy-react-scripts disable",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "browserslist": {
@@ -54,5 +56,9 @@
     "@types/styled-components": "5.1.9",
     "react-scripts": "4.0.3",
     "typescript": "4.4.2"
+  },
+  "ec2-deploy": {
+    "host": "apps.coolkev.com",
+    "path": "~/src/temp-monitor/ui"
   }
 }
