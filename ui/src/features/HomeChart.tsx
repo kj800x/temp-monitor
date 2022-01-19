@@ -43,7 +43,7 @@ export const HomeChart = () => {
   const [referenceDate] = useAppState<null | number>("referenceDate", null);
 
   const [inMetric] = useAppState<boolean>("useMetric", false);
-  const { chartData, loading, error, referenceLoading } = useChartData(
+  const { chartData, loading, error, referenceData } = useChartData(
     inMetric,
     referenceDate
   );
@@ -132,18 +132,6 @@ export const HomeChart = () => {
           />
           <CartesianGrid stroke="#eee" strokeDasharray="1 8" />
           <Legend onClick={toggleVisibility as any} />
-          {referenceDate && !referenceLoading ? (
-            <Line
-              type="basis"
-              dot={false}
-              strokeWidth={2.5}
-              strokeLinecap="round"
-              strokeDasharray="1 5"
-              dataKey={REFERENCE}
-              stroke="#51d3d9"
-              hide={hidden.includes(REFERENCE)}
-            />
-          ) : null}
           <Line
             type="basis"
             dot={false}
@@ -163,6 +151,18 @@ export const HomeChart = () => {
             stroke="#a2d28f"
             hide={hidden.includes(TODAY)}
           />
+          {referenceDate && referenceData ? (
+            <Line
+              type="basis"
+              dot={false}
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeDasharray="1 5"
+              dataKey={REFERENCE}
+              stroke="#51d3d9"
+              hide={hidden.includes(REFERENCE)}
+            />
+          ) : null}
         </LineChart>
       </ResponsiveContainer>
     </Wrapper>

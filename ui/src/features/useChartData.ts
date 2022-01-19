@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import {
   useRecentDataQuery,
   useReferenceDataQuery,
@@ -43,9 +43,22 @@ const compareTo =
     return 0;
   };
 
+export const usePreviousNonNullish = <T, B>(
+  value: T,
+  associated: B
+): [T, B] => {
+  const ref = useRef<[T, B]>([value, associated]);
+  useEffect(() => {
+    if (value !== null && value !== undefined) {
+      ref.current = [value, associated];
+    }
+  });
+  return ref.current;
+};
+
 export const useChartData = (
   inMetric: boolean,
-  referenceDate: number | null
+  currentReferenceDate: number | null
 ) => {
   const { loading, error, data } = useRecentDataQuery({
     pollInterval: FIVE_MINUTES,
@@ -54,13 +67,21 @@ export const useChartData = (
   const {
     loading: referenceLoading,
     error: referenceError,
-    data: referenceData,
+    data: currentReferenceData,
   } = useReferenceDataQuery({
     variables: {
-      date: referenceDate || 0,
+      date: currentReferenceDate || 0,
     },
-    skip: !referenceDate,
+    skip: !currentReferenceDate,
   });
+
+  const [previousReferenceData, [previousReferenceDate]] =
+    usePreviousNonNullish(currentReferenceData, [currentReferenceDate]);
+
+  const referenceData = currentReferenceData ?? previousReferenceData;
+  const referenceDate = currentReferenceData
+    ? currentReferenceDate
+    : previousReferenceDate;
 
   const chartData = useMemo(() => {
     if (!data) {
@@ -112,5 +133,13 @@ export const useChartData = (
     return points;
   }, [data, referenceData, referenceDate, inMetric]);
 
-  return { loading, error, data, chartData, referenceLoading, referenceError };
+  return {
+    loading,
+    error,
+    data,
+    chartData,
+    referenceData,
+    referenceLoading,
+    referenceError,
+  };
 };
