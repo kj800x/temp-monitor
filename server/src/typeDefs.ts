@@ -8,6 +8,7 @@ export const typeDefs = gql`
   type Datapoint {
     id: Int!
     temperature: Float!
+    humidity: Float
     date: Date!
   }
 
@@ -17,7 +18,7 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    record(temperature: Float, date: Date!): Datapoint
+    record(temperature: Float, humidity: Float, date: Date!): Datapoint
   }
 
   type Subscription {

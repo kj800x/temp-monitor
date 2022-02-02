@@ -6,11 +6,13 @@ import type { DomainObject } from "./types";
 export type DatapointLoaderType = {
   id: number;
   temperature: number;
+  humidity: number;
   date: number;
 };
 export type DatapointType = {
   id: number;
   temperature: number;
+  humidity: number;
   date: number;
 };
 
@@ -22,6 +24,7 @@ export const Datapoint: DomainObject<DatapointType, DatapointLoaderType> = {
   resolver: {
     id: get("id"),
     temperature: get("temperature"),
+    humidity: get("humidity"),
     date: get("date"),
   },
   loader: (ids: readonly number[]) => {
