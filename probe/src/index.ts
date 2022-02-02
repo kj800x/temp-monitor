@@ -33,8 +33,6 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 function readTemperature() {
   const values = sensor.read(22, 22);
 
-  console.log(values)
-
   const c = values.temperature;
   const f = (c * 9.0) / 5.0 + 32.0;
   return { c, f, humidity: values.humidity };
