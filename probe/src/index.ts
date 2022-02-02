@@ -1,4 +1,3 @@
-import fs from "fs";
 import process from "process";
 import fetch from "cross-fetch";
 import {
@@ -8,6 +7,7 @@ import {
   InMemoryCache,
   HttpLink,
 } from "@apollo/client/core";
+import sensor from "node-dht-sensor";
 
 const ONE_MINUTE = 1000 * 60;
 
@@ -21,8 +21,8 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 });
 
 const record = gql`
-  mutation record($temperature: Float!, $date: Date!) {
-    record(temperature: $temperature, date: $date) {
+  mutation record($temperature: Float!, $humidity: Float!, $date: Date!) {
+    record(temperature: $temperature, humidity: $humidity, date: $date) {
       id
     }
   }
@@ -30,31 +30,26 @@ const record = gql`
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function setup(): Promise<string> {
-  const files = fs.readdirSync("/sys/bus/w1/devices/");
-  const device = files.find((file) => file.startsWith("28"));
-  return `/sys/bus/w1/devices/${device}/w1_slave`;
-}
+function readTemperature() {
+  const values = sensor.read(22, 22);
 
-function readTemperature(file: string) {
-  const contents = fs.readFileSync(file, "utf-8");
-  const number = parseInt(contents.split("t=")[1]!.trim(), 10);
-  const c = number / 1000.0;
+  console.log(values)
+
+  const c = values.temperature;
   const f = (c * 9.0) / 5.0 + 32.0;
-  return { c, f };
+  return { c, f, humidity: values.humidity };
 }
 
 async function main() {
   console.log("Started");
-  const file = await setup();
-
   while (true) {
-    const temperature = readTemperature(file);
+    const temperature = readTemperature();
 
     await client.mutate({
       mutation: record,
       variables: {
         temperature: temperature.f,
+        humidity: temperature.humidity,
         date: new Date().getTime(),
       },
     });
