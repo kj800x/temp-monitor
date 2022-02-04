@@ -47,7 +47,7 @@ export const Header = () => {
         Office Temperature: <CurrentTemperature inMetric={inMetric} />
       </Title>
       <span>
-        <Button>
+        <Button as="label">
           Compare to:
           <DateInput
             type="date"
