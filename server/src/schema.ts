@@ -58,7 +58,7 @@ export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    const token = req.headers.authorization || "";
+    const token = req?.headers?.authorization || "";
 
     return {
       loaders: buildDataLoaders(),
