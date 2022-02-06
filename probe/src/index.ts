@@ -54,7 +54,6 @@ function readTemperature() {
 
 async function main() {
   console.log("Started");
-
   while (true) {
     const temperature = readTemperature();
 

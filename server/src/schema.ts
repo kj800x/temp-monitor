@@ -41,11 +41,11 @@ const resolvers = {
   Subscription: Subscription.resolver,
 };
 
-export type JWT_RESULT =
+export type JwtResult =
   | { status: "authenticated"; payload: any }
   | { status: "unauthenticated" };
 
-function checkToken(token: string): JWT_RESULT {
+function checkToken(token: string): JwtResult {
   try {
     const payload = jwt.verify(token, JWT_KEY);
     return { status: "authenticated", payload };
