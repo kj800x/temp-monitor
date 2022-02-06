@@ -4,6 +4,7 @@ import DataLoader from "dataloader";
 import { mapValues } from "./util/mapValues";
 import type { DataLoaders, DomainObject } from "./domain-objects/types";
 import { typeDefs } from "./typeDefs";
+import jwt from "jsonwebtoken";
 
 import GraphQLJSON from "graphql-type-json";
 import GraphQLDate from "./customScalars/Date";
@@ -12,6 +13,7 @@ import { Datapoint } from "./domain-objects/Datapoint";
 import { Query } from "./resolvers/Query";
 import { Subscription } from "./resolvers/Subscription";
 import { Mutation } from "./resolvers/Mutation";
+import { JWT_KEY } from "./env/jwtKey";
 
 type DomainObjects = {
   [key: string]: DomainObject<any, any>;
@@ -39,12 +41,30 @@ const resolvers = {
   Subscription: Subscription.resolver,
 };
 
+export type JWT_RESULT =
+  | { status: "authenticated"; payload: any }
+  | { status: "unauthenticated" };
+
+function checkToken(token: string): JWT_RESULT {
+  try {
+    const payload = jwt.verify(token, JWT_KEY);
+    return { status: "authenticated", payload };
+  } catch (err) {
+    return { status: "unauthenticated" };
+  }
+}
+
 export const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({
-    loaders: buildDataLoaders(),
-  }),
+  context: ({ req }) => {
+    const token = req.headers.authorization || "";
+
+    return {
+      loaders: buildDataLoaders(),
+      auth: checkToken(token),
+    };
+  },
   uploads: false,
   subscriptions: "/temp/graphql",
   playground: {

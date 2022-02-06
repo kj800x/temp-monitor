@@ -1,12 +1,17 @@
 import "../logSetup";
 import { backup } from "./backup";
 import log from "loglevel";
+import { generateToken } from "./generate-token";
 
 async function main() {
   const command = process.argv[2];
   switch (command) {
     case "backup": {
       await backup(process.argv[3]);
+      return;
+    }
+    case "generate-token": {
+      generateToken();
       return;
     }
     case "help": {

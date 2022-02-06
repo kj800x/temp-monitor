@@ -1,4 +1,5 @@
 import DataLoader from "dataloader";
+import { JWT_RESULT } from "../schema";
 import { DatapointLoaderType } from "./Datapoint";
 
 export type DataLoaders = {
@@ -7,6 +8,7 @@ export type DataLoaders = {
 
 export type Context = {
   loaders: DataLoaders;
+  auth: JWT_RESULT;
 };
 
 export type NoLoaderDomainObject<ObjectType, LoaderType> = {

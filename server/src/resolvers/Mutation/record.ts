@@ -1,6 +1,6 @@
+import { AuthenticationError } from "apollo-server-express";
 import { db } from "../../db";
 import { DatapointLoaderType } from "../../domain-objects/Datapoint";
-import { readAPIKey } from "../../env/apiKey";
 import { pubsub } from "../../pubsub";
 import { MutationFunction } from "./types";
 
@@ -8,14 +8,14 @@ const insert = db.prepare(
   "INSERT INTO Datapoint (temperature, humidity, date) VALUES (?, ?, ?)"
 );
 
-const expectedApiKey = readAPIKey();
-
 export const record: MutationFunction<
-  { apiKey: string; temperature: number; humidity: number; date: Date },
+  { temperature: number; humidity: number; date: Date },
   DatapointLoaderType
-> = async (_, { apiKey, temperature, humidity, date }, context) => {
-  if (apiKey !== expectedApiKey) {
-    throw new Error("Invalid API key provided");
+> = async (_, { temperature, humidity, date }, context) => {
+  if (context.auth.status !== "authenticated") {
+    throw new AuthenticationError(
+      "This mutation requires auth and the client did not provide a valid JWT token"
+    );
   }
 
   const id = insert.run(temperature, humidity, date.getTime())
