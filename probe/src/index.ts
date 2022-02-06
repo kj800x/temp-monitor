@@ -12,6 +12,15 @@ import fs from "fs";
 import path from "path";
 
 const ONE_MINUTE = 1000 * 60;
+const AUTH_FILE_PATH = path.join(__dirname, "..", "auth.txt");
+
+if (!fs.existsSync(AUTH_FILE_PATH)) {
+  throw new Error(
+    `Unable to read JWT token from ${AUTH_FILE_PATH}. You must generate a token with "bend cli generate-token" on the server and then create an auth.txt file on this device with the result`
+  );
+}
+
+const auth = fs.readFileSync(AUTH_FILE_PATH, "utf-8").trim();
 
 const cache: InMemoryCache = new InMemoryCache({});
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
@@ -19,22 +28,15 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: new HttpLink({
     uri: `https://apps.coolkev.com/temp/graphql`,
     fetch,
+    headers: {
+      Authorization: auth,
+    },
   }),
 });
 
 const record = gql`
-  mutation record(
-    $apiKey: String!
-    $temperature: Float!
-    $humidity: Float!
-    $date: Date!
-  ) {
-    record(
-      apiKey: $apiKey
-      temperature: $temperature
-      humidity: $humidity
-      date: $date
-    ) {
+  mutation record($temperature: Float!, $humidity: Float!, $date: Date!) {
+    record(temperature: $temperature, humidity: $humidity, date: $date) {
       id
     }
   }
@@ -50,26 +52,8 @@ function readTemperature() {
   return { c, f, humidity: values.humidity };
 }
 
-function readAPIKey(): string {
-  try {
-    const envFilePath = path.join(__dirname, "..", "..", ".env");
-    const envFile = fs.readFileSync(envFilePath, "utf8");
-    return envFile
-      .split("\n")
-      .find((line) => line.startsWith("API_KEY"))!
-      .split("API_KEY=")[1]!
-      .trim();
-  } catch (error) {
-    throw new Error(
-      "Unable to read API_KEY from .env file. Have you created one?"
-    );
-  }
-}
-
 async function main() {
   console.log("Started");
-
-  const apiKey = readAPIKey();
 
   while (true) {
     const temperature = readTemperature();
@@ -77,7 +61,6 @@ async function main() {
     await client.mutate({
       mutation: record,
       variables: {
-        apiKey,
         temperature: temperature.f,
         humidity: temperature.humidity,
         date: new Date().getTime(),
