@@ -8,8 +8,19 @@ import {
   HttpLink,
 } from "@apollo/client/core";
 import sensor from "node-dht-sensor";
+import fs from "fs";
+import path from "path";
 
 const ONE_MINUTE = 1000 * 60;
+const AUTH_FILE_PATH = path.join(__dirname, "..", "auth.txt");
+
+if (!fs.existsSync(AUTH_FILE_PATH)) {
+  throw new Error(
+    `Unable to read JWT token from ${AUTH_FILE_PATH}. You must generate a token with "bend cli generate-token" on the server and then create an auth.txt file on this device with the result`
+  );
+}
+
+const auth = fs.readFileSync(AUTH_FILE_PATH, "utf-8").trim();
 
 const cache: InMemoryCache = new InMemoryCache({});
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
@@ -17,6 +28,9 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: new HttpLink({
     uri: `https://apps.coolkev.com/temp/graphql`,
     fetch,
+    headers: {
+      Authorization: auth,
+    },
   }),
 });
 
