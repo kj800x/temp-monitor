@@ -18,7 +18,12 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    record(temperature: Float, humidity: Float, date: Date!): Datapoint
+    record(
+      apiKey: String!
+      temperature: Float
+      humidity: Float
+      date: Date!
+    ): Datapoint
   }
 
   type Subscription {

@@ -8,8 +8,10 @@ import { apolloServer } from "./schema";
 
 import log from "loglevel";
 import chalk from "chalk";
+import { readAPIKey } from "./env/apiKey";
 
 async function main() {
+  readAPIKey();
   const PORT = await localproxy.getAvailablePort();
   const expressApp = express();
   const httpServer = http.createServer(expressApp);

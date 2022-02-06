@@ -8,6 +8,8 @@ import {
   HttpLink,
 } from "@apollo/client/core";
 import sensor from "node-dht-sensor";
+import fs from "fs";
+import path from "path";
 
 const ONE_MINUTE = 1000 * 60;
 
@@ -21,8 +23,18 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 });
 
 const record = gql`
-  mutation record($temperature: Float!, $humidity: Float!, $date: Date!) {
-    record(temperature: $temperature, humidity: $humidity, date: $date) {
+  mutation record(
+    $apiKey: String!
+    $temperature: Float!
+    $humidity: Float!
+    $date: Date!
+  ) {
+    record(
+      apiKey: $apiKey
+      temperature: $temperature
+      humidity: $humidity
+      date: $date
+    ) {
       id
     }
   }
@@ -38,14 +50,34 @@ function readTemperature() {
   return { c, f, humidity: values.humidity };
 }
 
+function readAPIKey(): string {
+  try {
+    const envFilePath = path.join(__dirname, "..", "..", ".env");
+    const envFile = fs.readFileSync(envFilePath, "utf8");
+    return envFile
+      .split("\n")
+      .find((line) => line.startsWith("API_KEY"))!
+      .split("API_KEY=")[1]!
+      .trim();
+  } catch (error) {
+    throw new Error(
+      "Unable to read API_KEY from .env file. Have you created one?"
+    );
+  }
+}
+
 async function main() {
   console.log("Started");
+
+  const apiKey = readAPIKey();
+
   while (true) {
     const temperature = readTemperature();
 
     await client.mutate({
       mutation: record,
       variables: {
+        apiKey,
         temperature: temperature.f,
         humidity: temperature.humidity,
         date: new Date().getTime(),
