@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import styled from "styled-components";
 
-import { Header } from "./library/Header";
 import { HomePage } from "./pages/home/HomePage";
 import { WeekPage } from "./pages/week/WeekPage";
 
