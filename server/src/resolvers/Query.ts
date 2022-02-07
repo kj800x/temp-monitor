@@ -12,9 +12,22 @@ const FETCH_HISTORICAL_DATA = db
   )
   .pluck();
 
+const FETCH_HIGH_LOWS = db.prepare(
+  "SELECT date(`date`/1000, 'unixepoch', '-5 hours') as date, min(temperature) as tempLow, max(temperature) as tempHigh, min(humidity) as humidityLow, max(humidity) as humidityHigh FROM Datapoint WHERE date >= ? GROUP BY date(`date`/1000, 'unixepoch', '-5 hours')"
+);
+
+interface HighLowType {
+  date: string;
+  tempHigh: number;
+  tempLow: number;
+  humidityHigh: number;
+  humidityLow: number;
+}
+
 type QueryType = {
   data: (DatapointLoaderType | Error)[];
   sevenDays: (DatapointLoaderType | Error)[];
+  highLows: (HighLowType | Error)[];
   historicalData: (DatapointLoaderType | Error)[];
 };
 
@@ -27,6 +40,12 @@ export const Query: NoLoaderDomainObject<QueryType, null> = {
       twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
       const ids = FETCH_RECENT_DATA.all(twoDaysAgo.getTime());
       return context.loaders.Datapoint.loadMany(ids);
+    },
+    highLows: () => {
+      const oneYearAgo = new Date();
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+      const data: HighLowType[] = FETCH_HIGH_LOWS.all(oneYearAgo.getTime());
+      return data;
     },
     sevenDays: (_parent, _args, context) => {
       const eightDaysAgo = new Date();

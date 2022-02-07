@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { HomePage } from "./pages/home/HomePage";
 import { WeekPage } from "./pages/week/WeekPage";
+import { HighLowPage } from "./pages/highLow/HighLowPage";
 
 export function App() {
   return (
@@ -9,6 +10,7 @@ export function App() {
       <Switch>
         <Route exact path={`/`} component={HomePage} />
         <Route exact path={`/week`} component={WeekPage} />
+        <Route exact path={`/highLow`} component={HighLowPage} />
       </Switch>
     </Router>
   );

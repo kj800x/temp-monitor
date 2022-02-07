@@ -43,3 +43,15 @@ export const SEVEN_DAY = gql`
     }
   }
 `;
+
+export const HIGH_LOWS = gql`
+  query highLows {
+    highLows {
+      date
+      humidityLow
+      humidityHigh
+      tempLow
+      tempHigh
+    }
+  }
+`;

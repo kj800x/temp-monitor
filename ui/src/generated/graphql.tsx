@@ -33,6 +33,15 @@ export type Datapoint = {
   temperature: Scalars['Float'];
 };
 
+export type HighLowPoint = {
+  __typename?: 'HighLowPoint';
+  date: Scalars['String'];
+  humidityHigh?: Maybe<Scalars['Float']>;
+  humidityLow?: Maybe<Scalars['Float']>;
+  tempHigh?: Maybe<Scalars['Float']>;
+  tempLow?: Maybe<Scalars['Float']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   record?: Maybe<Datapoint>;
@@ -48,6 +57,7 @@ export type MutationRecordArgs = {
 export type Query = {
   __typename?: 'Query';
   data: Array<Datapoint>;
+  highLows: Array<HighLowPoint>;
   historicalData: Array<Datapoint>;
   sevenDays: Array<Datapoint>;
 };
@@ -83,6 +93,11 @@ export type SevenDayQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type SevenDayQuery = { __typename?: 'Query', sevenDays: Array<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
+
+export type HighLowsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type HighLowsQuery = { __typename?: 'Query', highLows: Array<{ __typename?: 'HighLowPoint', date: string, humidityLow?: Maybe<number>, humidityHigh?: Maybe<number>, tempLow?: Maybe<number>, tempHigh?: Maybe<number> }> };
 
 
 export const RecentDataDocument = gql`
@@ -229,3 +244,41 @@ export function useSevenDayLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<S
 export type SevenDayQueryHookResult = ReturnType<typeof useSevenDayQuery>;
 export type SevenDayLazyQueryHookResult = ReturnType<typeof useSevenDayLazyQuery>;
 export type SevenDayQueryResult = Apollo.QueryResult<SevenDayQuery, SevenDayQueryVariables>;
+export const HighLowsDocument = gql`
+    query highLows {
+  highLows {
+    date
+    humidityLow
+    humidityHigh
+    tempLow
+    tempHigh
+  }
+}
+    `;
+
+/**
+ * __useHighLowsQuery__
+ *
+ * To run a query within a React component, call `useHighLowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHighLowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHighLowsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useHighLowsQuery(baseOptions?: Apollo.QueryHookOptions<HighLowsQuery, HighLowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<HighLowsQuery, HighLowsQueryVariables>(HighLowsDocument, options);
+      }
+export function useHighLowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HighLowsQuery, HighLowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<HighLowsQuery, HighLowsQueryVariables>(HighLowsDocument, options);
+        }
+export type HighLowsQueryHookResult = ReturnType<typeof useHighLowsQuery>;
+export type HighLowsLazyQueryHookResult = ReturnType<typeof useHighLowsLazyQuery>;
+export type HighLowsQueryResult = Apollo.QueryResult<HighLowsQuery, HighLowsQueryVariables>;

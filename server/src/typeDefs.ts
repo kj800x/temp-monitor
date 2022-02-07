@@ -12,9 +12,18 @@ export const typeDefs = gql`
     date: Date!
   }
 
+  type HighLowPoint {
+    date: String!
+    tempHigh: Float
+    tempLow: Float
+    humidityHigh: Float
+    humidityLow: Float
+  }
+
   type Query {
     data: [Datapoint!]!
     sevenDays: [Datapoint!]!
+    highLows: [HighLowPoint!]!
     historicalData(date: Date!): [Datapoint!]!
   }
 
