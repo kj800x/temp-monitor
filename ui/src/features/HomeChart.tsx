@@ -204,21 +204,44 @@ export const HomeChart = () => {
             yAxisId="left"
             type="basis"
             dot={false}
-            strokeWidth={5}
-            dataKey={TODAY}
-            strokeLinecap="round"
-            stroke="#a2d28f"
-            hide={hidden.includes(TODAY)}
-          />
-          <Line
-            yAxisId="left"
-            type="basis"
-            dot={false}
             strokeWidth={2.5}
             dataKey={YESTERDAY}
             strokeLinecap="round"
             stroke="#ea90b1"
             hide={hidden.includes(YESTERDAY)}
+          />
+          <Line
+            yAxisId="right"
+            type="basis"
+            dot={false}
+            dataKey={YESTERDAY_H}
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeDasharray="1 5"
+            stroke="#ea90b1"
+            hide={hidden.includes(YESTERDAY_H)}
+          />
+          <Line
+            yAxisId="left"
+            type="basis"
+            dot={false}
+            strokeWidth={5}
+            dataKey={TODAY}
+            strokeLinecap="round"
+            stroke="#a2d28f"
+            hide={hidden.includes(TODAY)}
+            z={"10"}
+          />
+          <Line
+            yAxisId="right"
+            type="basis"
+            dot={false}
+            dataKey={TODAY_H}
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeDasharray="1 5"
+            stroke="#a2d28f"
+            hide={hidden.includes(TODAY_H)}
           />
           {referenceDate && referenceData ? (
             <Line
@@ -232,28 +255,6 @@ export const HomeChart = () => {
               hide={hidden.includes(REFERENCE)}
             />
           ) : null}
-          <Line
-            yAxisId="right"
-            type="basis"
-            dot={false}
-            dataKey={TODAY_H}
-            strokeWidth={2.5}
-            strokeLinecap="round"
-            strokeDasharray="1 5"
-            stroke="#a2d28f"
-            hide={hidden.includes(TODAY_H)}
-          />
-          <Line
-            yAxisId="right"
-            type="basis"
-            dot={false}
-            dataKey={YESTERDAY_H}
-            strokeWidth={2.5}
-            strokeLinecap="round"
-            strokeDasharray="1 5"
-            stroke="#ea90b1"
-            hide={hidden.includes(YESTERDAY_H)}
-          />
           {referenceDate && referenceData ? (
             <Line
               yAxisId="right"
