@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { HomeChart } from "../../features/HomeChart";
 import { Header } from "../../library/Header";
 import { Wrapper } from "../../library/Wrapper";
+import { WeekChart } from "./WeekChart";
 
 const PageWrapper = styled.div`
   flex: 1;
@@ -9,12 +9,12 @@ const PageWrapper = styled.div`
   color: #f5f8fa;
 `;
 
-export const HomePage = () => {
+export const WeekPage = () => {
   return (
     <Wrapper>
-      <Header />
+      <Header referenceDateEnabled={false} />
       <PageWrapper>
-        <HomeChart />
+        <WeekChart />
       </PageWrapper>
     </Wrapper>
   );

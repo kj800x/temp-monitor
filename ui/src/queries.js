@@ -32,3 +32,14 @@ export const REFERENCE_DATA = gql`
     }
   }
 `;
+
+export const SEVEN_DAY = gql`
+  query sevenDay {
+    sevenDays {
+      id
+      date
+      temperature
+      humidity
+    }
+  }
+`;

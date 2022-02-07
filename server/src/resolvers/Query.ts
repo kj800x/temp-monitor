@@ -14,6 +14,7 @@ const FETCH_HISTORICAL_DATA = db
 
 type QueryType = {
   data: (DatapointLoaderType | Error)[];
+  sevenDays: (DatapointLoaderType | Error)[];
   historicalData: (DatapointLoaderType | Error)[];
 };
 
@@ -25,6 +26,12 @@ export const Query: NoLoaderDomainObject<QueryType, null> = {
       const twoDaysAgo = new Date();
       twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
       const ids = FETCH_RECENT_DATA.all(twoDaysAgo.getTime());
+      return context.loaders.Datapoint.loadMany(ids);
+    },
+    sevenDays: (_parent, _args, context) => {
+      const eightDaysAgo = new Date();
+      eightDaysAgo.setDate(eightDaysAgo.getDate() - 8);
+      const ids = FETCH_RECENT_DATA.all(eightDaysAgo.getTime());
       return context.loaders.Datapoint.loadMany(ids);
     },
     historicalData: (_parent, args: { date: Date }, context) => {

@@ -49,6 +49,7 @@ export type Query = {
   __typename?: 'Query';
   data: Array<Datapoint>;
   historicalData: Array<Datapoint>;
+  sevenDays: Array<Datapoint>;
 };
 
 
@@ -77,6 +78,11 @@ export type ReferenceDataQueryVariables = Exact<{
 
 
 export type ReferenceDataQuery = { __typename?: 'Query', historicalData: Array<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
+
+export type SevenDayQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SevenDayQuery = { __typename?: 'Query', sevenDays: Array<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
 
 
 export const RecentDataDocument = gql`
@@ -186,3 +192,40 @@ export function useReferenceDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type ReferenceDataQueryHookResult = ReturnType<typeof useReferenceDataQuery>;
 export type ReferenceDataLazyQueryHookResult = ReturnType<typeof useReferenceDataLazyQuery>;
 export type ReferenceDataQueryResult = Apollo.QueryResult<ReferenceDataQuery, ReferenceDataQueryVariables>;
+export const SevenDayDocument = gql`
+    query sevenDay {
+  sevenDays {
+    id
+    date
+    temperature
+    humidity
+  }
+}
+    `;
+
+/**
+ * __useSevenDayQuery__
+ *
+ * To run a query within a React component, call `useSevenDayQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSevenDayQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSevenDayQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSevenDayQuery(baseOptions?: Apollo.QueryHookOptions<SevenDayQuery, SevenDayQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SevenDayQuery, SevenDayQueryVariables>(SevenDayDocument, options);
+      }
+export function useSevenDayLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SevenDayQuery, SevenDayQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SevenDayQuery, SevenDayQueryVariables>(SevenDayDocument, options);
+        }
+export type SevenDayQueryHookResult = ReturnType<typeof useSevenDayQuery>;
+export type SevenDayLazyQueryHookResult = ReturnType<typeof useSevenDayLazyQuery>;
+export type SevenDayQueryResult = Apollo.QueryResult<SevenDayQuery, SevenDayQueryVariables>;

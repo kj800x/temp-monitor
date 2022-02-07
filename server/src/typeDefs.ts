@@ -14,6 +14,7 @@ export const typeDefs = gql`
 
   type Query {
     data: [Datapoint!]!
+    sevenDays: [Datapoint!]!
     historicalData(date: Date!): [Datapoint!]!
   }
 
