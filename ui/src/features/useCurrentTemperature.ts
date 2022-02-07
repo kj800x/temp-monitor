@@ -9,7 +9,7 @@ export const useCurrentTemperature = () => {
 
   useRecentDataQuery({
     onCompleted: (data) => {
-      if (!temp) {
+      if (!temp && data.data.length > 0) {
         setTemp(data.data[data.data.length - 1].temperature);
       }
     },

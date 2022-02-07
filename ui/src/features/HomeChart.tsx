@@ -126,6 +126,10 @@ export const HomeChart = () => {
   const dataMin = Math.min(...rawValues);
   const dataMax = Math.max(...rawValues);
 
+  if (!isFinite(dataMax)) {
+    return <ErrorDisplay error={new Error("No data")} />;
+  }
+
   return (
     <Wrapper>
       <ResponsiveContainer height="100%" width="100%">
