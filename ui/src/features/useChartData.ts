@@ -15,6 +15,7 @@ interface RawPoint {
   __typename?: "Datapoint";
   id: number;
   temperature: number;
+  humidity?: number | null;
   date: any;
 }
 
@@ -115,16 +116,28 @@ export const useChartData = (
           rawPoints!,
           compareTo(startOfToday, i, i + OFFSET)
         )?.temperature,
+        todayH: binarySearch<RawPoint>(
+          rawPoints!,
+          compareTo(startOfToday, i, i + OFFSET)
+        )?.humidity,
         yesterday: binarySearch<RawPoint>(
           rawPoints!,
           compareTo(startOfYesterday, i, i + OFFSET)
         )?.temperature,
+        yesterdayH: binarySearch<RawPoint>(
+          rawPoints!,
+          compareTo(startOfYesterday, i, i + OFFSET)
+        )?.humidity,
         ...(rawReferencePoints && rawReferencePoints.length > 0
           ? {
               reference: binarySearch<RawPoint>(
                 rawReferencePoints!,
                 compareTo(startOfReference, i, i + OFFSET)
               )?.temperature,
+              referenceH: binarySearch<RawPoint>(
+                rawReferencePoints!,
+                compareTo(startOfReference, i, i + OFFSET)
+              )?.humidity,
             }
           : {}),
       });

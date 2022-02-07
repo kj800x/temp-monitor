@@ -4,8 +4,9 @@ export const RECENT_DATA = gql`
   query recentData {
     data {
       id
-      temperature
       date
+      temperature
+      humidity
     }
   }
 `;
@@ -16,6 +17,7 @@ export const LIVE_TEMPERATURE = gql`
       id
       date
       temperature
+      humidity
     }
   }
 `;
@@ -24,8 +26,9 @@ export const REFERENCE_DATA = gql`
   query referenceData($date: Date!) {
     historicalData(date: $date) {
       id
-      temperature
       date
+      temperature
+      humidity
     }
   }
 `;

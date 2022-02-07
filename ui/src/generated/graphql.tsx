@@ -28,6 +28,7 @@ export enum CacheControlScope {
 export type Datapoint = {
   __typename?: 'Datapoint';
   date: Scalars['Date'];
+  humidity?: Maybe<Scalars['Float']>;
   id: Scalars['Int'];
   temperature: Scalars['Float'];
 };
@@ -40,6 +41,7 @@ export type Mutation = {
 
 export type MutationRecordArgs = {
   date: Scalars['Date'];
+  humidity?: Maybe<Scalars['Float']>;
   temperature?: Maybe<Scalars['Float']>;
 };
 
@@ -62,27 +64,28 @@ export type Subscription = {
 export type RecentDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RecentDataQuery = { __typename?: 'Query', data: Array<{ __typename?: 'Datapoint', id: number, temperature: number, date: any }> };
+export type RecentDataQuery = { __typename?: 'Query', data: Array<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
 
 export type LiveTemperatureSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LiveTemperatureSubscription = { __typename?: 'Subscription', liveTemperature?: Maybe<{ __typename?: 'Datapoint', id: number, date: any, temperature: number }> };
+export type LiveTemperatureSubscription = { __typename?: 'Subscription', liveTemperature?: Maybe<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
 
 export type ReferenceDataQueryVariables = Exact<{
   date: Scalars['Date'];
 }>;
 
 
-export type ReferenceDataQuery = { __typename?: 'Query', historicalData: Array<{ __typename?: 'Datapoint', id: number, temperature: number, date: any }> };
+export type ReferenceDataQuery = { __typename?: 'Query', historicalData: Array<{ __typename?: 'Datapoint', id: number, date: any, temperature: number, humidity?: Maybe<number> }> };
 
 
 export const RecentDataDocument = gql`
     query recentData {
   data {
     id
-    temperature
     date
+    temperature
+    humidity
   }
 }
     `;
@@ -119,6 +122,7 @@ export const LiveTemperatureDocument = gql`
     id
     date
     temperature
+    humidity
   }
 }
     `;
@@ -148,8 +152,9 @@ export const ReferenceDataDocument = gql`
     query referenceData($date: Date!) {
   historicalData(date: $date) {
     id
-    temperature
     date
+    temperature
+    humidity
   }
 }
     `;

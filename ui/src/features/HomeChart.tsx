@@ -15,9 +15,20 @@ import {
 import { useAppState } from "../library/hooks/useAppState";
 import { useCallback, useState } from "react";
 
-const TODAY = "today";
-const YESTERDAY = "yesterday";
-const REFERENCE = "reference";
+const TODAY: Series = "today";
+const TODAY_H: Series = "todayH";
+const YESTERDAY: Series = "yesterday";
+const YESTERDAY_H: Series = "yesterdayH";
+const REFERENCE: Series = "reference";
+const REFERENCE_H: Series = "referenceH";
+
+type Series =
+  | "today"
+  | "todayH"
+  | "yesterday"
+  | "yesterdayH"
+  | "reference"
+  | "referenceH";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,6 +47,37 @@ const Wrapper = styled.div`
     }
   }
 `;
+
+function getFormattedSeriesName(name: Series, referenceDate: Date) {
+  switch (name) {
+    case TODAY: {
+      return "Today (temperature)";
+    }
+    case YESTERDAY: {
+      return "Yesterday (temperature)";
+    }
+    case REFERENCE: {
+      return `${referenceDate.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })} (temperature)`;
+    }
+    case TODAY_H: {
+      return "Today (humidity)";
+    }
+    case YESTERDAY_H: {
+      return "Yesterday (humidity)";
+    }
+    case REFERENCE_H: {
+      return `${referenceDate.toLocaleDateString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })} (humidity)`;
+    }
+  }
+}
 
 const domainPadding = (isMetric: boolean) => (isMetric ? 3 : 5);
 
@@ -91,8 +133,8 @@ export const HomeChart = () => {
           data={chartData}
           margin={{
             top: 5,
-            right: 30,
-            left: 20,
+            right: 0,
+            left: 5,
             bottom: 5,
           }}
         >
@@ -109,6 +151,7 @@ export const HomeChart = () => {
             }
           />
           <YAxis
+            yAxisId="left"
             domain={[
               Math.floor(dataMin) - domainPadding(inMetric),
               Math.ceil(dataMax) + domainPadding(inMetric),
@@ -119,6 +162,12 @@ export const HomeChart = () => {
               `${temp.toFixed(1)} °${inMetric ? "C" : "F"}`
             }
           />
+          <YAxis
+            domain={[0, 100]}
+            yAxisId="right"
+            orientation="right"
+            tickFormatter={(percent: number) => `${percent}%`}
+          />
           <Tooltip
             labelFormatter={(time: number) =>
               new Date(startOfToday + time).toLocaleTimeString("en-us", {
@@ -126,23 +175,33 @@ export const HomeChart = () => {
                 minute: "numeric", // Uncomment this if you mess with interval
               })
             }
-            formatter={(temp: number) =>
-              `${temp.toFixed(1)} °${inMetric ? "C" : "F"}`
-            }
+            formatter={(value: number, name: Series) => {
+              if (
+                name === YESTERDAY_H ||
+                name === TODAY_H ||
+                name === REFERENCE_H
+              ) {
+                return [
+                  `${value.toFixed(1)}%`,
+                  getFormattedSeriesName(name, new Date(referenceDate || 0)),
+                ];
+              } else {
+                return [
+                  `${value.toFixed(1)} °${inMetric ? "C" : "F"}`,
+                  getFormattedSeriesName(name, new Date(referenceDate || 0)),
+                ];
+              }
+            }}
           />
           <CartesianGrid stroke="#eee" strokeDasharray="1 8" />
-          <Legend onClick={toggleVisibility as any} />
-          <Line
-            type="basis"
-            dot={false}
-            strokeWidth={2.5}
-            dataKey={YESTERDAY}
-            strokeLinecap="round"
-            strokeDasharray="1 5"
-            stroke="#ea90b1"
-            hide={hidden.includes(YESTERDAY)}
+          <Legend
+            onClick={toggleVisibility as any}
+            formatter={(name: Series) =>
+              getFormattedSeriesName(name, new Date(referenceDate || 0))
+            }
           />
           <Line
+            yAxisId="left"
             type="basis"
             dot={false}
             strokeWidth={5}
@@ -151,16 +210,61 @@ export const HomeChart = () => {
             stroke="#a2d28f"
             hide={hidden.includes(TODAY)}
           />
+          <Line
+            yAxisId="left"
+            type="basis"
+            dot={false}
+            strokeWidth={2.5}
+            dataKey={YESTERDAY}
+            strokeLinecap="round"
+            stroke="#ea90b1"
+            hide={hidden.includes(YESTERDAY)}
+          />
           {referenceDate && referenceData ? (
             <Line
+              yAxisId="left"
+              type="basis"
+              dot={false}
+              strokeWidth={2.5}
+              dataKey={REFERENCE}
+              strokeLinecap="round"
+              stroke="#51d3d9"
+              hide={hidden.includes(REFERENCE)}
+            />
+          ) : null}
+          <Line
+            yAxisId="right"
+            type="basis"
+            dot={false}
+            dataKey={TODAY_H}
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeDasharray="1 5"
+            stroke="#a2d28f"
+            hide={hidden.includes(TODAY_H)}
+          />
+          <Line
+            yAxisId="right"
+            type="basis"
+            dot={false}
+            dataKey={YESTERDAY_H}
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeDasharray="1 5"
+            stroke="#ea90b1"
+            hide={hidden.includes(YESTERDAY_H)}
+          />
+          {referenceDate && referenceData ? (
+            <Line
+              yAxisId="right"
               type="basis"
               dot={false}
               strokeWidth={2.5}
               strokeLinecap="round"
               strokeDasharray="1 5"
-              dataKey={REFERENCE}
+              dataKey={REFERENCE_H}
               stroke="#51d3d9"
-              hide={hidden.includes(REFERENCE)}
+              hide={hidden.includes(REFERENCE_H)}
             />
           ) : null}
         </LineChart>
