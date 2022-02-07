@@ -71,7 +71,7 @@ export const useWeekChartData = (inMetric: boolean) => {
 
     const points = [];
 
-    const startOfSevenDays = startOfDate(-7).getTime();
+    const startOfSevenDays = startOfDate(-6).getTime();
 
     for (let i = 0; i < SEVEN_DAYS; i += OFFSET) {
       points.push({

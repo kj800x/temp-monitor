@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import { HomePage } from "./pages/home/HomePage";
 import { WeekPage } from "./pages/week/WeekPage";
@@ -10,7 +15,8 @@ export function App() {
       <Switch>
         <Route exact path={`/`} component={HomePage} />
         <Route exact path={`/week`} component={WeekPage} />
-        <Route exact path={`/highLow`} component={HighLowPage} />
+        <Route exact path={`/high-low`} component={HighLowPage} />
+        <Redirect to="/" />
       </Switch>
     </Router>
   );

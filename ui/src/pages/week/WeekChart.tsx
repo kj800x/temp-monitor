@@ -79,7 +79,7 @@ export const WeekChart = () => {
     return <ErrorDisplay error={error} />;
   }
 
-  const startOfToday = startOfDate().getTime();
+  const startOfToday = startOfDate(-6).getTime();
 
   const rawValues =
     chartData?.flatMap((d) => (d.temperature ? [d.temperature] : [])) || [];

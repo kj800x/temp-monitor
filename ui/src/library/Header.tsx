@@ -84,7 +84,7 @@ export const Header = ({ referenceDateEnabled = true }) => {
           Home
         </NavTab>
         <NavTab to="/week">Week</NavTab>
-        <NavTab to="/highLow">Highs / Lows</NavTab>
+        <NavTab to="/high-low">Highs / Lows</NavTab>
       </span>
       <span>
         {referenceDateEnabled && (
