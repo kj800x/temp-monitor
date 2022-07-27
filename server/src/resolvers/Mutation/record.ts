@@ -1,7 +1,7 @@
-import { AuthenticationError } from "apollo-server-express";
 import { db } from "../../db";
 import { DatapointLoaderType } from "../../domain-objects/Datapoint";
 import { pubsub } from "../../pubsub";
+import { authRequired } from "./authRequired";
 import { MutationFunction } from "./types";
 
 const insert = db.prepare(
@@ -11,17 +11,7 @@ const insert = db.prepare(
 export const record: MutationFunction<
   { temperature: number; humidity: number; date: Date },
   DatapointLoaderType
-> = async (_, { temperature, humidity, date }, context) => {
-  if (temperature === 9999) {
-    throw new AuthenticationError("Hi Pete");
-  }
-
-  if (context.auth.status !== "authenticated") {
-    throw new AuthenticationError(
-      "This mutation requires auth and the client did not provide a valid JWT token"
-    );
-  }
-
+> = authRequired(async (_, { temperature, humidity, date }, context) => {
   const id = insert.run(temperature, humidity, date.getTime())
     .lastInsertRowid as number;
 
@@ -30,4 +20,4 @@ export const record: MutationFunction<
   });
 
   return context.loaders.Datapoint.load(id);
-};
+});
