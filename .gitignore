@@ -3,6 +3,7 @@
 !/server
 !/ui
 !/probe
+!/rust-probe
 
 **/*.tsbuildinfo
 **/node_modules/
