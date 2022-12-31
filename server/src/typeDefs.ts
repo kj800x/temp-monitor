@@ -6,6 +6,7 @@ export const typeDefs = gql`
   scalar Blob
 
   type Datapoint {
+    source: String!
     id: Int!
     temperature: Float!
     humidity: Float
@@ -13,6 +14,7 @@ export const typeDefs = gql`
   }
 
   type HighLowPoint {
+    source: String!
     date: String!
     tempHigh: Float
     tempLow: Float
@@ -28,7 +30,12 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    record(temperature: Float, humidity: Float, date: Date!): Datapoint
+    record(
+      source: String
+      temperature: Float
+      humidity: Float
+      date: Date
+    ): Datapoint
   }
 
   type Subscription {

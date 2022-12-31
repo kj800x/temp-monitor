@@ -13,10 +13,11 @@ const FETCH_HISTORICAL_DATA = db
   .pluck();
 
 const FETCH_HIGH_LOWS = db.prepare(
-  "SELECT date(`date`/1000, 'unixepoch', '-5 hours') as date, min(temperature) as tempLow, max(temperature) as tempHigh, min(humidity) as humidityLow, max(humidity) as humidityHigh FROM Datapoint WHERE date >= ? GROUP BY date(`date`/1000, 'unixepoch', '-5 hours')"
+  "SELECT date(`date`/1000, 'unixepoch', '-5 hours') as date, 'office' as source, min(temperature) as tempLow, max(temperature) as tempHigh, min(humidity) as humidityLow, max(humidity) as humidityHigh FROM Datapoint WHERE date >= ? AND source = 'office' GROUP BY date(`date`/1000, 'unixepoch', '-5 hours')"
 );
 
 interface HighLowType {
+  source: string;
   date: string;
   tempHigh: number;
   tempLow: number;

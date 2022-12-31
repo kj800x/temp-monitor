@@ -14,6 +14,12 @@ static ONE_SEC: time::Duration = time::Duration::from_millis(1000);
 const SSID: &str = env!("SSID");
 const PASSWORD: &str = env!("PASSWORD");
 const DEVICE_NAME: &str = env!("DEVICE_NAME");
+const TOKEN: &str = env!("TOKEN");
+const URL: &str = env!("URL");
+
+fn c_to_f(c: f32) -> f32 {
+    (c * (9.0 / 5.0)) + 32.0
+}
 
 fn main() -> anyhow::Result<()> {
     // Temporary. Will disappear once ESP-IDF 4.4 is released, but for now it is necessary to call this function once,
@@ -25,32 +31,33 @@ fn main() -> anyhow::Result<()> {
 
     http::get("http://neverssl.com/")?;
 
-    // println!("Hello, world!");
-    // println!("I will report data as {}", DEVICE_NAME);
+    println!("Hello, world!");
+    println!("I will report data as {}", DEVICE_NAME);
 
-    // let pins;
-    // unsafe {
-    //     pins = Pins::new();
-    // }
+    let pins;
+    unsafe {
+        pins = Pins::new();
+    }
 
-    // let pin_driver = PinDriver::input_output(pins.gpio4)?;
-    // let mut sensor = Dht22::new(NoopInterruptControl, Ets, pin_driver);
+    let pin_driver = PinDriver::input_output(pins.gpio4)?;
+    let mut sensor = Dht22::new(NoopInterruptControl, Ets, pin_driver);
 
-    // let mut i = 0;
-    // loop {
-    //     thread::sleep(ONE_SEC);
-    //     i += 1;
+    let mut i = 0;
+    loop {
+        thread::sleep(ONE_SEC);
+        i += 1;
 
-    //     match sensor.read() {
-    //         Ok(reading) => println!(
-    //             "{}°C, {}% RH, iteration: {}",
-    //             reading.temperature(),
-    //             reading.humidity(),
-    //             i
-    //         ),
-    //         Err(e) => eprintln!("Error: {}", e),
-    //     }
-    // }
-
-    Ok(())
+        match sensor.read() {
+            Ok(reading) => {
+                println!(
+                    "{}°C, {}% RH, iteration: {}",
+                    reading.temperature(),
+                    reading.humidity(),
+                    i
+                );
+                http::post(URL, reading.humidity(), c_to_f(reading.temperature()))?;
+            }
+            Err(e) => eprintln!("Error: {}", e),
+        }
+    }
 }

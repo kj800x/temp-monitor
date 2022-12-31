@@ -4,12 +4,14 @@ import { order } from "../util/ordering";
 import type { DomainObject } from "./types";
 
 export type DatapointLoaderType = {
+  source: string;
   id: number;
   temperature: number;
   humidity: number;
   date: number;
 };
 export type DatapointType = {
+  source: string;
   id: number;
   temperature: number;
   humidity: number;
@@ -22,6 +24,7 @@ const LOADER = prepareIn<number, DatapointLoaderType>(
 
 export const Datapoint: DomainObject<DatapointType, DatapointLoaderType> = {
   resolver: {
+    source: get("source"),
     id: get("id"),
     temperature: get("temperature"),
     humidity: get("humidity"),
