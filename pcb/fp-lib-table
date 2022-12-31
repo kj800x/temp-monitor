@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name "temp-sensor")(type "KiCad")(uri "/home/kevin/Documents/Kicad/temp-sensor.pretty")(options "")(descr ""))
+)

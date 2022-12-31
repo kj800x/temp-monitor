@@ -4,6 +4,7 @@
 !/ui
 !/probe
 !/rust-probe
+!/pcb
 
 **/*.tsbuildinfo
 **/node_modules/

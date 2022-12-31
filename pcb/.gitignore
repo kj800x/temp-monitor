@@ -1,0 +1,3 @@
+temp-sensor-backups/
+*.bak
+*-cache
