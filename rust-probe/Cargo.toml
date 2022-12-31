@@ -20,7 +20,10 @@ esp-idf-sys = { version = "0.32.1", features = ["binstart"] }
 esp-idf-hal = "0.40.1"
 dht-embedded = "0.1.1"
 embedded-hal = "1.0.0-alpha.9"
-anyhow = "1"
+embedded-svc = "0.24.0"
+esp-idf-svc = { version = "0.45.0", features = ["experimental", "alloc"] }
+anyhow = "1.0.68"
+log = "0.4.17"
 
 [patch.crates-io]
 dht-embedded = { git = 'https://github.com/kj800x/dht-embedded-rs' }

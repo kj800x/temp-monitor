@@ -6,7 +6,9 @@ use esp_idf_hal::{
 use esp_idf_sys as _; // If using the `binstart` feature of `esp-idf-sys`, always keep this module imported
 use std::{thread, time};
 
-mod tiny_mqtt;
+// mod tiny_mqtt;
+mod http;
+mod wifi;
 
 static ONE_SEC: time::Duration = time::Duration::from_millis(1000);
 const SSID: &str = env!("SSID");
@@ -18,30 +20,37 @@ fn main() -> anyhow::Result<()> {
     // or else some patches to the runtime implemented by esp-idf-sys might not link properly.
     esp_idf_sys::link_patches();
 
-    println!("Hello, world!");
-    println!("I will report data as {}", DEVICE_NAME);
+    // Hold onto wifi so that we don't drop our wifi connection unexpectedly
+    let _wifi = wifi::wifi(SSID, PASSWORD)?;
 
-    let pins;
-    unsafe {
-        pins = Pins::new();
-    }
+    http::get("http://neverssl.com/")?;
 
-    let pin_driver = PinDriver::input_output(pins.gpio4)?;
-    let mut sensor = Dht22::new(NoopInterruptControl, Ets, pin_driver);
+    // println!("Hello, world!");
+    // println!("I will report data as {}", DEVICE_NAME);
 
-    let mut i = 0;
-    loop {
-        thread::sleep(ONE_SEC);
-        i += 1;
+    // let pins;
+    // unsafe {
+    //     pins = Pins::new();
+    // }
 
-        match sensor.read() {
-            Ok(reading) => println!(
-                "{}°C, {}% RH, iteration: {}",
-                reading.temperature(),
-                reading.humidity(),
-                i
-            ),
-            Err(e) => eprintln!("Error: {}", e),
-        }
-    }
+    // let pin_driver = PinDriver::input_output(pins.gpio4)?;
+    // let mut sensor = Dht22::new(NoopInterruptControl, Ets, pin_driver);
+
+    // let mut i = 0;
+    // loop {
+    //     thread::sleep(ONE_SEC);
+    //     i += 1;
+
+    //     match sensor.read() {
+    //         Ok(reading) => println!(
+    //             "{}°C, {}% RH, iteration: {}",
+    //             reading.temperature(),
+    //             reading.humidity(),
+    //             i
+    //         ),
+    //         Err(e) => eprintln!("Error: {}", e),
+    //     }
+    // }
+
+    Ok(())
 }
