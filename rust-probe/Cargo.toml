@@ -1,7 +1,7 @@
 [package]
 name = "rust-probe"
 version = "0.1.0"
-authors = ["Kevin Johnson <kevin@coolkev.com>"]
+authors = ["Kevin Johnson <kevin@kj800x.com>"]
 edition = "2021"
 resolver = "2"
 
@@ -26,6 +26,9 @@ anyhow = "1.0.68"
 log = "0.4.17"
 
 [patch.crates-io]
+# Support for embedded-hal = "1.0.0-alpha.9"
+# Fix hopefully upstreammed in https://github.com/kelnos/dht-embedded-rs/pull/1
+# https://github.com/kelnos/dht-embedded-rs/compare/990cb714cdb87c898900dae9cfa484de715ddd8e..6c6512233b0f04e26f2e910214b710f0e0bc5105
 dht-embedded = { git = 'https://github.com/kj800x/dht-embedded-rs' }
 
 [build-dependencies]

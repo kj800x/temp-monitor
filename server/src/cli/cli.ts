@@ -21,6 +21,7 @@ async function main() {
       usage.info(``);
       usage.info(`commands:`);
       usage.info(`  backup [LABEL]`);
+      usage.info(`  generate-token`);
       return;
     }
     default: {
