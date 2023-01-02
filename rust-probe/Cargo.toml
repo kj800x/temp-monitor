@@ -18,18 +18,12 @@ pio = ["esp-idf-sys/pio"]
 [dependencies]
 esp-idf-sys = { version = "0.32.1", features = ["binstart"] }
 esp-idf-hal = "0.40.1"
-dht-embedded = "0.1.1"
+dht-embedded = "0.2.0"
 embedded-hal = "1.0.0-alpha.9"
 embedded-svc = "0.24.0"
 esp-idf-svc = { version = "0.45.0", features = ["experimental", "alloc"] }
 anyhow = "1.0.68"
 log = "0.4.17"
-
-[patch.crates-io]
-# Support for embedded-hal = "1.0.0-alpha.9"
-# Fix hopefully upstreammed in https://github.com/kelnos/dht-embedded-rs/pull/1
-# https://github.com/kelnos/dht-embedded-rs/compare/990cb714cdb87c898900dae9cfa484de715ddd8e..6c6512233b0f04e26f2e910214b710f0e0bc5105
-dht-embedded = { git = 'https://github.com/kj800x/dht-embedded-rs' }
 
 [build-dependencies]
 embuild = "0.31.0"

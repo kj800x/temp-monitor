@@ -428,8 +428,9 @@ checksum = "0db23d29972d99baa3de2ee2ae3f104c10564a6d05a346eb3f4c4f2c0525a06e"
 
 [[package]]
 name = "dht-embedded"
-version = "0.1.1"
-source = "git+https://github.com/kj800x/dht-embedded-rs#6c6512233b0f04e26f2e910214b710f0e0bc5105"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "705d2ad6103a2910e4d4ec8d71978b2a575e0b7c84f0afedf74137c4c95501b9"
 dependencies = [
  "embedded-hal 1.0.0-alpha.9",
 ]
