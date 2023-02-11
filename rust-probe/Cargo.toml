@@ -24,7 +24,11 @@ embedded-svc = "0.24.0"
 esp-idf-svc = { version = "0.45.0", features = ["experimental", "alloc"] }
 anyhow = "1.0.68"
 log = "0.4.17"
+heapless = "0.7.16"
 
 [build-dependencies]
 embuild = "0.31.0"
 anyhow = "1"
+
+[patch.crates-io]
+esp-idf-svc = { git = 'https://github.com/kj800x/esp-idf-svc.git', branch = 'kj-patches' }

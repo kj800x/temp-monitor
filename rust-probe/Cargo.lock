@@ -616,8 +616,7 @@ dependencies = [
 [[package]]
 name = "esp-idf-svc"
 version = "0.45.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f6035126eeaf81d19ca5342fa8f36e85489c6fba1148ec8af167a6b9bff39e0f"
+source = "git+https://github.com/kj800x/esp-idf-svc.git?branch=kj-patches#8d57bf32aa177f7da7ba1ccbc7885ad6b8732832"
 dependencies = [
  "anyhow",
  "embedded-svc",
@@ -1291,6 +1290,7 @@ dependencies = [
  "esp-idf-hal",
  "esp-idf-svc",
  "esp-idf-sys",
+ "heapless",
  "log",
 ]
 

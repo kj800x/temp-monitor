@@ -11,6 +11,8 @@ use esp_idf_svc::{
 use log::info;
 use std::{net::Ipv4Addr, time::Duration};
 
+// use crate::DEVICE_NAME;
+
 pub fn wifi<'a>(ssid: &'a str, psk: &'a str) -> anyhow::Result<EspWifi<'a>> {
     let mut auth_method = AuthMethod::WPA2Personal;
     if ssid.is_empty() {
@@ -44,6 +46,11 @@ pub fn wifi<'a>(ssid: &'a str, psk: &'a str) -> anyhow::Result<EspWifi<'a>> {
     };
 
     println!("Setting WiFi configuration");
+
+    // let dhcpConfig = ipv4::ClientConfiguration::DHCP(ipv4::DHCPClientSettings {
+    //     hostname: Some(heapless::String::from("Asdf")),
+    // });
+
     let conf = Configuration::Client(ClientConfiguration {
         ssid: ssid.into(),
         password: psk.into(),
@@ -53,8 +60,13 @@ pub fn wifi<'a>(ssid: &'a str, psk: &'a str) -> anyhow::Result<EspWifi<'a>> {
     });
 
     wifi.set_configuration(&conf)?;
+    // let netif = wifi.sta_netif_mut();
+    // let hostname = format!("temp-probe-{}", DEVICE_NAME);
+    // println!("Setting hostname to {}", hostname);
+    // netif.set_hostname(&hostname).unwrap();
 
     println!("Getting WiFi status");
+
     wifi.start()?;
     if !WifiWait::new(&sysloop)?
         .wait_with_timeout(Duration::from_secs(20), || wifi.is_started().unwrap())
@@ -63,9 +75,12 @@ pub fn wifi<'a>(ssid: &'a str, psk: &'a str) -> anyhow::Result<EspWifi<'a>> {
     }
 
     wifi.connect()?;
+
     if !EspNetifWait::new::<EspNetif>(wifi.sta_netif(), &sysloop)?.wait_with_timeout(
-        Duration::from_secs(20),
+        Duration::from_secs(10),
         || {
+            // println!("isConnected {}", wifi.is_connected().unwrap());
+            // println!("ip {:?}", wifi.sta_netif().get_ip_info().unwrap().ip);
             wifi.is_connected().unwrap()
                 && wifi.sta_netif().get_ip_info().unwrap().ip != Ipv4Addr::new(0, 0, 0, 0)
         },
